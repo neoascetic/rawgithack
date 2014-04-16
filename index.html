@@ -92,21 +92,21 @@
         <h2>The Problem</h2>
 
         <p>
-        You've got a <code>raw.github.com</code> URL that points to some work-in-progress HTML, JavaScript, or CSS. You'd like to share it with someone for a quick demo, or maybe you'd like to use it in a <a href="http://jsperf.com/">jsPerf</a> test.
+        You've got a <code>raw.githubusercontent.com</code> URL that points to some work-in-progress HTML, JavaScript, or CSS. You'd like to share it with someone for a quick demo, or maybe you'd like to use it in a <a href="http://jsperf.com/">jsPerf</a> test.
         </p>
 
         <p>
-        Too bad! Most things served from <code>raw.github.com</code> have a <code>text/plain</code> content type and are served with an <code>X-Content-Type-Options: nosniff</code> header, which means HTML won't render, and some browsers won't execute JavaScript or apply CSS.
+        Too bad! Most things served from <code>raw.githubusercontent.com</code> have a <code>text/plain</code> content type and are served with an <code>X-Content-Type-Options: nosniff</code> header, which means HTML won't render, and some browsers won't execute JavaScript or apply CSS.
         </p>
 
         <h2>The Solution</h2>
 
         <p>
-        Change the domain! Just replace <code>raw.github.com</code> with <code>raw.githack.com</code> and <em>skadoosh</em>, you're loading raw files from your GitHub repo and they're served with appropriate content types. Render HTML, apply CSS, execute JavaScript.
+        Change the domain! Just replace <code>raw.githubusercontent.com</code> with <code>raw.githack.com</code> and <em>skadoosh</em>, you're loading raw files from your GitHub repo and they're served with appropriate content types. Render HTML, apply CSS, execute JavaScript.
         </p>
 
         <p><strong>Before</strong></p>
-        <pre class="before">https://raw.<strong>github</strong>.com/user/repo/master/filename.js</pre>
+        <pre class="before">https://raw.<strong>githubusercontent</strong>.com/user/repo/master/filename.js</pre>
 
         <p><strong>After</strong></p>
         <pre class="after">https://raw.<strong>githack</strong>.com/user/repo/master/filename.js</pre>
