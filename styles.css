@@ -10,11 +10,11 @@ body {
   text-align: justify;
 }
 
-code, pre {
+code, .code, pre {
   font-family: 'Ubuntu Mono', 'Source Code Pro', 'DejaVu Sans Mono', Menlo, monospace;
 }
 
-code {
+code, .code {
   background: #f8f8f8;
   border: 1px solid #efefef;
   padding: 1px 4px;
