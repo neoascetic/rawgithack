@@ -1,0 +1,4 @@
+#!/bin/sh
+
+sed -i "s/githack.com/$DOMAIN/g" /etc/nginx/rawgithack/*
+exec "$@"
