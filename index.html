@@ -7,7 +7,7 @@
 <meta name="description" content="raw.githack.com serves raw files directly from GitHub with proper Content-Type headers.">
 <link rel="canonical" href="https://raw.githack.com">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:400,700">
-<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/master/rawgithack.css">
+<link rel="stylesheet" href="https://raw.githack.com/neoascetic/rawgithack/master/rawgithack.css">
 
 <header class="hd">
   <h1 class="title"><a href="/">raw.githack.com</a></h1>
@@ -58,10 +58,109 @@
       </div>
     </div>
 
+    <div class="faq">
+      <div id="who" class="question">
+        <h2><a href="#who">Who runs this thing?</a></h2>
+        <p>
+          Hi, I'm <a href="http://neoascetic.me/">Pavel Puchkin</a>.
+        </p>
+      </div>
+
+      <div id="why" class="question">
+        <h2><a href="#why">Why is this necessary? Can't I just load files from GitHub or Bitbucket directly?</a></h2>
+        <p>
+          When you request a file from <code>raw.githubusercontent.com</code> or <code>gist.githubusercontent.com</code>, GitHub usually serves it (in the case of JavaScript, HTML, CSS, and some other file types) with a <code>Content-Type</code> of <code>text/plain</code>. As a result, most modern browsers won't actually interpret it as JavaScript, HTML, or CSS.
+        </p>
+        <p>
+          They do this because serving raw files from a git repo is relatively inefficient, so they want to discourage people from using their repos for static file hosting.
+        </p>
+        <p>
+          raw.githack.com acts as a caching proxy, forwarding requests to GitHub or Bitbucket, caching the responses either for a short time (in the case of <code>raw.githack.com</code> URLs) or permanently (in the case of <code>rawcdn.githack.com</code> URLs), and relaying them to your browser with the correct <code>Content-Type</code> headers.
+        </p>
+        <p>
+          The caching layer ensures that minimal load is placed on GitHub or Bitbucket, and you get quick and easy static file hosting right from a repo. Everyone's happy!
+        </p>
+      </div>
+
+      <div id="associated-with-github" class="question">
+        <h2><a href="#associated-with-github">Is raw.githack.com associated with GitHub or Bitbucket?</a></h2>
+        <p>
+          No, raw.githack.com is not associated with GitHub or Bitbucket in any way. Please don't contact their support asking for help with raw.githack.com. They'll give you a weird look and back away slowly.
+        </p>
+      </div>
+
+      <div id="diff-between-rawgithack-and-cdn" class="question">
+        <h2><a href="#diff-between-rawgithack-and-cdn">What's the difference between raw.githack.com and rawcdn.githack.com URLs?</a></h2>
+        <p>
+          When you make a request to a <code>raw.githack.com</code> URL, the server loads the requested file from GitHub, serves it to your browser with the correct <code>Content-Type</code> header, and caches it for a short time. If you push new changes to GitHub, you can reload and see them within a few minutes, which makes <code>raw.githack.com</code> useful for low-traffic testing or sharing demos during development.
+        </p>
+        <p>
+          Requests to <code>rawcdn.githack.com</code> are routed through <a href="http://cloudflare.com/">CloudFlare</a>'s super fast content delivery network, and are cached <strong>for a year</strong> the first time they're loaded. This results in the best performance and reduces load on raw.githack.com and on GitHub, but it means that reloading won't fetch new changes from GitHub.
+        </p>
+        <p>
+          During development, when traffic is low and freshness is more important than performance, use <code>raw.githack.com</code>. For anything you share with the public or push to production, use <code>rawcdn.githack.com</code>.
+        </p>
+      </div>
+
+      <div id="rawgithack-com-in-production" class="question">
+        <h2><a href="#rawgithack-com-in-production">Can I use a raw.githack.com URL on a production website?</a></h2>
+        <p>
+          No. Please use <code>rawcdn.githack.com</code> for anything that might result in heavy traffic. Only use <code>raw.githack.com</code> URLs for low-traffic testing and sharing temporary examples or demos during development. When people misuse <code>raw.githack.com</code>, it costs me money. Please don't be a jerk.
+        </p>
+      </div>
+
+      <div id="what-happens-to-jerks" class="question">
+        <h2><a href="#what-happens-to-jerks">What will happen if I send large amounts of traffic to a raw.githack.com URL?</a></h2>
+        <p>
+          raw.githack.com will start serving an error page instead of the requested file.
+        </p>
+        <p>
+          This is designed to get your attention as quickly as possible before the excessive traffic  becomes a major problem for RawGit and starts costing me large amounts of money or impacting other users of this service.
+        </p>
+        <p>
+          Remember, only use <code>rawcdn.githack.com</code> in production; never <code>raw.githack.com</code>.
+        </p>
+      </div>
+
+      <div id="cdn-ttl" class="question">
+        <h2><a href="#cdn-ttl">How long does the CDN cache files? How can I make it refresh my file?</a></h2>
+        <p>
+          The CDN caches files for one year based on their path. It ignores query strings. This is done both to improve performance and to make it possible for the CDN to handle massive amounts of traffic without causing excessive load on raw.githack.com, GitHub's or Bitbucket's servers.
+        </p>
+        <p>
+          To ensure that the CDN always serves the version of the file you want, use a git tag or commit ref in the file's path instead of a branch name, and update the URL if you push a new version of the file.
+        </p>
+        <p>
+          So, instead of a URL like <code>https://rawcdn.githack.com/user/repo/branch/file</code>, use a URL like <code>https://rawcdn.githack.com/user/repo/tag/file</code> or <code>https://rawcdn.githack.com/user/repo/commit/file</code>.
+        </p>
+      </div>
+
+      <div id="no-uptime-guarantee" class="question">
+        <h2><a href="#no-uptime-guarantee">I need guaranteed 100% uptime. Should I use rawcdn.githack.com?</a></h2>
+        <p>
+          Probably not.
+        </p>
+        <p>
+          raw.githack.com is a free service and cannot provide any uptime or support guarantees, even for <code>rawcdn.githack.com</code>. While I do my best to keep things running, things sometimes go wrong. Sometimes there are network or provider issues outside my control, sometimes abusive traffic temporarily affects response times, and sometimes I break things (although I try really hard not to).
+        </p>
+        <p>
+          Since I run raw.githack.com in my spare time, with my own money and with free CDN hosting by <a href="http://cloudflare.com/">CloudFlare</a>, it has a budget that's probably less than you pay for coffee in a given month. My goal is to help other open source developers get their projects up and running, but if you need to serve files that are crucial to your business, you should probably pay for a host with well-funded infrastructure and uptime guarantees.
+        </p>
+      </div>
+
+      <div id="feedback" class="question">
+        <h2><a href="#feedback">I have feedback or want to report a bug! Who can I contact?</a></h2>
+        <p>
+          To report a critical issue like RawGit being broken or to share general feedback, send a tweet to <a href="https://twitter.com/neoascetic">@neoascetic</a>. I try to respond quickly when I'm awake and near a computer, but sometimes I do have to sleep. To report a non-critical bug, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue</a>.
+        </p>
+      </div>
+    </div>
+
     <script src="//rawcdn.githack.com/neoascetic/rawgithack/master/rawgithack.js"></script>
   </div>
 </div>
 
 <footer class="ft">
-  <p>&copy; 2016 <a href="https://neoascetic.me/">Pavel Puchkin</a>.</p>
+  <p>&copy; 2016 <a href="https://neoascetic.me/">Pavel Puchkin</a>.</p><br>
+  The idea of this service is inspired from <a href="https://rawgit.com/">rawgit.com</a> (formerly rawgithub.com).
 </footer>
