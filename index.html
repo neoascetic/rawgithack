@@ -1,103 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>raw.githack.com</title>
-    <link rel="canonical" href="https://raw.githack.com">
-    <link href="//fonts.googleapis.com/css?family=Ubuntu+Mono:400,700|Ubuntu:400,700,400italic" rel="stylesheet">
-    <!-- Just look at me, I am working! -->
-    <link href="//raw.githack.com/neoascetic/rawgithack/master/styles.css" rel="stylesheet">
-</head>
-<body>
 
-<div id="doc">
-    <div class="hd">
-        <h1>
-            raw.githack.com
-        </h1>
+<meta charset="utf-8">
+<title>raw.githack.com</title>
+<meta name="viewport" content="width=device-width">
+<meta name="description" content="raw.githack.com serves raw files directly from GitHub with proper Content-Type headers.">
+<link rel="canonical" href="https://raw.githack.com">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:400,700">
+<link rel="stylesheet" href="//raw.githack.com/neoascetic/rawgithack/master/rawgithack.css">
+
+<header class="hd">
+  <h1 class="title"><a href="/">raw.githack.com</a></h1>
+  <nav class="nav">
+    <ul>
+      <!-- <li><a href="https://github.com/rgrove/rawgit/wiki/Frequently-Asked-Questions">FAQ</a></li> -->
+      <li><a href="https://github.com/neoascetic/rawgithack">Source</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="bd">
+  <div class="content">
+    <p class="hero">
+      <strong>raw.githack.com</strong> serves raw files directly from GitHub and Bitbucket with proper <strong>Content-Type</strong> headers.
+    </p>
+
+    <div class="url-helper">
+      <div class="url-paste">
+        <p id="url-form">
+          <label for="url" class="offscreen">GitHub or Bitbucket URL:</label>
+          <input id="url" class="url" type="url" placeholder="Paste a GitHub or Bitbucket file or gist URL here." autofocus>
+        </p>
+      </div>
+
+      <div class="column">
+        <h2>Use this URL in <strong>production</strong></h2>
+        <p>
+          <input id="url-prod" class="url" placeholder="https://rawcdn.githack.com/user/repo/tag/file" readonly>
+        </p>
+        <ul>
+          <li><p>No traffic limits or throttling. Files are served via <a href="https://www.cloudflare.com/">CloudFlare</a>'s CDN.
+          <li><p>Files are automatically optimized.
+          <li><p>Use a specific tag or commit hash in the URL (not a branch). Files are cached permanently based on the URL. Query strings are ignored.
+          <!-- <li><p>The catch: this is a free service, so there are <a href="https://github.com/rgrove/rawgit/wiki/Frequently-Asked-Questions#i-need-guaranteed-100-uptime-should-i-use-cdnrawgitcom">no uptime or support guarantees</a>.</p> -->
+        </ul>
+      </div>
+
+      <div class="column">
+        <h2>Use this URL for <strong>development</strong></h2>
+        <p>
+          <input id="url-dev" class="url" placeholder="https://raw.githack.com/user/repo/branch/file" readonly>
+        </p>
+        <ul>
+          <li><p>New changes you push to GitHub will be reflected within minutes.</p>
+          <li><p>Excessive traffic will be throttled.</p>
+        </ul>
+      </div>
     </div>
 
-    <div class="bd">
-        <h2>The Problem</h2>
-
-        <p>
-        You've got a <code>raw.githubusercontent.com</code> URL that points to some work-in-progress HTML, JavaScript, or CSS. You'd like to share it with someone for a quick demo, or maybe you'd like to use it in a <a href="http://jsperf.com/">jsPerf</a> test.
-        </p>
-
-        <p>
-        Too bad! Most things served from <code>raw.githubusercontent.com</code> have a <code>text/plain</code> content type and are served with an <code>X-Content-Type-Options: nosniff</code> header, which means HTML won't render, and some browsers won't execute JavaScript or apply CSS.
-        </p>
-
-        <h2>The Solution</h2>
-
-        <p>
-        Change the domain! Just replace <span class="code">raw.<strong>githubusercontent</strong>.com</span> with <span class="code">raw.<strong>githack</strong>.com</span> and <em>skadoosh</em>, you're loading raw files from your GitHub repo and they're served with appropriate content types. Render HTML, apply CSS, execute JavaScript.
-        </p>
-
-        <p><strong>Before</strong></p>
-        <pre class="before">https://raw.<strong>githubusercontent</strong>.com/user/repo/master/filename.js</pre>
-
-        <p><strong>After</strong></p>
-        <pre class="after">https://raw.<strong>githack</strong>.com/user/repo/master/filename.js</pre>
-
-        <p>
-        It works with gists too! Just replace <span class="code">gist.<strong>githubusercontent</strong>.com</span> with <span class="code">gist.<strong>githack</strong>.com</span> in the raw gist URL.
-        </p>
-
-        <p>
-        It also works with bitbucket as well! You simply need to replace <strong><code>bitbucket.org</code></strong> with <strong><code>bb.githack.com</code></strong>.
-        </p>
-
-        <h2>The Caveat</h2>
-
-        <p>
-        Use this for testing and for sharing demo code with friends, but <strong>don't use it for anything production-related</strong>. It's slow, it might break from time to time, and it's intended as a convenience for development, not free static hosting.
-        </p>
-
-        <h2>The Source</h2>
-
-        <p>
-        The source code for raw.githack.com is <a href="https://github.com/neoascetic/rawgithack">hosted on GitHub</a>! Fork it and go nuts.
-        </p>
-
-        <h2>The FAQ</h2>
-
-        <h3 id="can-i-use-raw-githack-com-in-production"><a href="#can-i-use-raw-githack-com-in-production">Can I use raw.githack.com on a production website?</a></h3>
-
-        <p>
-        No. Don't do this. Not even a little bit. It will make me very sad.
-        </p>
-
-        <p>
-        raw.githack.com is a free service to make developers' lives easier when developing and testing and debugging things. It's not free hosting. Use <a href="http://pages.github.com/">GitHub Pages</a> for that.
-        </p>
-
-        <h3 id="what-will-happen-if-im-an-asshole"><a href="#what-will-happen-if-im-an-asshole">What will happen if I hotlink to a raw.githack.com URL on a production
-            website?</a></h3>
-
-        <p>
-        Bad things. If you hotlink to a raw.githack.com URL on a site that gets lots of traffic, requests will be throttled. If this heavy traffic continues, requests originating from your site will eventually be dropped.
-        </p>
-
-        <h3 id="but-i-really-want-to-be-an-asshole"><a href="#but-i-really-want-to-be-an-asshole">But I really really want to hotlink to a raw.githack.com URL in production!</a></h3>
-
-        <p>
-        We can't always get what we want. You should use <a href="http://pages.github.com/">GitHub Pages</a>, which is designed for that. Also that's not a question.
-        </p>
-    </div>
-
-    <div class="ft">
-        <p>
-        Hey! raw.githack.com is just for fun and is not associated with GitHub in any way. Please use it responsibly. Have feedback? I'm <a href="https://twitter.com/neoascetic">@neoascetic</a>.
-        </p>
-
-        <p>
-        The idea of this service is inspired from <a href="http://rawgit.com">rawgit.com</a> (formerly rawgithub.com). I just realized that using a whole framework (node.js + express.js) for such simple thing as requests proxying is overkilling, and made same stuff using nginx only.
-        </p>
-    </div>
-
-    <a href="https://github.com/neoascetic/rawgithack"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    <script src="//raw.githack.com/neoascetic/rawgithack/master/rawgithack.js"></script>
+  </div>
 </div>
 
-</body>
-</html>
+<footer class="ft">
+  <p>&copy; 2016 <a href="https://neoascetic.me/">Pavel Puchkin</a>.</p>
+</footer>
