@@ -7,13 +7,13 @@
 <meta name="description" content="raw.githack.com serves raw files directly from GitHub with proper Content-Type headers.">
 <link rel="canonical" href="https://raw.githack.com">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:400,700">
-<link rel="stylesheet" href="https://raw.githack.com/neoascetic/rawgithack/master/rawgithack.css">
+<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/master/rawgithack.css">
 
 <header class="hd">
   <h1 class="title"><a href="/">raw.githack.com</a></h1>
   <nav class="nav">
     <ul>
-      <!-- <li><a href="https://github.com/rgrove/rawgit/wiki/Frequently-Asked-Questions">FAQ</a></li> -->
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="https://github.com/neoascetic/rawgithack">Source</a></li>
     </ul>
   </nav>
@@ -22,7 +22,7 @@
 <div class="bd">
   <div class="content">
     <p class="hero">
-      <strong>raw.githack.com</strong> serves raw files directly from GitHub and Bitbucket with proper <strong>Content-Type</strong> headers.
+      <strong>raw.githack.com</strong> serves raw files directly from GitHub or Bitbucket with proper <strong>Content-Type</strong> headers.
     </p>
 
     <div class="url-helper">
@@ -42,7 +42,7 @@
           <li><p>No traffic limits or throttling. Files are served via <a href="https://www.cloudflare.com/">CloudFlare</a>'s CDN.
           <li><p>Files are automatically optimized.
           <li><p>Use a specific tag or commit hash in the URL (not a branch). Files are cached permanently based on the URL. Query strings are ignored.
-          <!-- <li><p>The catch: this is a free service, so there are <a href="https://github.com/rgrove/rawgit/wiki/Frequently-Asked-Questions#i-need-guaranteed-100-uptime-should-i-use-cdnrawgitcom">no uptime or support guarantees</a>.</p> -->
+          <li><p>The catch: this is a free service, so there are <a href="#no-uptime-guarantee">no uptime or support guarantees</a>.</p>
         </ul>
       </div>
 
@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <div class="faq">
+    <div class="faq" id="faq">
       <div id="who" class="question">
         <h2><a href="#who">Who runs this thing?</a></h2>
         <p>
@@ -69,13 +69,13 @@
       <div id="why" class="question">
         <h2><a href="#why">Why is this necessary? Can't I just load files from GitHub or Bitbucket directly?</a></h2>
         <p>
-          When you request a file from <code>raw.githubusercontent.com</code> or <code>gist.githubusercontent.com</code>, GitHub usually serves it (in the case of JavaScript, HTML, CSS, and some other file types) with a <code>Content-Type</code> of <code>text/plain</code>. As a result, most modern browsers won't actually interpret it as JavaScript, HTML, or CSS.
+          When you request a file from <code>raw.githubusercontent.com</code>,<code>gist.githubusercontent.com</code> or <code>bitbucket.org</code>, they are usually served (in the case of JavaScript, HTML, CSS, and some other file types) with a <code>Content-Type</code> of <code>text/plain</code>. As a result, most modern browsers won't actually interpret it as JavaScript, HTML, or CSS.
         </p>
         <p>
           They do this because serving raw files from a git repo is relatively inefficient, so they want to discourage people from using their repos for static file hosting.
         </p>
         <p>
-          raw.githack.com acts as a caching proxy, forwarding requests to GitHub or Bitbucket, caching the responses either for a short time (in the case of <code>raw.githack.com</code> URLs) or permanently (in the case of <code>rawcdn.githack.com</code> URLs), and relaying them to your browser with the correct <code>Content-Type</code> headers.
+          raw.githack.com acts as a caching proxy, forwarding requests to GitHub or Bitbucket, caching the responses either for a short time (in the case of development URLs) or permanently (in the case of CDN URLs), and relaying them to your browser with the correct <code>Content-Type</code> headers.
         </p>
         <p>
           The caching layer ensures that minimal load is placed on GitHub or Bitbucket, and you get quick and easy static file hosting right from a repo. Everyone's happy!
@@ -90,35 +90,35 @@
       </div>
 
       <div id="diff-between-rawgithack-and-cdn" class="question">
-        <h2><a href="#diff-between-rawgithack-and-cdn">What's the difference between raw.githack.com and rawcdn.githack.com URLs?</a></h2>
+        <h2><a href="#diff-between-rawgithack-and-cdn">What's the difference between development and CDN URLs?</a></h2>
         <p>
-          When you make a request to a <code>raw.githack.com</code> URL, the server loads the requested file from GitHub, serves it to your browser with the correct <code>Content-Type</code> header, and caches it for a short time. If you push new changes to GitHub, you can reload and see them within a few minutes, which makes <code>raw.githack.com</code> useful for low-traffic testing or sharing demos during development.
+          When you make a request to a development URL, the server loads the requested file from GitHub, serves it to your browser with the correct <code>Content-Type</code> header, and caches it for a short time. If you push new changes to GitHub, you can reload and see them within a few minutes, which makes development URLs useful for low-traffic testing or sharing demos during development.
         </p>
         <p>
-          Requests to <code>rawcdn.githack.com</code> are routed through <a href="http://cloudflare.com/">CloudFlare</a>'s super fast content delivery network, and are cached <strong>for a year</strong> the first time they're loaded. This results in the best performance and reduces load on raw.githack.com and on GitHub, but it means that reloading won't fetch new changes from GitHub.
+          Requests to CDN are routed through <a href="http://cloudflare.com/">CloudFlare</a>'s content delivery network, and are cached <strong>for a year</strong> the first time they're loaded. This results in the best performance and reduces load on raw.githack.com and on underlying service, but it means that reloading won't fetch new changes. Furthermore, JS and CSS files will be minified for the sake of performance.
         </p>
         <p>
-          During development, when traffic is low and freshness is more important than performance, use <code>raw.githack.com</code>. For anything you share with the public or push to production, use <code>rawcdn.githack.com</code>.
+          During development, when traffic is low and freshness is more important than performance, use development URLs. For anything you share with the public or push to production, use CDN URLs.
         </p>
       </div>
 
-      <div id="rawgithack-com-in-production" class="question">
-        <h2><a href="#rawgithack-com-in-production">Can I use a raw.githack.com URL on a production website?</a></h2>
+      <div id="development-in-production" class="question">
+        <h2><a href="#development-in-production">Can I use a development URL on a production website?</a></h2>
         <p>
-          No. Please use <code>rawcdn.githack.com</code> for anything that might result in heavy traffic. Only use <code>raw.githack.com</code> URLs for low-traffic testing and sharing temporary examples or demos during development. When people misuse <code>raw.githack.com</code>, it costs me money. Please don't be a jerk.
+          No. Please use CDN URLs for anything that might result in heavy traffic. Only use development URLs for low-traffic testing and sharing temporary examples or demos during development. When people misuse the service, it costs me money. Please don't be a jerk.
         </p>
       </div>
 
       <div id="what-happens-to-jerks" class="question">
-        <h2><a href="#what-happens-to-jerks">What will happen if I send large amounts of traffic to a raw.githack.com URL?</a></h2>
+        <h2><a href="#what-happens-to-jerks">What will happen if I send large amounts of traffic to a development URL?</a></h2>
         <p>
-          raw.githack.com will start serving an error page instead of the requested file.
+          The service will start serving an error page instead of the requested file.
         </p>
         <p>
-          This is designed to get your attention as quickly as possible before the excessive traffic  becomes a major problem for RawGit and starts costing me large amounts of money or impacting other users of this service.
+          This is designed to get your attention as quickly as possible before the excessive traffic becomes a major problem for the service and starts costing me large amounts of money or impacting other users of this service.
         </p>
         <p>
-          Remember, only use <code>rawcdn.githack.com</code> in production; never <code>raw.githack.com</code>.
+          Remember, only use CDN URLs in production; never development one.
         </p>
       </div>
 
@@ -136,12 +136,12 @@
       </div>
 
       <div id="no-uptime-guarantee" class="question">
-        <h2><a href="#no-uptime-guarantee">I need guaranteed 100% uptime. Should I use rawcdn.githack.com?</a></h2>
+        <h2><a href="#no-uptime-guarantee">I need guaranteed 100% uptime. Should I use raw.githack.com?</a></h2>
         <p>
           Probably not.
         </p>
         <p>
-          raw.githack.com is a free service and cannot provide any uptime or support guarantees, even for <code>rawcdn.githack.com</code>. While I do my best to keep things running, things sometimes go wrong. Sometimes there are network or provider issues outside my control, sometimes abusive traffic temporarily affects response times, and sometimes I break things (although I try really hard not to).
+          raw.githack.com is a free service and cannot provide any uptime or support guarantees, even for CDN URLs. While I do my best to keep things running, things sometimes go wrong. Sometimes there are network or provider issues outside my control, sometimes abusive traffic temporarily affects response times, and sometimes I break things (although I try really hard not to).
         </p>
         <p>
           Since I run raw.githack.com in my spare time, with my own money and with free CDN hosting by <a href="http://cloudflare.com/">CloudFlare</a>, it has a budget that's probably less than you pay for coffee in a given month. My goal is to help other open source developers get their projects up and running, but if you need to serve files that are crucial to your business, you should probably pay for a host with well-funded infrastructure and uptime guarantees.
@@ -151,7 +151,17 @@
       <div id="feedback" class="question">
         <h2><a href="#feedback">I have feedback or want to report a bug! Who can I contact?</a></h2>
         <p>
-          To report a critical issue like RawGit being broken or to share general feedback, send a tweet to <a href="https://twitter.com/neoascetic">@neoascetic</a>. I try to respond quickly when I'm awake and near a computer, but sometimes I do have to sleep. To report a non-critical bug, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue</a>.
+          To report a critical issue like raw.githack.com being broken or to share general feedback, send a tweet to <a href="https://twitter.com/neoascetic">@neoascetic</a>. I try to respond quickly when I'm awake and near a computer, but sometimes I do have to sleep. To report a non-critical bug, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue</a>.
+        </p>
+      </div>
+
+      <div id="diff-between-rawgithack-and-rawgit" class="question">
+        <h2><a href="#diff-between-rawgithack-and-rawgit">How raw.githack.com differs from RawGit?</a></h2>
+        <p>
+          The idea of this service is inspired from <a href="http://rawgit.com">rawgit.com</a> (formerly rawgithub.com). I just realized that using a whole framework (node.js with express.js) for such simple thing as requests proxying is overkilling, and made same stuff using nginx only.
+        </p>
+        <p>
+          RawGit supports only GitHub while raw.githack.com supports Bitbucket as well.
         </p>
       </div>
     </div>
@@ -161,6 +171,6 @@
 </div>
 
 <footer class="ft">
-  <p>&copy; 2016 <a href="https://neoascetic.me/">Pavel Puchkin</a>.</p><br>
-  The idea of this service is inspired from <a href="https://rawgit.com/">rawgit.com</a> (formerly rawgithub.com).
+  <p>&copy; 2016 <a href="https://neoascetic.me/">Pavel Puchkin</a>.<br>
+  The idea of this service is inspired from <a href="https://rawgit.com/">rawgit.com</a> (formerly rawgithub.com).</p>
 </footer>
