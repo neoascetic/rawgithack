@@ -5,6 +5,10 @@ html {
 
 html, button, input, select, textarea {
   font: 16px/1.5 'Open Sans', Helvetica, sans-serif;
+  text-align: justify;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
 }
 
 body {
