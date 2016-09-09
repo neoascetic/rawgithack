@@ -176,11 +176,11 @@ pre { overflow-x: auto; }
   cursor: not-allowed
 }
 
-.url-copy-buton:disabled img {
+.url-copy-button:disabled img {
   opacity: 0.3;
 }
 
-.url-copy-buton img {
+.url-copy-button img {
   display: block;
 }
 
