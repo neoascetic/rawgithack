@@ -12,6 +12,16 @@
   var devEl  = doc.getElementById('url-dev');
   var urlEl  = doc.getElementById('url');
 
+  new Clipboard('.url-copy-button');
+
+  var devCopyButton  = doc.getElementById('url-dev-copy');
+  var prodCopyButton = doc.getElementById('url-prod-copy');
+
+  if (doc.queryCommandSupported && doc.queryCommandSupported('copy')) {
+    devCopyButton.style.display  = 'inline-block';
+    prodCopyButton.style.display = 'inline-block';
+  }
+
   urlEl.addEventListener('input', function () {
     var url = urlEl.value.trim();
 
@@ -21,6 +31,8 @@
     prodEl.value = '';
     devEl.classList.remove('valid');
     prodEl.classList.remove('valid');
+    devCopyButton.disabled = true;
+    prodCopyButton.disabled = true;
 
     for (var i in TEMPLATES) {
       var pattern = TEMPLATES[i][0],
@@ -33,6 +45,8 @@
         devEl.value  = url.replace(pattern, template);
         prodEl.classList.add('valid');
         devEl.classList.add('valid');
+        devCopyButton.disabled = false;
+        prodCopyButton.disabled = false;
         break;
       }
     }

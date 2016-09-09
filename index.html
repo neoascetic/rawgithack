@@ -34,8 +34,11 @@
 
       <div class="column">
         <h2>Use this URL in <strong>production</strong></h2>
-        <p>
+        <p class="url-container">
           <input id="url-prod" class="url" placeholder="https://rawcdn.githack.com/user/repo/tag/file" readonly>
+          <button id="url-prod-copy" class="url-copy-button" data-clipboard-target="#url-prod" title="Copy URL" disabled>
+            <img src="clippy.svg" alt="">
+          </button>
         </p>
         <ul>
           <li><p>No traffic limits or throttling. Files are served via <a href="https://www.cloudflare.com/">CloudFlare</a>'s CDN.
@@ -47,8 +50,11 @@
 
       <div class="column">
         <h2>Use this URL for <strong>development</strong></h2>
-        <p>
+        <p class="url-container">
           <input id="url-dev" class="url" placeholder="https://raw.githack.com/user/repo/branch/file" readonly>
+          <button id="url-dev-copy" class="url-copy-button" data-clipboard-target="#url-dev" title="Copy URL" disabled>
+            <img src="clippy.svg" alt="">
+          </button>
         </p>
         <ul>
           <li><p>New changes you push to GitHub will be reflected within minutes.</p>
@@ -165,6 +171,8 @@
       </div>
     </div>
 
+    <script src="//rawcdn.githack.com/zenorocha/document.queryCommandSupported/v1.0.0/dist/queryCommandSupported.min.js"></script>
+    <script src="//rawcdn.githack.com/zenorocha/clipboard.js/v1.5.10/dist/clipboard.min.js"></script>
     <script src="//rawcdn.githack.com/neoascetic/rawgithack/master/rawgithack.js"></script>
   </div>
 </div>
