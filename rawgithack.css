@@ -136,12 +136,6 @@ pre { overflow-x: auto; }
   text-align: center;
 }
 
-p {
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
-}
-
 .url {
   background: #fbfbfb;
   border: 1px solid #dfdfdf;
@@ -283,6 +277,9 @@ p {
   border: 1px solid transparent;
   margin: 1em -1em;
   padding: 0.5em 1em;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
 }
 
 .question h2 {
