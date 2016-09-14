@@ -25,9 +25,9 @@
 
   urlEl.addEventListener('input', formatURL, false);
   formatURL();
-  
+
   function formatURL () {
-    var url = urlEl.value.trim();
+    var url = decodeURIComponent(urlEl.value.trim());
 
     urlEl.classList.remove('valid');
     urlEl.classList.toggle('invalid', url.length);
