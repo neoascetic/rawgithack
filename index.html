@@ -7,6 +7,7 @@
 <meta name="description" content="raw.githack.com serves raw files directly from GitHub, Bitbucket or GitLab with proper Content-Type headers.">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:400,700">
 <link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/master/rawgithack.css">
+<link rel="search" type="application/opensearchdescription+xml" href="//rawcdn.githack.com/neoascetic/rawgithack/master/opensearch.xml" title="raw.githack.com">
 
 <header class="hd">
   <h1 class="title"><a href="/">raw.githack.com</a></h1>
@@ -28,7 +29,7 @@
       <div class="url-paste">
         <p id="url-form">
           <label for="url" class="offscreen">GitHub, Bitbucket or GitLab URL:</label>
-          <input id="url" class="url" type="url" placeholder="Paste a GitHub, Bitbucket or GitLab file or gist URL here." autofocus>
+          <input id="url" class="url" type="url" value="<!--# echo var="arg_url" encoding="url" default="" -->" placeholder="Paste a GitHub, Bitbucket or GitLab file or gist URL here." autofocus>
         </p>
       </div>
 

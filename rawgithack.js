@@ -23,7 +23,10 @@
     prodCopyButton.style.display = 'inline-block';
   }
 
-  urlEl.addEventListener('input', function () {
+  urlEl.addEventListener('input', formatURL, false);
+  formatURL();
+  
+  function formatURL () {
     var url = urlEl.value.trim();
 
     urlEl.classList.remove('valid');
@@ -51,7 +54,7 @@
         break;
       }
     }
-  }, false);
+  }
 
   prodEl.addEventListener('focus', onFocus);
   devEl.addEventListener('focus', onFocus);
