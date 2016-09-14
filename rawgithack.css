@@ -6,9 +6,6 @@ html {
 html, button, input, select, textarea {
   font: 16px/1.5 'Open Sans', Helvetica, sans-serif;
   text-align: justify;
-  -webkit-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
 }
 
 body {
@@ -139,6 +136,12 @@ pre { overflow-x: auto; }
   text-align: center;
 }
 
+p {
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
 .url {
   background: #fbfbfb;
   border: 1px solid #dfdfdf;
@@ -224,10 +227,7 @@ pre { overflow-x: auto; }
 }
 
 @media (max-width: 767px) {
-  .hero {
-    font-size: 1.4em;
-    text-align: left;
-  }
+  .hero { font-size: 1.4em; }
 
   .hero,
   .url,
