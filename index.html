@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>raw.githack.com</title>
 <meta name="viewport" content="width=device-width">
-<meta name="description" content="raw.githack.com serves raw files directly from GitHub with proper Content-Type headers.">
+<meta name="description" content="raw.githack.com serves raw files directly from GitHub, Bitbucket or GitLab with proper Content-Type headers.">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:400,700">
 <link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/master/rawgithack.css">
 
@@ -21,14 +21,14 @@
 <div class="bd">
   <div class="content">
     <p class="hero">
-      <strong>raw.githack.com</strong> serves raw files directly from GitHub or Bitbucket with proper <strong>Content-Type</strong> headers.
+      <strong>raw.githack.com</strong> serves raw files directly from GitHub, Bitbucket or GitLab with proper <strong>Content-Type</strong> headers.
     </p>
 
     <div class="url-helper">
       <div class="url-paste">
         <p id="url-form">
-          <label for="url" class="offscreen">GitHub or Bitbucket URL:</label>
-          <input id="url" class="url" type="url" placeholder="Paste a GitHub or Bitbucket file or gist URL here." autofocus>
+          <label for="url" class="offscreen">GitHub, Bitbucket or GitLab URL:</label>
+          <input id="url" class="url" type="url" placeholder="Paste a GitHub, Bitbucket or GitLab file or gist URL here." autofocus>
         </p>
       </div>
 
@@ -72,25 +72,25 @@
       </div>
 
       <div id="why" class="question">
-        <h2><a href="#why">Why is this necessary? Can't I just load files from GitHub or Bitbucket directly?</a></h2>
+        <h2><a href="#why">Why is this necessary? Can't I just load files from GitHub, Bitbucket or GitLab directly?</a></h2>
         <p>
-          When you request a file from <code>raw.githubusercontent.com</code>, <code>gist.githubusercontent.com</code> or <code>bitbucket.org</code>, they are usually served (in the case of JavaScript, HTML, CSS, and some other file types) with a <code>Content-Type</code> of <code>text/plain</code>. As a result, most modern browsers won't actually interpret it as JavaScript, HTML, or CSS.
+          When you request a file from <code>raw.githubusercontent.com</code>, <code>gist.githubusercontent.com</code>, <code>bitbucket.org</code> or <code>gitlab.com</code>, they are usually served (in the case of JavaScript, HTML, CSS, and some other file types) with a <code>Content-Type</code> of <code>text/plain</code>. As a result, most modern browsers won't actually interpret it as JavaScript, HTML, or CSS.
         </p>
         <p>
           They do this because serving raw files from a git repo is relatively inefficient, so they want to discourage people from using their repos for static file hosting.
         </p>
         <p>
-          raw.githack.com acts as a caching proxy, forwarding requests to GitHub or Bitbucket, caching the responses either for a short time (in the case of development URLs) or permanently (in the case of CDN URLs), and relaying them to your browser with the correct <code>Content-Type</code> headers.
+          raw.githack.com acts as a caching proxy, forwarding requests to GitHub, Bitbucket or GitLab, caching the responses either for a short time (in the case of development URLs) or permanently (in the case of CDN URLs), and relaying them to your browser with the correct <code>Content-Type</code> headers.
         </p>
         <p>
-          The caching layer ensures that minimal load is placed on GitHub or Bitbucket, and you get quick and easy static file hosting right from a repo. Everyone's happy!
+          The caching layer ensures that minimal load is placed on GitHub, Bitbucket or GitLab, and you get quick and easy static file hosting right from a repo. Everyone's happy!
         </p>
       </div>
 
       <div id="associated-with-github" class="question">
-        <h2><a href="#associated-with-github">Is raw.githack.com associated with GitHub or Bitbucket?</a></h2>
+        <h2><a href="#associated-with-github">Is raw.githack.com associated with GitHub, Bitbucket or GitLab?</a></h2>
         <p>
-          No, raw.githack.com is not associated with GitHub or Bitbucket in any way. Please don't contact their support asking for help with raw.githack.com. They'll give you a weird look and back away slowly.
+          No, raw.githack.com is not associated with GitHub, Bitbucket or GitLab in any way. Please don't contact their support asking for help with raw.githack.com. They'll give you a weird look and back away slowly.
         </p>
       </div>
 
@@ -130,7 +130,7 @@
       <div id="cdn-ttl" class="question">
         <h2><a href="#cdn-ttl">How long does the CDN cache files? How can I make it refresh my file?</a></h2>
         <p>
-          The CDN caches files for one year based on their path. It ignores query strings. This is done both to improve performance and to make it possible for the CDN to handle massive amounts of traffic without causing excessive load on raw.githack.com, GitHub's or Bitbucket's servers.
+          The CDN caches files for one year based on their path. It ignores query strings. This is done both to improve performance and to make it possible for the CDN to handle massive amounts of traffic without causing excessive load on raw.githack.com, GitHub's, Bitbucket's or GitLab's servers.
         </p>
         <p>
           To ensure that the CDN always serves the version of the file you want, use a git tag or commit ref in the file's path instead of a branch name, and update the URL if you push a new version of the file.
@@ -166,7 +166,7 @@
           The idea of this service is inspired from <a href="http://rawgit.com">rawgit.com</a> (formerly rawgithub.com). I just realized that using a whole framework (node.js with express.js) for such simple thing as requests proxying is overkilling, and made same stuff using nginx only.
         </p>
         <p>
-          RawGit supports only GitHub while raw.githack.com supports Bitbucket as well.
+          RawGit supports only GitHub while raw.githack.com supports Bitbucket and GitLab as well.
         </p>
       </div>
     </div>
