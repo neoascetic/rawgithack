@@ -27,7 +27,7 @@
   formatURL();
 
   function formatURL () {
-    var url = decodeURIComponent(urlEl.value.trim());
+    var url = urlEl.value = decodeURIComponent(urlEl.value.trim());
 
     urlEl.classList.remove('valid');
     urlEl.classList.toggle('invalid', url.length);
