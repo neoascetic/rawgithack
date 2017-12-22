@@ -8,7 +8,7 @@
     // snippet file URL from web interface, with revision
     [/^(https?):\/\/bitbucket\.org\/snippets\/([^\/]+\/[^\/]+)\/revisions\/([^\/\#\?]+)(?:\?[^#]*)?(?:\#file-(.+\..+?))$/i, '$1://bb.githack.com/!api/2.0/snippets/$2/$3/files/$4'],
     // snippet file URL from web interface, no revision
-    [/^(https?):\/\/bitbucket\.org\/snippets\/([^\/]+\/[^\/\#\?]+)(?:\?[^#]*)?(?:\#file-(.+\..+?)$/i, '$1://bb.githack.com/!api/2.0/snippets/$2/HEAD/files/$3'],
+    [/^(https?):\/\/bitbucket\.org\/snippets\/([^\/]+\/[^\/\#\?]+)(?:\?[^#]*)?(?:\#file-(.+\..+?))$/i, '$1://bb.githack.com/!api/2.0/snippets/$2/HEAD/files/$3'],
     // snippet file URLs from REST API
     [/^(https?):\/\/bitbucket\.org\/\!api\/2.0\/snippets\/([^\/]+\/[^\/]+\/[^\/]+)\/files\/(.+\..+?)(?:\?.*)?$/i, '$1://bb.githack.com/!api/2.0/snippets/$2/files/$3'],
     [/^(https?):\/\/api\.bitbucket\.org\/2.0\/snippets\/([^\/]+\/[^\/]+\/[^\/]+)\/files\/(.+\..+?)(?:\?.*)?$/i, '$1://bb.githack.com/!api/2.0/snippets/$2/files/$3'],
