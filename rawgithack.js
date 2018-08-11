@@ -33,9 +33,24 @@
   }
 
   urlEl.addEventListener('input', formatURL, false);
+
+  if (/(iPhone|iPad|iPod)/i.test(navigator.userAgent)) {
+    // On iOS, it's quite difficult to copy the value of readonly input elements (see https://git.io/vpI8Z).
+    // By making the inputs non-readonly and preventing keydown we can mimic the behaviour of readonly inputs while
+    // improving the copy-input-value interaction.
+    inputDev.removeAttribute('readonly')
+    inputProd.removeAttribute('readonly')
+    inputDev.addEventListener('keydown', function (e) {
+      e.preventDefault();
+    });
+    inputProd.addEventListener('keydown', function (e) {
+      e.preventDefault();
+    });
+  }
+
   formatURL();
 
-  function formatURL () {
+  function formatURL() {
     var url = urlEl.value = decodeURIComponent(urlEl.value.trim());
 
     urlEl.classList.remove('valid');
