@@ -29,14 +29,14 @@
       <div class="url-paste">
         <p id="url-form">
           <label for="url" class="offscreen">GitHub, Bitbucket or GitLab URL:</label>
-          <input id="url" class="url" type="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste a GitHub, Bitbucket or GitLab file or gist URL here." autofocus>
+          <input id="url" class="url" type="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste a GitHub, Bitbucket or GitLab file or gist URL here." autofocus tabindex="1">
         </p>
       </div>
 
       <div class="column">
         <h2>Use this URL in <strong>production</strong></h2>
         <p class="url-container">
-          <input id="url-prod" class="url" placeholder="https://rawcdn.githack.com/user/repo/tag/file" readonly>
+          <input id="url-prod" class="url" placeholder="https://rawcdn.githack.com/user/repo/tag/file" readonly tabindex="2">
           <button id="url-prod-copy" class="url-copy-button" data-clipboard-target="#url-prod" title="Copy URL" disabled>
             <img src="//rawcdn.githack.com/neoascetic/rawgithack/master/clippy.svg" alt="">
           </button>
@@ -52,7 +52,7 @@
       <div class="column">
         <h2>Use this URL for <strong>development</strong></h2>
         <p class="url-container">
-          <input id="url-dev" class="url" placeholder="https://raw.githack.com/user/repo/branch/file" readonly>
+          <input id="url-dev" class="url" placeholder="https://raw.githack.com/user/repo/branch/file" readonly tabindex="3">
           <button id="url-dev-copy" class="url-copy-button" data-clipboard-target="#url-dev" title="Copy URL" disabled>
             <img src="//rawcdn.githack.com/neoascetic/rawgithack/master/clippy.svg" alt="">
           </button>
