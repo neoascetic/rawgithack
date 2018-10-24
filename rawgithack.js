@@ -21,6 +21,19 @@
     [/^(https?):\/\/api\.bitbucket\.org\/2.0\/snippets\/([^\/]+\/[^\/]+\/[^\/]+)\/files\/(.+\..+?)(?:\?.*)?$/i,
      '$1://bb.githack.com/!api/2.0/snippets/$2/files/$3'],
 
+    // welcome rawgit refugees
+    [/^(https?):\/\/(?:cdn\.)?rawgit\.com\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+\..+)$/i,
+     '$1://gist.githack.com/$2'],
+    [/^(https?):\/\/(?:cdn\.)?rawgit\.com\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+\..+)/i,
+     '$1://raw.githack.com/$2/$3'],
+
+    // ...and maybe gitcdn.xyz? ;)
+    [/^(https?):\/\/gitcdn\.xyz\/[^\/]+\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+\..+)$/i,
+     '$1://gist.githack.com/$2'],
+    [/^(https?):\/\/gitcdn\.xyz\/[^\/]+\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+\..+)/i,
+     '$1://raw.githack.com/$2/$3'],
+
+
     [/^(https?):\/\/raw\.github(?:usercontent)?\.com\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+\..+)/i,
      '$1://raw.githack.com/$2/$3'],
     [/^(https?):\/\/github\.com\/(.[^\/]+?)\/(.[^\/]+?)\/(?!releases\/)(?:(?:blob|raw)\/)?(.+?\/.+)/i,
