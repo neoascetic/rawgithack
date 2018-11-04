@@ -49,10 +49,8 @@ pre { overflow-x: auto; }
 }
 
 .hd .logo {
-  height: 32px;
   margin: 0 0.2em 0 0.4em;
-  position: relative;
-  top: 4px;
+  float: left;
   width: 56px;
 }
 
