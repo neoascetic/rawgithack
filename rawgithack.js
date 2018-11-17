@@ -4,7 +4,7 @@
   const GITHUB_API_URL = 'https://api.github.com';
 
   const TEMPLATES = [
-    [/^(https?):\/\/gitlab\.com\/([^\/]+\/[^\/]+)\/(?:raw|blob)\/(.+?)(?:\?.*)?$/i,
+    [/^(https?):\/\/gitlab\.com\/([^\/]+.*\/[^\/]+)\/(?:raw|blob)\/(.+?)(?:\?.*)?$/i,
      '$1://gl.githack.com/$2/raw/$3'],
     [/^(https?):\/\/bitbucket\.org\/([^\/]+\/[^\/]+)\/(?:raw|src)\/(.+?)(?:\?.*)?$/i,
      '$1://bb.githack.com/$2/raw/$3'],
