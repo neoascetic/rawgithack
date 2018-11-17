@@ -28,11 +28,10 @@
      '$1://raw.githack.com/$2/$3'],
 
     // ...and maybe gitcdn.xyz? ;)
-    [/^(https?):\/\/gitcdn\.xyz\/[^\/]+\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+)$/i,
+    [/^(https?):\/\/gitcdn\.(?:xyz|link)\/[^\/]+\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+)$/i,
      '$1://gist.githack.com/$2'],
-    [/^(https?):\/\/gitcdn\.xyz\/[^\/]+\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+)/i,
+    [/^(https?):\/\/gitcdn\.(?:xyz|link)\/[^\/]+\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+)/i,
      '$1://raw.githack.com/$2/$3'],
-
 
     [/^(https?):\/\/raw\.github(?:usercontent)?\.com\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+)/i,
      '$1://raw.githack.com/$2/$3'],
