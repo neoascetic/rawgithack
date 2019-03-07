@@ -66,15 +66,12 @@ pre { overflow-x: auto; }
   margin: 0 0.6em;
 }
 
-.hd .nav a {
+.hd .nav a, .hd .nav .donate input {
+  border: 0;
   color: #555;
   padding: 5px 8px;
   text-decoration: none;
-}
-
-.hd .nav .donate input {
   background: transparent;
-  border: 0;
 }
 
 .hd .nav a:hover, .hd .nav .donate input:hover {
