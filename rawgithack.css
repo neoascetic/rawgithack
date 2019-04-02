@@ -72,11 +72,15 @@ pre { overflow-x: auto; }
   padding: 5px 8px;
   text-decoration: none;
   background: transparent;
+  cursor: pointer;
 }
 
-.hd .nav a:hover, .hd .nav .donate input:hover {
+.hd .nav a:hover {
   background: #efefef;
-  cursor: pointer;
+}
+
+.hd .nav .donate input {
+  background: gold;
 }
 
 .hd .title {
