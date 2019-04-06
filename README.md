@@ -1,4 +1,4 @@
-raw.githack.com [![](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](https://opensource.org/licenses/MIT)
+raw.githack.com
 ===============
 
 This is the source code behind [raw.githack.com](https://raw.githack.com).
