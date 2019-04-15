@@ -66,20 +66,19 @@ pre { overflow-x: auto; }
   margin: 0 0.6em;
 }
 
-.hd .nav a, .hd .nav .donate input {
+.hd .nav a, .hd .nav {
   border: 0;
   color: #555;
   padding: 5px 8px;
   text-decoration: none;
   background: transparent;
-  cursor: pointer;
 }
 
 .hd .nav a:hover {
   background: #efefef;
 }
 
-.hd .nav .donate input {
+.hd .nav .purge {
   background: gold;
 }
 
@@ -254,6 +253,16 @@ pre { overflow-x: auto; }
   .url-helper ul {
     padding-left: 1.5em;
   }
+}
+
+.purge textarea {
+  width: 100%;
+  overflow: hidden;
+}
+
+.purge input {
+  display: block;
+  margin: 0 auto;
 }
 
 /* -- Misc ------------------------------------------------------------------ */

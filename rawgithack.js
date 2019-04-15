@@ -132,4 +132,7 @@
   function onFocus(e) {
     setTimeout(function () { e.target.select(); }, 1);
   }
+
+  autosize(doc.querySelector('textarea'));
+
 }(document));
