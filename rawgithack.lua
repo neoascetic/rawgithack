@@ -16,9 +16,9 @@ local function post(url, data, headers)
 end
 
 
-local function error(desc, data)
+local function error(desc)
    ngx.status = ngx.HTTP_BAD_REQUEST
-   ngx.say(json.encode({error = desc, data = data or {}}))
+   ngx.say(json.encode({success = false, response = desc}))
    ngx.exit(ngx.status)
 end
 
@@ -27,7 +27,7 @@ local function get_files()
    local args, err = ngx.req.get_post_args()
 
    if err == "truncated" then error("truncated request") end
-   if not args.files then error("wrong number of files") end
+   if not args.files then error("wrong number of URLs") end
 
    local files, invalid_files = {}, {}
    for l in args.files:gmatch('[^\r\n]+') do
@@ -36,8 +36,8 @@ local function get_files()
       table.insert(valid and files or invalid_files, url)
    end
 
-   if #invalid_files > 0 then error("invalid files", invalid_files) end
-   if #files < 1 or #files > 30 then error("wrong number of files") end
+   if #invalid_files > 0 then error("invalid URLs: " .. table.concat(invalid_files, ', ')) end
+   if #files < 1 or #files > 30 then error("wrong number of URLs") end
 
    return files
 end
@@ -50,8 +50,9 @@ local function cdn_purge(files)
       ['X-Auth-Key'] = cfg.cf.api_key
    }
    local res = post(url, json.encode({files = files}), headers)
-   ngx.say(json.encode(res))
-   if res.status ~= 200 then
+   if res.status == 200 then
+      ngx.say(json.encode({success = true, response = 'cache was successfully invalidated!'}))
+   else
       ngx.log(ngx.ERR, "CDN purge cache error: " .. res.body)
       error("cdn response error")
    end

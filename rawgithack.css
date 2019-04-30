@@ -265,6 +265,29 @@ pre { overflow-x: auto; }
   margin: 0 auto;
 }
 
+.purge .wait:before {
+  content: "👆";
+  margin-right: 5px;
+}
+
+.purge .success:before {
+  content: "👍";
+  margin-right: 5px;
+}
+
+.purge .success {
+  color: green;
+}
+
+.purge .error:before {
+  content: "👎";
+  margin-right: 5px;
+}
+
+.purge .error {
+  color: red;
+}
+
 /* -- Misc ------------------------------------------------------------------ */
 .invalid {
   background: #FFF7F7;
@@ -274,6 +297,10 @@ pre { overflow-x: auto; }
 .valid {
   background: #F2FFEB;
   border-color: #98f9a0;
+}
+
+.hidden {
+  display: none;
 }
 
 /* -- Footer ---------------------------------------------------------------- */
