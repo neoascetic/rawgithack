@@ -167,9 +167,14 @@
     hide(filesSuccess);
     hide(filesError);
     show(filesWait);
-    var body = 'files=' + encodeURIComponent(filesTextarea.value)
+    var body = 'files=' + encodeURIComponent(filesTextarea.value);
     fetch('/purge', { method: 'POST', body: body})
-      .then(res => { return res.json(); })
+      .then(res => {
+        if (res.status == 429) {
+          return {success: false, response: 'too many requests'};
+        }
+        return res.json();
+      })
       .then(res => {
           hide(filesWait);
           filesTextarea.disabled = false;
