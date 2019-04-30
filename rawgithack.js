@@ -145,6 +145,7 @@
   }
 
   var filesTextarea = doc.querySelector('.purge textarea');
+  var filesSubmit = doc.querySelector('.purge input[type=submit]');
   var filesWait = doc.querySelector('.purge .wait');
   var filesSuccess = doc.querySelector('.purge .success');
   var filesError = doc.querySelector('.purge .error');
@@ -164,6 +165,7 @@
 
   document.getElementById('purge-form').onsubmit = function() {
     filesTextarea.disabled = true;
+    filesSubmit.disabled = true;
     hide(filesSuccess);
     hide(filesError);
     show(filesWait);
@@ -177,6 +179,7 @@
       })
       .then(res => {
           hide(filesWait);
+          filesSubmit.disabled = false;
           filesTextarea.disabled = false;
           var operand = res.success ? filesSuccess : filesError;
           operand.textContent = res.response;
