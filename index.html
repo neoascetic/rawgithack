@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="raw.githack.com serves raw files directly from GitHub, Bitbucket or GitLab with proper Content-Type headers.">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:400,700">
-<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/751b66a/rawgithack.css">
+<link rel="stylesheet" href="//raw.githack.com/neoascetic/rawgithack/reset/rawgithack.css">
+
 <link rel="search" type="application/opensearchdescription+xml" href="//rawcdn.githack.com/neoascetic/rawgithack/4558441/opensearch.xml" title="raw.githack.com">
 <link rel="icon" href="//rawcdn.githack.com/neoascetic/rawgithack/4558441/sushi.png">
 
@@ -19,14 +20,7 @@
     <ul>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="https://github.com/neoascetic/rawgithack">Source</a></li>
-      <li>
-        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="donate">
-          <input type="hidden" name="cmd" value="_donations" />
-          <input type="hidden" name="business" value="i@neoascetic.me" />
-          <input type="hidden" name="currency_code" value="USD" />
-          <input type="submit" name="submit" title="Thank you!" value="Donate" />
-        </form>
-      </li>
+      <li><a class="purge" href="#purge">Purge cache <sup>β</sup></a></li>
     </ul>
   </nav>
 </header>
@@ -178,13 +172,29 @@
         </p>
       </div>
     </div>
-
-    <script src="//rawcdn.githack.com/cdnjs/cdnjs/0971b44/ajax/libs/fetch/2.0.1/fetch.min.js"></script>
-    <script src="//rawcdn.githack.com/zenorocha/document.queryCommandSupported/v1.0.0/dist/queryCommandSupported.min.js"></script>
-    <script src="//rawcdn.githack.com/zenorocha/clipboard.js/v1.5.10/dist/clipboard.min.js"></script>
-    <script src="//rawcdn.githack.com/neoascetic/rawgithack/4558441/rawgithack.js"></script>
   </div>
+
+  <div id="purge" class="question">
+    <h2><a href="#purge">Can I somehow purge cached URLs?</a></h2>
+    <p>
+      Yes you can and it is also free while feature is in beta! Just use this handy form to send a request.
+      Obviously, only CDN files are supported, and just up to 30 per one request.
+      Protocol (http/https) doesn't matter and placeholders (*) are simply ignored.
+    </p>
+
+    <form method="POST" action="/purge" class="purge" id="purge-form">
+      <textarea required="true" name="files" placeholder="https://raw.githack.com/user/repo/branch/file.ext"></textarea>
+      <div>
+        <span class="wait">waiting</span>
+        <span class="success hidden">success</span>
+        <span class="error hidden">error</span>
+      </div>
+      <input type="submit" value="Send purge request">
+    </form>
+  </div>
+
 </div>
+
 
 <footer class="ft">
   <p>
@@ -193,3 +203,10 @@
     <a href="http://thenounproject.com/noun/sushi/#icon-No14497">Sushi icon</a> designed by <a href="http://thenounproject.com/lnakanishi">Linda Yuki Nakanishi</a> from The Noun Project.
   </p>
 </footer>
+
+
+<script src="//rawcdn.githack.com/cdnjs/cdnjs/0971b44/ajax/libs/fetch/2.0.1/fetch.min.js"></script>
+<script src="//rawcdn.githack.com/zenorocha/document.queryCommandSupported/v1.0.0/dist/queryCommandSupported.min.js"></script>
+<script src="//rawcdn.githack.com/zenorocha/clipboard.js/v1.5.10/dist/clipboard.min.js"></script>
+<script src="//rawcdn.githack.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+<script src="//raw.githack.com/neoascetic/rawgithack/reset/rawgithack.js"></script>
