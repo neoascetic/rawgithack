@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.2.0] - 2019-10-17
+- Drop HSTS
+- Add donate button
+
 ## [1.1.1] - 2019-10-02
 - Pin the specific openresty version
 - Support stl extension
