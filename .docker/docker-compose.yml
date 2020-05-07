@@ -1,0 +1,13 @@
+version: '2'
+services:
+  rawgithack:
+    image: neoascetic/rawgithack:latest
+    restart: always
+    volumes:
+      - cache:/var/cache/nginx/rawgithack:rw
+      - /root/docker/rawgithack/config.lua:/etc/nginx/rawgithack/config.lua:rw
+    ports:
+      - "80:80"
+
+volumes:
+  cache:

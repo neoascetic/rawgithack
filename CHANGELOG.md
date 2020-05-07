@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.2.1] - 2020-05-07
+- Fixed SSL server name issue
+- Fixed Content-Type for 404 status
+- Added RPM support
+- Added abuse button
+
 ## [1.2.0] - 2019-10-17
 - Drop HSTS
 - Add donate button
