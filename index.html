@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>raw.githack.com</title>
 <meta name="viewport" content="width=device-width">
-<meta name="description" content="raw.githack.com serves raw files directly from GitHub, Bitbucket or GitLab with proper Content-Type headers.">
+<meta name="description" content="raw.githack.com serves raw files directly from GitHub, Bitbucket or GitLab services with proper Content-Type headers">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:400,700">
 <link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/1.1.0/rawgithack.css">
 
@@ -21,6 +21,7 @@
       <li><a href="#faq">FAQ</a></li>
       <li><a href="https://github.com/neoascetic/rawgithack">Source</a></li>
       <li><a target="_blank" href="https://www.paypal.me/neoascetic">Donate</a></li>
+      <li><a class="abuse" href="#abuse">Report abuse</a></li>
       <li><a class="purge" href="#purge">Purge cache <sup>β</sup></a></li>
     </ul>
   </nav>
@@ -35,10 +36,9 @@
     <div class="url-helper">
       <div class="url-paste">
         <p id="url-form">
-          <label for="url" class="offscreen">GitHub, Bitbucket or GitLab URL:</label>
-          <input id="url" class="url" type="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste a GitHub, Bitbucket or GitLab file or gist URL here." autofocus tabindex="1">
+          <label for="url" class="offscreen">URL:</label>
+          <input id="url" class="url" type="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste an URL here" autofocus tabindex="1">
         </p>
-        <p style="text-align: center; font-size: small">Migrating from RawGit? You can convert their URLs here too!</p>
       </div>
 
       <div class="column">
@@ -66,8 +66,7 @@
           </button>
         </p>
         <ul>
-          <li><p>New changes you push to GitHub will be reflected within minutes.</p>
-          <li><p>Excessive traffic will be throttled.</p>
+          <li><p>New changes you push will be reflected within minutes.</p>
         </ul>
       </div>
     </div>
@@ -81,32 +80,32 @@
       </div>
 
       <div id="why" class="question">
-        <h2><a href="#why">Why is this necessary? Can't I just load files from GitHub, Bitbucket or GitLab directly?</a></h2>
+        <h2><a href="#why">Why is this necessary? Can't I just load files from my favorite service directly?</a></h2>
         <p>
-          When you request a file from <code>raw.githubusercontent.com</code>, <code>gist.githubusercontent.com</code>, <code>bitbucket.org</code> or <code>gitlab.com</code>, they are usually served (in the case of JavaScript, HTML, CSS, and some other file types) with a <code>Content-Type</code> of <code>text/plain</code>. As a result, most modern browsers won't actually interpret it as JavaScript, HTML, or CSS.
+          When you request a file from source control hosting services, they are usually served (in the case of JavaScript, HTML, CSS, and some other file types) with a <code>Content-Type</code> of <code>text/plain</code>. As a result, most modern browsers won't actually interpret it as JavaScript, HTML, or CSS.
         </p>
         <p>
           They do this because serving raw files from a git repo is relatively inefficient, so they want to discourage people from using their repos for static file hosting.
         </p>
         <p>
-          raw.githack.com acts as a caching proxy, forwarding requests to GitHub, Bitbucket or GitLab, caching the responses either for a short time (in the case of development URLs) or permanently (in the case of CDN URLs), and relaying them to your browser with the correct <code>Content-Type</code> headers.
+          raw.githack.com acts as a caching proxy, forwarding requests to the corresponding service, caching the responses either for a short time (in the case of development URLs) or permanently (in the case of CDN URLs), and relaying them to your browser with the correct <code>Content-Type</code> headers.
         </p>
         <p>
-          The caching layer ensures that minimal load is placed on GitHub, Bitbucket or GitLab, and you get quick and easy static file hosting right from a repo. Everyone's happy!
+          The caching layer ensures that minimal load is placed on each service, and you get quick and easy static file hosting right from a repo. Everyone's happy!
         </p>
       </div>
 
-      <div id="associated-with-github" class="question">
-        <h2><a href="#associated-with-github">Is raw.githack.com associated with GitHub, Bitbucket or GitLab?</a></h2>
+      <div id="associated-with-hosting-service" class="question">
+        <h2><a href="#associated-with-hosting-service">Is raw.githack.com associated with any of the supported hosting services?</a></h2>
         <p>
-          No, raw.githack.com is not associated with GitHub, Bitbucket or GitLab in any way. Please don't contact their support asking for help with raw.githack.com. They'll give you a weird look and back away slowly.
+          No, raw.githack.com is not associated with them in any way. Please don't contact their support asking for help with raw.githack.com. They'll give you a weird look and back away slowly.
         </p>
       </div>
 
       <div id="diff-between-rawgithack-and-cdn" class="question">
         <h2><a href="#diff-between-rawgithack-and-cdn">What's the difference between development and CDN URLs?</a></h2>
         <p>
-          When you make a request to a development URL, the server loads the requested file from GitHub, serves it to your browser with the correct <code>Content-Type</code> header, and caches it for a short time. If you push new changes to GitHub, you can reload and see them within a few minutes, which makes development URLs useful for low-traffic testing or sharing demos during development.
+          When you make a request to a development URL, the server loads the requested file from the corresponding service, serves it to your browser with the correct <code>Content-Type</code> header, and caches it for a short time. If you push new changes to your repo, you can reload and see them within a few minutes, which makes development URLs useful for low-traffic testing or sharing demos during development.
         </p>
         <p>
           Requests to CDN are routed through <a href="http://cloudflare.com/">CloudFlare</a>'s content delivery network, and are cached <strong>for a year</strong> the first time they're loaded. This results in the best performance and reduces load on raw.githack.com and on underlying service, but it means that reloading won't fetch new changes. Furthermore, JS and CSS files will be minified for the sake of performance.
@@ -133,7 +132,7 @@
       <div id="cdn-ttl" class="question">
         <h2><a href="#cdn-ttl">How long does the CDN cache files? How can I make it refresh my file?</a></h2>
         <p>
-          The CDN caches files for one year based on their path. It ignores query strings. This is done both to improve performance and to make it possible for the CDN to handle massive amounts of traffic without causing excessive load on raw.githack.com, GitHub's, Bitbucket's or GitLab's servers.
+          The CDN caches files for one year based on their path. It ignores query strings. This is done both to improve performance and to make it possible for the CDN to handle massive amounts of traffic without causing excessive load on the underlying services.
         </p>
         <p>
           To ensure that the CDN always serves the version of the file you want, use a git tag or commit ref in the file's path instead of a branch name, and update the URL if you push a new version of the file.
@@ -159,19 +158,10 @@
       <div id="feedback" class="question">
         <h2><a href="#feedback">I have feedback or want to report a bug! Who can I contact?</a></h2>
         <p>
-          To report a critical issue like raw.githack.com being broken or to share general feedback, <a href="mailto:hi@neoascetic.me">send me a letter</a>. I try to respond quickly when I'm awake and near a computer, but sometimes I do have to sleep. To report a non-critical bug, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue</a>.
+          To report a critical issue like raw.githack.com being broken, used to spread spam/copyright-protected content/etc or to share general feedback, <a href="mailto:hi@neoascetic.me">send me a letter</a>. I try to respond quickly when I'm awake and near a computer, but sometimes I do have to sleep. To report a non-critical bug, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue</a>.
         </p>
       </div>
 
-      <div id="diff-between-rawgithack-and-rawgit" class="question">
-        <h2><a href="#diff-between-rawgithack-and-rawgit">How raw.githack.com differs from RawGit?</a></h2>
-        <p>
-          The idea of this service is inspired from <a href="http://rawgit.com">rawgit.com</a> (formerly rawgithub.com). I just realized that using a whole framework (node.js with express.js) for such simple thing as requests proxying is overkilling, and made same stuff using nginx only.
-        </p>
-        <p>
-          RawGit supports only GitHub while raw.githack.com supports Bitbucket and GitLab as well.
-        </p>
-      </div>
     </div>
   </div>
 
