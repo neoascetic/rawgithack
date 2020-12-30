@@ -38,7 +38,12 @@
     [/^(https?):\/\/github\.com\/(.[^\/]+?)\/(.[^\/]+?)\/(?!releases\/)(?:(?:blob|raw)\/)?(.+?\/.+)/i,
      '$1://raw.githack.com/$2/$3/$4'],
     [/^(https?):\/\/gist\.github(?:usercontent)?\.com\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+)$/i,
-     '$1://gist.githack.com/$2']
+     '$1://gist.githack.com/$2'],
+
+    [/^(https?):\/\/git\.sr\.ht\/(~[^\/]+\/[^\/]+\/blob\/.+\/.+)/i,
+     '$1://srht.githack.com/$2'],
+    [/^(https?):\/\/hg\.sr\.ht\/(~[^\/]+\/[^\/]+\/raw\/.+)/i,
+     '$1://srhgt.githack.com/$2']
   ];
 
   var prodEl = doc.getElementById('url-prod');
