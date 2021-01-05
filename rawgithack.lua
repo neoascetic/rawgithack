@@ -89,6 +89,7 @@ end
 
 local function purge_request()
    local files = get_files()
+   ngx.log(ngx.INFO, "got a request to purge #" .. #files .. " files")
    local_purge(files) 
    cdn_purge(files)
 end
