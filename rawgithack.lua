@@ -64,7 +64,9 @@ local function url_to_cache_key(url)
       ['^https?://glcdn%.githack%.com'] = 'gitlab.com',
       ['^https?://bbcdn%.githack%.com'] = 'bitbucket.org',
       ['^https?://rawcdn%.githack%.com'] = 'raw.githubusercontent.com',
-      ['^https?://gistcdn%.githack%.com'] = 'gist.githubusercontent.com'
+      ['^https?://gistcdn%.githack%.com'] = 'gist.githubusercontent.com',
+      ['^https?://srhtcdn%.githack%.com'] = 'git.sr.ht',
+      ['^https?://srhgtcdn%.githack%.com'] = 'hg.sr.ht'
    }
    for pattern, origin in pairs(map) do
       local cache_key, n = url:gsub(pattern, origin, 1)
@@ -75,8 +77,11 @@ end
 
 local function local_purge(files)
    local dir = '/var/cache/nginx/rawgithack'
+   local keys = {}
    for _, f in pairs(files) do
-      local key = ngx.md5(url_to_cache_key(f))
+      keys[#keys] = ngx.md5(url_to_cache_key(f))
+   end
+   for _, key in pairs(keys) do
       -- TODO support arbitrary logic of cache path
       local path = table.concat({dir, key:sub(-1), key:sub(-3, -2), key}, '/')
       local _, err = os.remove(path)
