@@ -73,7 +73,7 @@
   formatURL();
 
   function formatURL() {
-    var url = urlEl.value = decodeURIComponent(urlEl.value.trim());
+    var url = urlEl.value = mergeSlashes(decodeURIComponent(urlEl.value.trim()));
 
     urlEl.classList.remove('valid');
     urlEl.classList.toggle('invalid', url.length);
@@ -103,6 +103,12 @@
           });
       }
     }
+  }
+
+  function mergeSlashes(url) {
+    var url = new URL(url);
+    url.pathname = url.pathname.replaceAll(/\/\/+/ig, '/');
+    return url.toString();
   }
 
   function maybeConvertUrl(url) {
