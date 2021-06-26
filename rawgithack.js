@@ -106,7 +106,11 @@
   }
 
   function mergeSlashes(url) {
-    var url = new URL(url);
+    try {
+      var url = new URL(url);
+    } catch (e) {
+      return url;
+    }
     url.pathname = url.pathname.replaceAll(/\/\/+/ig, '/');
     return url.toString();
   }
