@@ -16,8 +16,10 @@ local function post(url, data, headers)
 end
 
 
-local function error(desc)
+local function error(desc, extended)
    ngx.status = ngx.HTTP_BAD_REQUEST
+   if extended then desc = desc .. ': ' .. extended end
+   ngx.log(ngx.ERR, desc)
    ngx.say(json.encode({success = false, response = desc}))
    ngx.exit(ngx.status)
 end
@@ -53,8 +55,7 @@ local function cdn_purge(files)
    if res.status == 200 then
       ngx.say(json.encode({success = true, response = 'cache was successfully invalidated!'}))
    else
-      ngx.log(ngx.ERR, "CDN purge cache error: " .. res.body)
-      error("cdn response error")
+      error("cdn response error", res.body)
    end
 end
 
