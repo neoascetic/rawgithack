@@ -111,7 +111,7 @@
     } catch (e) {
       return url;
     }
-    url.pathname = url.pathname.replaceAll(/\/\/+/ig, '/');
+    url.pathname = url.pathname.replace(/\/\/+/ig, '/');
     return url.toString();
   }
 
