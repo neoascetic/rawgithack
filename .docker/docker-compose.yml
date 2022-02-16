@@ -1,7 +1,9 @@
 version: '2'
 services:
   rawgithack:
-    image: neoascetic/rawgithack:latest
+    build:
+      context: ../
+      dockerfile: .docker/Dockerfile
     restart: always
     volumes:
       - cache:/var/cache/nginx/rawgithack:rw
