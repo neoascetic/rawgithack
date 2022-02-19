@@ -259,6 +259,8 @@ pre { overflow-x: auto; }
   }
 }
 
+/* -- Purge------------------------------------------------------------------ */
+
 .purge textarea {
   width: 100%;
   overflow: hidden;
@@ -348,7 +350,8 @@ pre { overflow-x: auto; }
   border-color: rgba(255, 255, 0, 0.5);
 }
 
-/* Carbon styles from https://codepen.io/team/buysellads/pen/oNgqYgL */
+
+/* -- Carbon styles from https://codepen.io/team/buysellads/pen/oNgqYgL ----- */
 
 #carbonads * {
   margin: initial;
