@@ -7,9 +7,11 @@ services:
     restart: always
     volumes:
       - cache:/var/cache/nginx/rawgithack:rw
-      - /root/docker/rawgithack/config.lua:/etc/nginx/rawgithack/config.lua:rw
+      - ../config.lua:/etc/nginx/rawgithack/config.lua:r
+      - ../rawgithack.conf:/etc/nginx/rawgithack/rawgithack.conf:r
     ports:
       - "80:80"
+      - "8000:80"
 
 volumes:
   cache:
