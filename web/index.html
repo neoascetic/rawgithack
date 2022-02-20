@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>raw.githack.com</title>
 <meta name="viewport" content="width=device-width">
-<meta name="description" content="raw.githack.com serves raw files directly from various source code hosting services with proper Content-Type headers">
+<meta name="description" content="raw.githack.com serves files directly from your source code hosting with proper Content-Type headers">
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:400,700">
 <link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/3297581/rawgithack.css">
 
@@ -29,14 +29,15 @@
 <div class="bd">
   <div class="content">
     <p class="hero">
-      <strong>raw.githack.com</strong> serves raw files directly from various source code hosting services with proper <strong>Content-Type</strong> headers
+      <strong>raw.githack.com</strong> serves files directly from your source code hosting with proper <strong>Content-Type</strong> headers
     </p>
 
     <div class="url-helper">
       <div class="url-paste">
         <p id="url-form">
           <label for="url" class="offscreen">URL:</label>
-          <input id="url" class="url" type="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste an URL here" autofocus tabindex="1">
+          <input id="url" class="url" type="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste GitHub (Gist), Bitbucket, GitLab, sourcehut or RawGit URL here" autofocus tabindex="1">
+          <br>
         </p>
       </div>
 
