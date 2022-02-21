@@ -146,6 +146,11 @@ pre { overflow-x: auto; }
   text-align: center;
 }
 
+.hero .desc {
+  font-size: 0.4em;
+  display: block;
+}
+
 .url {
   background: #fbfbfb;
   border: 1px solid #dfdfdf;
