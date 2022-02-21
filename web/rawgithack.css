@@ -377,11 +377,8 @@ pre { overflow-x: auto; }
   bottom: 30px;
 
   max-width: 330px;
-  background-color: hsl(0, 0%, 98%);
-  box-shadow:
-    0 2px 1px 1px hsla(0, 0%, 0%, .05),
-    0 2px 2px 2px hsla(0, 0%, 0%, .05),
-    0 2px 4px 4px hsla(0, 0%, 0%, .05);
+  background-color: #efefef;
+  border: 1px solid #efefef;
 }
 
 #carbonads a {
