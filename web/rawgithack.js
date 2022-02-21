@@ -1,48 +1,87 @@
+const GITHUB_API_URL = 'https://api.github.com';
+
+const TEMPLATES = [
+  [/^(https?):\/\/gitlab\.com\/([^\/]+.*\/[^\/]+)\/(?:raw|blob)\/(.+?)(?:\?.*)?$/i,
+   '$1://gl.githack.com/$2/raw/$3'],
+  [/^(https?):\/\/bitbucket\.org\/([^\/]+\/[^\/]+)\/(?:raw|src)\/(.+?)(?:\?.*)?$/i,
+   '$1://bb.githack.com/$2/raw/$3'],
+
+  // snippet file URL from web interface, with revision
+  [/^(https?):\/\/bitbucket\.org\/snippets\/([^\/]+\/[^\/]+)\/revisions\/([^\/\#\?]+)(?:\?[^#]*)?(?:\#file-(.+?))$/i,
+   '$1://bb.githack.com/!api/2.0/snippets/$2/$3/files/$4'],
+  // snippet file URL from web interface, no revision
+  [/^(https?):\/\/bitbucket\.org\/snippets\/([^\/]+\/[^\/\#\?]+)(?:\?[^#]*)?(?:\#file-(.+?))$/i,
+   '$1://bb.githack.com/!api/2.0/snippets/$2/HEAD/files/$3'],
+  // snippet file URLs from REST API
+  [/^(https?):\/\/bitbucket\.org\/\!api\/2.0\/snippets\/([^\/]+\/[^\/]+\/[^\/]+)\/files\/(.+?)(?:\?.*)?$/i,
+   '$1://bb.githack.com/!api/2.0/snippets/$2/files/$3'],
+  [/^(https?):\/\/api\.bitbucket\.org\/2.0\/snippets\/([^\/]+\/[^\/]+\/[^\/]+)\/files\/(.+?)(?:\?.*)?$/i,
+   '$1://bb.githack.com/!api/2.0/snippets/$2/files/$3'],
+
+  // welcome rawgit refugees
+  [/^(https?):\/\/(?:cdn\.)?rawgit\.com\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+)$/i,
+   '$1://gist.githack.com/$2'],
+  [/^(https?):\/\/(?:cdn\.)?rawgit\.com\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+)/i,
+   '$1://raw.githack.com/$2/$3'],
+
+  [/^(https?):\/\/raw\.github(?:usercontent)?\.com\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+)/i,
+   '$1://raw.githack.com/$2/$3'],
+  [/^(https?):\/\/github\.com\/(.[^\/]+?)\/(.[^\/]+?)\/(?!releases\/)(?:(?:blob|raw)\/)?(.+?\/.+)/i,
+   '$1://raw.githack.com/$2/$3/$4'],
+  [/^(https?):\/\/gist\.github(?:usercontent)?\.com\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+)$/i,
+   '$1://gist.githack.com/$2'],
+
+  [/^(https?):\/\/git\.sr\.ht\/(~[^\/]+\/[^\/]+\/blob\/.+\/.+)/i,
+   '$1://srht.githack.com/$2'],
+  [/^(https?):\/\/hg\.sr\.ht\/(~[^\/]+\/[^\/]+\/raw\/.+)/i,
+   '$1://srhgt.githack.com/$2']
+];
+
+function mergeSlashes(url) {
+  try {
+    var url = new URL(url);
+  } catch (e) {
+    return url;
+  }
+  url.pathname = url.pathname.replace(/\/\/+/ig, '/');
+  return url.toString();
+}
+
+function maybeConvertUrl(url) {
+  for (var i in TEMPLATES) {
+    var [pattern, template] = TEMPLATES[i];
+    if (pattern.test(url)) {
+      return url.replace(pattern, template);
+    }
+  }
+}
+
+function cdnize(url) {
+  return url.replace(/^(\w+):\/\/(\w+)/, "$1://$2cdn");
+}
+
+function onFocus(e) {
+  setTimeout(function () { e.target.select(); }, 1);
+}
+
+function hide(element) {
+  element.classList.add('hidden');
+}
+
+function show(element) {
+  element.classList.remove('hidden');
+}
+
+
+// index
 (function (doc) {
   "use strict";
 
-  const GITHUB_API_URL = 'https://api.github.com';
-
-  const TEMPLATES = [
-    [/^(https?):\/\/gitlab\.com\/([^\/]+.*\/[^\/]+)\/(?:raw|blob)\/(.+?)(?:\?.*)?$/i,
-     '$1://gl.githack.com/$2/raw/$3'],
-    [/^(https?):\/\/bitbucket\.org\/([^\/]+\/[^\/]+)\/(?:raw|src)\/(.+?)(?:\?.*)?$/i,
-     '$1://bb.githack.com/$2/raw/$3'],
-
-    // snippet file URL from web interface, with revision
-    [/^(https?):\/\/bitbucket\.org\/snippets\/([^\/]+\/[^\/]+)\/revisions\/([^\/\#\?]+)(?:\?[^#]*)?(?:\#file-(.+?))$/i,
-     '$1://bb.githack.com/!api/2.0/snippets/$2/$3/files/$4'],
-    // snippet file URL from web interface, no revision
-    [/^(https?):\/\/bitbucket\.org\/snippets\/([^\/]+\/[^\/\#\?]+)(?:\?[^#]*)?(?:\#file-(.+?))$/i,
-     '$1://bb.githack.com/!api/2.0/snippets/$2/HEAD/files/$3'],
-    // snippet file URLs from REST API
-    [/^(https?):\/\/bitbucket\.org\/\!api\/2.0\/snippets\/([^\/]+\/[^\/]+\/[^\/]+)\/files\/(.+?)(?:\?.*)?$/i,
-     '$1://bb.githack.com/!api/2.0/snippets/$2/files/$3'],
-    [/^(https?):\/\/api\.bitbucket\.org\/2.0\/snippets\/([^\/]+\/[^\/]+\/[^\/]+)\/files\/(.+?)(?:\?.*)?$/i,
-     '$1://bb.githack.com/!api/2.0/snippets/$2/files/$3'],
-
-    // welcome rawgit refugees
-    [/^(https?):\/\/(?:cdn\.)?rawgit\.com\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+)$/i,
-     '$1://gist.githack.com/$2'],
-    [/^(https?):\/\/(?:cdn\.)?rawgit\.com\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+)/i,
-     '$1://raw.githack.com/$2/$3'],
-
-    [/^(https?):\/\/raw\.github(?:usercontent)?\.com\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+)/i,
-     '$1://raw.githack.com/$2/$3'],
-    [/^(https?):\/\/github\.com\/(.[^\/]+?)\/(.[^\/]+?)\/(?!releases\/)(?:(?:blob|raw)\/)?(.+?\/.+)/i,
-     '$1://raw.githack.com/$2/$3/$4'],
-    [/^(https?):\/\/gist\.github(?:usercontent)?\.com\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+)$/i,
-     '$1://gist.githack.com/$2'],
-
-    [/^(https?):\/\/git\.sr\.ht\/(~[^\/]+\/[^\/]+\/blob\/.+\/.+)/i,
-     '$1://srht.githack.com/$2'],
-    [/^(https?):\/\/hg\.sr\.ht\/(~[^\/]+\/[^\/]+\/raw\/.+)/i,
-     '$1://srhgt.githack.com/$2']
-  ];
+  var urlEl  = doc.getElementById('url');
+  if (!urlEl) return;
 
   var prodEl = doc.getElementById('url-prod');
   var devEl  = doc.getElementById('url-dev');
-  var urlEl  = doc.getElementById('url');
 
   new Clipboard('.url-copy-button');
 
@@ -105,29 +144,6 @@
     }
   }
 
-  function mergeSlashes(url) {
-    try {
-      var url = new URL(url);
-    } catch (e) {
-      return url;
-    }
-    url.pathname = url.pathname.replace(/\/\/+/ig, '/');
-    return url.toString();
-  }
-
-  function maybeConvertUrl(url) {
-    for (var i in TEMPLATES) {
-      var [pattern, template] = TEMPLATES[i];
-      if (pattern.test(url)) {
-        return url.replace(pattern, template);
-      }
-    }
-  }
-
-  function cdnize(url) {
-    return url.replace(/^(\w+):\/\/(\w+)/, "$1://$2cdn");
-  }
-
   function setValid() {
     urlEl.classList.remove('invalid');
     urlEl.classList.add('valid');
@@ -141,19 +157,15 @@
   devEl.addEventListener('focus', onFocus);
   urlEl.addEventListener('focus', onFocus);
 
-  function onFocus(e) {
-    setTimeout(function () { e.target.select(); }, 1);
-  }
+}(document));
 
-  function hide(element) {
-    element.classList.add('hidden');
-  }
 
-  function show(element) {
-    element.classList.remove('hidden');
-  }
+// purge
+(function (doc) {
+  "use strict";
 
   var filesTextarea = doc.querySelector('.purge textarea');
+  if (!filesTextarea) return;
   var filesSubmit = doc.querySelector('.purge input[type=submit]');
   var filesWait = doc.querySelector('.purge .wait');
   var filesSuccess = doc.querySelector('.purge .success');
