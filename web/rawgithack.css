@@ -78,10 +78,6 @@ pre { overflow-x: auto; }
   background: #efefef;
 }
 
-.hd .nav .abuse {
-  background: red;
-}
-
 .hd .nav .purge {
   background: gold;
 }
