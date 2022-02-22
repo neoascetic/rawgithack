@@ -140,14 +140,14 @@ pre { overflow-x: auto; }
 }
 
 .hero {
-  font-size: 2.5em;
-  line-height: 1.3;
+  font-size: 3em;
+  line-height: 1.5;
   padding: 0 3em;
   text-align: center;
 }
 
 .hero .desc {
-  font-size: 0.4em;
+  font-size: 0.3em;
   display: block;
 }
 
@@ -269,6 +269,7 @@ pre { overflow-x: auto; }
 .purge textarea {
   width: 100%;
   overflow: hidden;
+  height: 150px;
 }
 
 .purge input {
