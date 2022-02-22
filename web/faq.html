@@ -1,6 +1,7 @@
 <p class="hero" id="faq">
   <strong>FAQ</strong>
 </p>
+
 <div class="faq">
   <div id="who" class="question">
     <h2><a href="#who">Who runs this thing?</a></h2>
@@ -111,25 +112,11 @@
     </p>
   </div>
 
-</div>
-</div>
-
-<div id="purge" class="question">
-<h2><a href="#purge">Can I somehow purge cached URLs?</a></h2>
-<p>
-  Yes you can and it is also free while feature is in beta! Just use this handy form to send a request.
-  Obviously, only CDN files are supported, and just up to 30 per one request.
-  Protocol (http/https) doesn't matter and placeholders (*) are simply ignored.
-</p>
-
-<form method="POST" action="/purge" class="purge" id="purge-form">
-  <textarea required="true" name="files" placeholder="https://rawcdn.githack.com/user/repo/branch/file.ext"></textarea>
-  <div>
-    <span class="wait">waiting</span>
-    <span class="success hidden">success</span>
-    <span class="error hidden">error</span>
+  <div id="purge" class="question">
+    <h2><a href="#purge">Can I somehow purge cached URLs?</a></h2>
+    <p>
+      You can do this <a href="/purge-cache">here</a>.
+    </p>
   </div>
-  <input type="submit" value="Send purge request">
-</form>
 
-<script defer src="//rawcdn.githack.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+</div>
