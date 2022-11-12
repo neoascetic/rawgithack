@@ -143,7 +143,7 @@ pre { overflow-x: auto; }
 }
 
 .hero .desc {
-  font-size: 0.3em;
+  font-size: 1rem;
   display: block;
 }
 
@@ -293,6 +293,7 @@ pre { overflow-x: auto; }
   }
 
   .sponsor div { text-align: left; }
+  .sponsor img { width: 100%; }
 
 /* -- Purge------------------------------------------------------------------ */
 
