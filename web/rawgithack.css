@@ -260,6 +260,22 @@ pre { overflow-x: auto; }
   }
 }
 
+/* -- Sponsors--------------------------------------------------------------- */
+
+.sponsors {
+  text-align: center;
+}
+
+  .sponsor {
+    vertical-align: top;
+    display: inline-block;
+    width: 30em;
+    padding: 1em;
+  }
+
+  .sponsor a { display: block; }
+  .sponsor div { text-align: left; }
+
 /* -- Purge------------------------------------------------------------------ */
 
 .purge textarea {
