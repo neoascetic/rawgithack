@@ -269,8 +269,22 @@ pre { overflow-x: auto; }
   .sponsor {
     vertical-align: top;
     display: inline-block;
-    width: 25em;
     padding: 1em;
+  }
+
+  .gold .sponsor {
+    width: 25em;
+    font-size: 1rem;
+  }
+
+  .silver .sponsor {
+    width: 20em;
+    font-size: 0.9rem;
+  }
+
+  .bronze .sponsor {
+    width: 15em;
+    font-size: 0.8rem;
   }
 
   .sponsor a {
