@@ -269,11 +269,15 @@ pre { overflow-x: auto; }
   .sponsor {
     vertical-align: top;
     display: inline-block;
-    width: 30em;
+    width: 25em;
     padding: 1em;
   }
 
-  .sponsor a { display: block; }
+  .sponsor a {
+     display: block;
+     padding-bottom: 1em;
+  }
+
   .sponsor div { text-align: left; }
 
 /* -- Purge------------------------------------------------------------------ */
