@@ -138,7 +138,7 @@ local function purge_request()
    if err == "truncated" then error("truncated request") end
 
    if (not patrons[args.patron] and
-       args.patron ~= cfg.simsim) then error("unknown patron") end
+       args.patron ~= cfg.simsim) then error("you are not our patron") end
 
    local files = validate_files(args.files)
    ngx.log(ngx.WARN, "got a request to purge #" .. #files .. " files")
