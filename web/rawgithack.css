@@ -301,9 +301,18 @@ pre { overflow-x: auto; }
   width: 100%;
   overflow: hidden;
   height: 150px;
+  border-width: 1px;
+  border-color: #888;
 }
 
-.purge input {
+.purge input[name=patron] {
+  display: inline-block;
+  border-width: 1px;
+  border-color: #888;
+  margin: 0;
+}
+
+.purge input[type=submit] {
   display: block;
   margin: 0 auto;
 }
