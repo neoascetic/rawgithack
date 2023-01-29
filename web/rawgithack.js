@@ -167,6 +167,7 @@ function show(element) {
   var filesTextarea = doc.querySelector('.purge textarea');
   if (!filesTextarea) return;
   var filesSubmit = doc.querySelector('.purge input[type=submit]');
+  var filesPatron = doc.querySelector('.purge input[name=patron]');
   var filesWait = doc.querySelector('.purge .wait');
   var filesSuccess = doc.querySelector('.purge .success');
   var filesError = doc.querySelector('.purge .error');
@@ -187,10 +188,11 @@ function show(element) {
   document.getElementById('purge-form').onsubmit = function() {
     filesTextarea.disabled = true;
     filesSubmit.disabled = true;
+    filesPatron.disabled = true;
     hide(filesSuccess);
     hide(filesError);
     show(filesWait);
-    var body = 'files=' + encodeURIComponent(filesTextarea.value);
+    var body = 'files=' + encodeURIComponent(filesTextarea.value) + '&patron=' + encodeURIComponent(filesPatron.value);
     fetch('/purge', { method: 'POST', body: body})
       .then(res => {
         if (res.status == 429) {
@@ -201,6 +203,7 @@ function show(element) {
       .then(res => {
           hide(filesWait);
           filesSubmit.disabled = false;
+          filesPatron.disabled = false;
           filesTextarea.disabled = false;
           var operand = res.success ? filesSuccess : filesError;
           operand.textContent = res.response;
