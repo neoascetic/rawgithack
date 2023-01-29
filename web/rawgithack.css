@@ -260,41 +260,6 @@ pre { overflow-x: auto; }
   }
 }
 
-/* -- Sponsors--------------------------------------------------------------- */
-
-.sponsors {
-  text-align: center;
-}
-
-  .sponsor {
-    vertical-align: top;
-    display: inline-block;
-    padding: 1em;
-  }
-
-  .gold .sponsor {
-    width: 25em;
-    font-size: 1rem;
-  }
-
-  .silver .sponsor {
-    width: 20em;
-    font-size: 0.9rem;
-  }
-
-  .bronze .sponsor {
-    width: 15em;
-    font-size: 0.8rem;
-  }
-
-  .sponsor a {
-     display: block;
-     padding-bottom: 1em;
-  }
-
-  .sponsor div { text-align: left; }
-  .sponsor img { width: 100%; }
-
 /* -- Purge------------------------------------------------------------------ */
 
 .purge textarea {
