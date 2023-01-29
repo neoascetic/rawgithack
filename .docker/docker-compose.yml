@@ -7,6 +7,7 @@ services:
     restart: always
     volumes:
       - cache:/var/cache/nginx/rawgithack:rw
+      - patrons_cache:/var/cache/nginx/rawgithack_patrons:rw
       - ../config.lua:/etc/nginx/rawgithack/config.lua
       - ../rawgithack.conf:/etc/nginx/rawgithack/rawgithack.conf
     ports:
@@ -14,3 +15,4 @@ services:
 
 volumes:
   cache:
+  patrons_cache:

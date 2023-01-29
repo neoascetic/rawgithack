@@ -49,7 +49,7 @@ end
 
 
 local function init()
-   local cold_cache_path = "/var/cache/nginx/rawgithack/patrons.json"
+   local cold_cache_path = "/var/cache/nginx/rawgithack_patrons/patrons.json"
    ngx.timer.every(60, refresh_patrons, cold_cache_path)
    local cold_cache = load_file(cold_cache_path)
    if cold_cache ~= nil then patrons = json.decode(cold_cache) end
