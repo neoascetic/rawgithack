@@ -1,4 +1,5 @@
-FROM openresty/openresty:1.13.6.2-1-alpine
+FROM openresty/openresty:1.13.6.2-1-alpine-fat
+RUN opm get ledgetech/lua-resty-http
 COPY rawgithack.conf rawgithack.lua web/*.html /etc/nginx/rawgithack/
 RUN rm /etc/nginx/conf.d/default.conf &&\
     ln -sf /etc/nginx/rawgithack/rawgithack.conf /etc/nginx/conf.d/rawgithack.conf &&\
