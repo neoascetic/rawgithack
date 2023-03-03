@@ -36,8 +36,7 @@ local function refresh_patrons(_premature, cold_cache_path)
      local result = json.decode(res.body)
      for i = 1, #result['data'] do
          local user = result['data'][i]['attributes']
-         if (user['patron_status'] == 'active_patron' or
-             user['patron_status'] == 'declined_patron') then
+         if user['patron_status'] == 'active_patron' then
             acc[user['email']] = true
          end
      end
