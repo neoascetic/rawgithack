@@ -37,7 +37,7 @@ local function refresh_patrons(_premature, cold_cache_path)
      for i = 1, #result['data'] do
          local user = result['data'][i]['attributes']
          if user['patron_status'] == 'active_patron' then
-            acc[user['email']] = true
+            acc[user['email']:lower()] = true
          end
      end
      next_page = result['meta']['pagination']['cursors']['next']
@@ -136,7 +136,7 @@ local function purge_request()
    local args, err = ngx.req.get_post_args()
    if err == "truncated" then error("truncated request") end
 
-   if (not patrons[args.patron] and
+   if (not patrons[args.patron:lower()] and
        args.patron ~= cfg.simsim) then error("you are not our patron") end
 
    local files = validate_files(args.files)
