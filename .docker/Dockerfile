@@ -9,7 +9,7 @@ cd /etc/nginx/rawgithack/
 mkdir www
 for page in *.html; do
   if [ "$page" != "base.html" ]; then
-    sed $'/PLACEHOLDER/{r $page\nd}' base.html > www/$page
+    sed -e '/PLACEHOLDER/{' -e "r $page" -e 'd}' base.html > www/$page
   fi
 done
 rm *.html
