@@ -8,8 +8,7 @@ services:
     volumes:
       - cache:/var/cache/nginx/rawgithack:rw
       - patrons_cache:/var/cache/nginx/rawgithack_patrons:rw
-      - ../config.lua:/etc/nginx/rawgithack/config.lua
-      - ../rawgithack.conf:/etc/nginx/rawgithack/rawgithack.conf
+      - ../www:/etc/nginx/rawgithack/www
     ports:
       - "80:80"
 

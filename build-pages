@@ -1,0 +1,8 @@
+#!/bin/bash
+
+mkdir -p www
+for page in web/*.html; do
+  if [ "$page" != "web/base.html" ]; then
+    sed -e "/PLACEHOLDER/{" -e "r $page" -e "d;}" web/base.html > www/$(basename $page)
+  fi
+done
