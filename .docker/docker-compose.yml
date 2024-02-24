@@ -9,6 +9,7 @@ services:
       - cache:/var/cache/nginx/rawgithack:rw
       - patrons_cache:/var/cache/nginx/rawgithack_patrons:rw
       - ../www:/etc/nginx/rawgithack/www
+      - ../rawgithack.conf:/etc/nginx/rawgithack/rawgithack.conf
     ports:
       - "80:80"
 
