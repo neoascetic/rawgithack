@@ -9,7 +9,7 @@ html, button, input, select, textarea {
 }
 
 body {
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
 }
 
@@ -45,6 +45,7 @@ pre { overflow-x: auto; }
   border-bottom: 1px solid #efefef;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0.5em 1em;
 }
 
@@ -128,7 +129,7 @@ pre { overflow-x: auto; }
 
 .bd {
   margin: 0 auto;
-  max-width: 1440px;
+  max-width: 1140px;
 }
 
 .hero {
