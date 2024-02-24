@@ -2,6 +2,6 @@
   <ShortName>raw.githack.com</ShortName>
   <Description>CDN for your source code. Type in GitHub|Bitbucket|GitLab|sourcehut URL.</Description>
   <InputEncoding>UTF-8</InputEncoding>
-  <Url type="text/html" method="get" template="https://raw.githack.com/?q={searchTerms}"/>
+  <Url type="text/html" method="get" template="https://raw.githack.com/?url={searchTerms}"/>
   <moz:SearchForm>https://raw.githack.com</moz:SearchForm>
 </OpenSearchDescription>
