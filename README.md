@@ -10,3 +10,22 @@ made the same stuff using nginx only.
 
 This is also a game: I am trying to implement the same functionality using nginx
 config files only. No programming languages allowed. Come join me!
+
+Example config.lua
+------------------
+
+```lua
+return {
+   simsim = "SECRET",
+   cf = {
+      zone = "ZONE_ID",
+      username = "USERNAME",
+      api_key = "API_KEY",
+      username = "USERNAME"
+   },
+   patreon = {
+      campaign = "CAMPAIGN_ID",
+      token = "ACCESS_TOKEN"
+   }
+}
+```
