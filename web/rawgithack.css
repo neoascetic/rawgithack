@@ -450,6 +450,7 @@ pre { overflow-x: auto; }
     margin: 0 auto;
 
     max-width: 330px;
+    min-height: 100px;
   }
 
   #carbonads .carbon-wrap {
