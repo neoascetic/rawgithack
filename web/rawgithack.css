@@ -13,12 +13,7 @@ body {
   padding: 0;
 }
 
-a {
-  color: #0000ff;
-  text-decoration: none;
-}
-
-a:hover { text-decoration: underline; }
+a { color: #0000ff; }
 
 code, pre {
   color: #444;
@@ -347,6 +342,11 @@ pre { overflow-x: auto; }
 
 .question h2 a {
   color: inherit;
+  text-decoration: none;
+}
+
+.question h2 a:hover {
+  text-decoration: underline;
 }
 
 .question > p:last-child {
