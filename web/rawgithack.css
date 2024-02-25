@@ -4,7 +4,7 @@ html {
 }
 
 html, button, input, select, textarea {
-  font: 16px/1.5 'Open Sans', Helvetica, sans-serif;
+  font: 16px/1.5 'Trebuchet MS', sans-serif;
   text-align: justify;
 }
 
@@ -22,7 +22,7 @@ a:hover { text-decoration: underline; }
 
 code, pre {
   color: #444;
-  font-family: 'Source Code Pro', 'Droid Sans Mono', 'DejaVu Sans Mono', Menlo, monospace;
+  font-family: 'Courier New', 'Courier', monospace;
 }
 
 code {
