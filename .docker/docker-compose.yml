@@ -5,6 +5,7 @@ services:
       context: ../
       dockerfile: .docker/Dockerfile
     restart: always
+    network_mode: host
     volumes:
       - cache:/var/cache/nginx/rawgithack:rw
       - patrons_cache:/var/cache/nginx/rawgithack_patrons:rw
