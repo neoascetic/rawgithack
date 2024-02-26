@@ -62,20 +62,10 @@
   <div id="development-in-production" class="question">
     <h2><a href="#development-in-production">Can I use a development URL on a production website?</a></h2>
     <p>
-      No. Please use CDN URLs for anything that might result in heavy traffic. Only use development URLs for low-traffic testing and sharing temporary examples or demos during development. When people misuse the service, it costs me money. Please don't be a jerk.
-    </p>
-  </div>
-
-  <div id="what-happens-to-jerks" class="question">
-    <h2><a href="#what-happens-to-jerks">What will happen if I send large amounts of traffic to a development URL?</a></h2>
-    <p>
-      The service will start serving an error page instead of the requested file.
+      Better no. Please use CDN URLs for anything that might result in heavy traffic. Only use development URLs for low-traffic testing and sharing temporary examples or demos during development. 
     </p>
     <p>
-      This is designed to get your attention as quickly as possible before the excessive traffic becomes a major problem for the service and starts costing me large amounts of money or impacting other users of this service.
-    </p>
-    <p>
-      Remember, only use CDN URLs in production; never development one.
+      If you don't and the service gets a lots of requests from the same domain, all further requests will be temporary redirected to corresponding CDN URLs, meaning some clients won't see changes you push to your repo on the next request.
     </p>
   </div>
 
@@ -132,7 +122,7 @@
   <div id="purge" class="question">
     <h2><a href="#purge">Can I somehow purge cached URLs?</a></h2>
     <p>
-      You can <a href="/purge-cache">purge cached URLs on this page</a>.
+      If you messed up and want your cache to be purged, you can do this <a href="/purge-cache">using special form</a>.
     </p>
   </div>
 
