@@ -38,7 +38,7 @@ multiline layout << 'HTML'
   </nav>
 </header>
 
-<script async src="//cdn.carbonads.com/carbon.js?serve=CEADPK3U&placement=rawgithackcom" id="_carbonads_js"></script>
+<div><script async src="//cdn.carbonads.com/carbon.js?serve=CEADPK3U&placement=rawgithackcom" id="_carbonads_js"></script></div>
 
 <div class="bd">
   <div class="content">

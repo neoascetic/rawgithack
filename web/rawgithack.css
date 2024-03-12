@@ -442,6 +442,10 @@ pre { overflow-x: auto; }
 }
 
 @media only screen and (min-width: 320px) and (max-width: 759px) {
+  div:has(#_carbonads_js) {
+    min-height: 102px;
+  }
+
   #carbonads {
     float: initial;
     position: relative;
