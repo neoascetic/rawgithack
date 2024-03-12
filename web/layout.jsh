@@ -1,15 +1,22 @@
+year="$(date +%Y)"
+
+if [[ "$target" != index.html ]]; then
+  canonical="${target%.*}"
+fi
+
+multiline layout << 'HTML'
 <!doctype html>
 <html lang="en">
 
 <head>
 
 <meta charset="utf-8">
-<title>${TITLE} | raw.githack.com</title>
+<title>${title} | raw.githack.com</title>
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="raw.githack.com — CDN for your source code">
 <link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/e44a0cb/web/rawgithack.css?min=1">
 
-<link rel="canonical" href="https://raw.githack.com/<!--# if expr="$page != index" --><!--# echo var="page" default="" --><!--# endif -->">
+<link rel="canonical" href="https://raw.githack.com/${canonical}">
 <link rel="search" type="application/opensearchdescription+xml" href="//rawcdn.githack.com/neoascetic/rawgithack/465ac52/web/opensearch.xml" title="raw.githack.com">
 <link rel="icon" href="//rawcdn.githack.com/neoascetic/rawgithack/092e86b/web/sushi.svg">
 
@@ -36,14 +43,14 @@
 <div class="bd">
   <div class="content">
 
-${CONTENT}
+${content}
 
   </div>
 </div>
 
 <footer class="ft">
   <p>
-    © <strong>2013 — <!--# config timefmt="%Y" --><!--# echo var="date_local" --></strong> Pavel Puchkin
+    © <strong>2013 — ${year}</strong> Pavel Puchkin
     <br>
     <a href="http://thenounproject.com/noun/sushi/#icon-No14497">Sushi icon</a> designed by <a href="http://thenounproject.com/lnakanishi">Linda Yuki Nakanishi</a> from The Noun Project.
     <br>
@@ -61,3 +68,4 @@ ${CONTENT}
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9fdcadef580f4335ad3c1e18bf166d0f"}'></script>
 
 </body>
+HTML
