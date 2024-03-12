@@ -14,7 +14,7 @@ multiline layout << 'HTML'
 <title>${title} | raw.githack.com</title>
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="raw.githack.com — CDN for your source code">
-<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/e44a0cb/web/rawgithack.css?min=1">
+<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/358bddc/web/rawgithack.css?min=1">
 
 <link rel="canonical" href="https://raw.githack.com/${canonical}">
 <link rel="search" type="application/opensearchdescription+xml" href="//rawcdn.githack.com/neoascetic/rawgithack/465ac52/web/opensearch.xml" title="raw.githack.com">
