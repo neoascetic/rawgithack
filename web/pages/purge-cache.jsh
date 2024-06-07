@@ -1,4 +1,5 @@
 title="Purge cache"
+description="The page where you can purge cached URLs if you messed up"
 multiline content << 'HTML'
 
 <p class="hero" id="purge">

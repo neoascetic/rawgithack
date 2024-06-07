@@ -1,4 +1,5 @@
 title="CDN for your source code"
+description="raw.githack.com - ${title}"
 multiline content << 'HTML'
 
 <p class="hero">

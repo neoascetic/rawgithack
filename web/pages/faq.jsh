@@ -1,4 +1,5 @@
 title="FAQ"
+description="Frequently Asked Questions about raw.githack.com service"
 multiline content << 'HTML'
 
 <p class="hero">

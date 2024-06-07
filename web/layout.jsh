@@ -13,7 +13,7 @@ multiline layout << 'HTML'
 <meta charset="utf-8">
 <title>${title} | raw.githack.com</title>
 <meta name="viewport" content="width=device-width">
-<meta name="description" content="raw.githack.com — CDN for your source code">
+<meta name="description" content="${description}">
 <link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/358bddc/web/rawgithack.css?min=1">
 
 <link rel="canonical" href="https://raw.githack.com/${canonical}">
