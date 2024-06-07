@@ -14,7 +14,7 @@ multiline layout << 'HTML'
 <title>${title} | raw.githack.com</title>
 <meta name="viewport" content="width=device-width">
 <meta name="description" content="${description}">
-<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/358bddc/web/rawgithack.css?min=1">
+<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/ee590f6/web/rawgithack.css?min=1">
 
 <link rel="canonical" href="https://raw.githack.com/${canonical}">
 <link rel="search" type="application/opensearchdescription+xml" href="//rawcdn.githack.com/neoascetic/rawgithack/465ac52/web/opensearch.xml" title="raw.githack.com">
@@ -33,6 +33,7 @@ multiline layout << 'HTML'
     <ul>
       <li><a href="/faq">FAQ</a></li>
       <li><a href="/purge-cache">Purge cache</a></li>
+      <li><a href="/hacks">Git Hacks<sup>new</sup></a></li>
       <li><a href="/faq#sponsorship">❤️</a></li>
     </ul>
   </nav>
@@ -55,6 +56,7 @@ ${content}
     <a href="http://thenounproject.com/noun/sushi/#icon-No14497">Sushi icon</a> designed by <a href="http://thenounproject.com/lnakanishi">Linda Yuki Nakanishi</a> from The Noun Project.
     <br>
     <a href="/faq">FAQ</a>
+    <a href="/hacks">Hacks</a>
     <a href="/purge-cache">Purge cache</a>
     <a href="/faq#feedback">Report abuse</a>
     <a href="https://stats.uptimerobot.com/XAMJYh438n">Status page</a>
