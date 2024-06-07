@@ -1,11 +1,11 @@
 title="FAQ"
 multiline content << 'HTML'
 
-<p class="hero" id="faq">
+<p class="hero">
   <strong>FAQ</strong>
 </p>
 
-<div class="faq">
+<div>
   <div id="who" class="question">
     <h2><a href="#who">Who runs this thing?</a></h2>
     <p>

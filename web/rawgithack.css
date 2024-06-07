@@ -29,6 +29,8 @@ code {
 
 pre { overflow-x: auto; }
 
+pre > code { display: block; }
+
 .offscreen {
   left: -9999px;
   position: absolute;
