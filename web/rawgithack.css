@@ -127,6 +127,7 @@ pre > code { display: block; }
 .bd {
   margin: 0 auto;
   max-width: 1140px;
+  hyphens: auto;
 }
 
 .hero {
