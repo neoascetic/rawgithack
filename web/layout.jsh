@@ -66,7 +66,7 @@ ${content}
 
 
 <script defer src="//rawcdn.githack.com/cdnjs/cdnjs/0971b44/ajax/libs/fetch/2.0.1/fetch.min.js?min=1"></script>
-<script defer src="//rawcdn.githack.com/neoascetic/rawgithack/c162f69/web/rawgithack.js?min=1"></script>
+<script defer src="//rawcdn.githack.com/neoascetic/rawgithack/35d3b36/web/rawgithack.js?min=1"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9fdcadef580f4335ad3c1e18bf166d0f"}'></script>
 
 </body>

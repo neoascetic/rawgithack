@@ -1,4 +1,4 @@
-local json = require("cjson")
+local json = require("cjson.safe")
 local http = require("resty.http")
 local cfg = require("config")
 
@@ -91,7 +91,8 @@ local function cdn_purge(files)
        headers=headers,
        body=json.encode({files=files})}
    local res = http.new():request_uri(purge_url, params)
-   if res.status ~= 200 then
+   local res_body = json.decode(res.body)
+   if type(res_body) ~= 'table' or not res_body.success then
       ngx.log(ngx.ERR, "CDN response error: " .. res.body)
       return false
    end
