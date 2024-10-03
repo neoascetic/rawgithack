@@ -194,12 +194,7 @@ function show(element) {
     show(filesWait);
     var body = 'files=' + encodeURIComponent(filesTextarea.value) + '&patron=' + encodeURIComponent(filesPatron.value);
     fetch('/purge', { method: 'POST', body: body})
-      .then(res => {
-        if (res.status == 429) {
-          return {success: false, response: 'too many requests'};
-        }
-        return res.json();
-      })
+      .then(res => { return res.json(); })
       .then(res => {
           hide(filesWait);
           filesSubmit.disabled = false;
