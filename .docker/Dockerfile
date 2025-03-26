@@ -1,4 +1,4 @@
-FROM openresty/openresty:1.13.6.2-1-alpine-fat
+FROM openresty/openresty:1.25.3.2-3-alpine-fat
 RUN opm get ledgetech/lua-resty-http
 RUN <<EOF
 ln -sf /etc/nginx/rawgithack/rawgithack.conf /etc/nginx/conf.d/default.conf
