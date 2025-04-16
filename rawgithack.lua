@@ -120,7 +120,7 @@ local function local_purge(files)
    local dir = '/var/cache/nginx/rawgithack'
    local keys = {}
    for _, f in pairs(files) do
-      keys[#keys] = ngx.md5(url_to_cache_key(f))
+      keys[#keys] = ngx.md5(url_to_cache_key(ngx.unescape_uri(f)))
    end
    for _, key in pairs(keys) do
       -- TODO support arbitrary logic of cache path
