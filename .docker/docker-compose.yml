@@ -10,6 +10,10 @@ services:
       - cache:/var/cache/nginx/rawgithack:rw
       - patrons_cache:/var/cache/nginx/rawgithack_patrons:rw
       - ..:/etc/nginx/rawgithack
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 volumes:
   cache:
