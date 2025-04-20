@@ -12,7 +12,7 @@ multiline layout << 'HTML'
 
 <meta charset="utf-8">
 <title>${title} | raw.githack.com</title>
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="${description}">
 <link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/ee590f6/web/rawgithack.css?min=1">
 
