@@ -39,7 +39,6 @@ multiline content << 'HTML'
       <li><a href="https://github.com/">GitHub</a> (with <a href="https://gist.github.com/">Gist</a>)</li>
       <li><a href="https://bitbucket.org/">Bitbucket</a></li>
       <li><a href="https://gitlab.com/">GitLab</a></li>
-      <li><a href="https://sourcehut.org/">sourcehut</a></li>
     </ul>
   </div>
 

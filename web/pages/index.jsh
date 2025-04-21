@@ -11,7 +11,7 @@ multiline content << 'HTML'
   <div class="url-paste">
     <form method="get" id="url-form">
       <label for="url" class="offscreen">URL:</label>
-      <input id="url" class="url" type="url" name="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste GitHub, Bitbucket, GitLab or sourcehut URL here" autofocus tabindex="1">
+      <input id="url" class="url" type="url" name="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste GitHub, Bitbucket or GitLab URL here" autofocus tabindex="1">
     </form>
   </div>
 
