@@ -95,7 +95,7 @@ multiline content << 'HTML'
       raw.githack.com is a free service and cannot provide any uptime or support guarantees, even for CDN URLs. While I do my best to keep things running, things sometimes go wrong. Sometimes there are network or provider issues outside my control, sometimes abusive traffic temporarily affects response times, and sometimes I break things (although I try really hard not to).
     </p>
     <p>
-      You can take a look at our <a href="https://stats.uptimerobot.com/XAMJYh438n">uptime stats</a> to decide if this service is stable enough for you. On the other hand, the service has been working since 2013, for more than a decade, without major outages. Doesn't this mean something?
+      You can take a look at our <a href="https://status.raw.githack.com/">uptime stats</a> to decide if this service is stable enough for you. On the other hand, the service has been working since 2013, for more than a decade, without major outages. Doesn't this mean something?
     </p>
   </div>
 
@@ -108,7 +108,6 @@ multiline content << 'HTML'
       You also can use referal links to register an account with one of our partners:
     </p>
     <ul>
-      <li><a href="https://uptimerobot.com/?rid=c03e1f0ca7fc8a">UptimeRobot</a>. The world's leading uptime monitoring service.</li>
       <li><a href="https://hetzner.cloud/?ref=BrRJMValwaz8">Hetzner</a>. Hetzner Online, with hundreds of thousands of servers in operation, is one of the largest data center operators in Europe.</li>
     </ul>
     <p>

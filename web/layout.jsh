@@ -59,7 +59,7 @@ ${content}
     <a href="/hacks">Hacks</a>
     <a href="/purge-cache">Purge cache</a>
     <a href="/faq#feedback">Report abuse</a>
-    <a href="https://stats.uptimerobot.com/XAMJYh438n">Status page</a>
+    <a href="https://status.raw.githack.com/">Status page</a>
     <a href="https://github.com/neoascetic/rawgithack">Source code</a>
   </p>
 </footer>
