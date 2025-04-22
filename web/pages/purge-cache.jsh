@@ -12,7 +12,7 @@ multiline content << 'HTML'
 </p>
 
 <form method="POST" action="/purge" class="purge" id="purge-form">
-  <textarea required="true" name="files" placeholder="https://rawcdn.githack.com/user/repo/branch/file1.ext&#10;https://rawcdn.githack.com/user/repo/branch/file2.ext&#10;..."></textarea>
+  <textarea required="true" name="files" placeholder="https://rawcdn.githack.com/user/repo/branch/file1.ext&#10;http://raw.githack.com/user/repo/branch/file2.ext&#10;..."></textarea>
   <input type="email" required="true" name="patron" placeholder="Your Patreon email">
   <div>
     <span class="wait">waiting</span>

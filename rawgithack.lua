@@ -62,14 +62,22 @@ local function error(desc)
 end
 
 
+local domain_to_origin = {
+   ['gl'] = 'gitlab.com',
+   ['bb'] = 'bitbucket.org',
+   ['raw'] = 'raw.githubusercontent.com',
+   ['gist'] = 'gist.githubusercontent.com'
+}
+
+
 local function validate_files(raw_files)
    if not raw_files then error("wrong number of URLs") end
 
    local files, invalid_files = {}, {}
    for l in raw_files:gmatch('[^\r\n]+') do
       local url = l:gsub('^%s*(.*)%s*$', '%1') -- trailing whitespaces
-      local valid = url:match('^https?://%w+cdn%.githack%.com')
-      table.insert(valid and files or invalid_files, url)
+      local domain = url:match('^https?://(%w+)cdn%.githack%.com/') or url:match('^https?://(%w+)%.githack%.com/')
+      table.insert(domain_to_origin[domain] and files or invalid_files, url)
    end
 
    if #invalid_files > 0 then error("invalid URLs: " .. table.concat(invalid_files, ', ')) end
@@ -101,15 +109,8 @@ end
 
 
 local function url_to_cache_key(url)
-   local map = {
-      ['^https?://glcdn%.githack%.com'] = 'gitlab.com',
-      ['^https?://bbcdn%.githack%.com'] = 'bitbucket.org',
-      ['^https?://rawcdn%.githack%.com'] = 'raw.githubusercontent.com',
-      ['^https?://gistcdn%.githack%.com'] = 'gist.githubusercontent.com',
-      ['^https?://srhtcdn%.githack%.com'] = 'git.sr.ht',
-      ['^https?://srhgtcdn%.githack%.com'] = 'hg.sr.ht'
-   }
-   for pattern, origin in pairs(map) do
+   for domain, origin in pairs(domain_to_origin) do
+      local pattern = '^https?://' .. domain .. '%w*%.githack%.com'
       local cache_key, n = url:gsub(pattern, origin, 1)
       if n == 1 then return cache_key end
    end
@@ -137,12 +138,13 @@ local function purge_request()
    local args, err = ngx.req.get_post_args()
    if err == "truncated" then error("truncated request") end
 
-   if (not patrons[args.patron:lower()] and
-       args.patron ~= cfg.simsim) then error("you are not our patron") end
+   if (not args.patron or not patrons[args.patron:lower()] and args.patron ~= cfg.simsim)
+     then error("you are not our patron")
+   end
 
    local files = validate_files(args.files)
    ngx.log(ngx.WARN, "got a request to purge #" .. #files .. " files")
-   local_purge(files) 
+   local_purge(files)
    if not cdn_purge(files) then error("CDN response error") end
    ngx.say(json.encode({success = true, response = 'cache was successfully invalidated!'}))
 end
