@@ -277,6 +277,10 @@ pre > code { display: block; }
   margin: 0 auto;
 }
 
+.purge .report {
+  text-align: left;
+}
+
 .purge .wait:before {
   content: "👆";
   margin-right: 5px;

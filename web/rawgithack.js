@@ -18,23 +18,12 @@ const TEMPLATES = [
   [/^(https?):\/\/api\.bitbucket\.org\/2.0\/snippets\/([^\/]+\/[^\/]+\/[^\/]+)\/files\/(.+?)(?:\?.*)?$/i,
    '$1://bb.githack.com/!api/2.0/snippets/$2/files/$3'],
 
-  // welcome rawgit refugees
-  [/^(https?):\/\/(?:cdn\.)?rawgit\.com\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+)$/i,
-   '$1://gist.githack.com/$2'],
-  [/^(https?):\/\/(?:cdn\.)?rawgit\.com\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+)/i,
-   '$1://raw.githack.com/$2/$3'],
-
   [/^(https?):\/\/raw\.github(?:usercontent)?\.com\/([^\/]+\/[^\/]+\/[^\/]+|[0-9A-Za-z-]+\/[0-9a-f]+\/raw)\/(.+)/i,
    '$1://raw.githack.com/$2/$3'],
   [/^(https?):\/\/github\.com\/(.[^\/]+?)\/(.[^\/]+?)\/(?!releases\/)(?:(?:blob|raw)\/)?(.+?\/.+)/i,
    '$1://raw.githack.com/$2/$3/$4'],
   [/^(https?):\/\/gist\.github(?:usercontent)?\.com\/(.+?\/[0-9a-f]+\/raw\/(?:[0-9a-f]+\/)?.+)$/i,
-   '$1://gist.githack.com/$2'],
-
-  [/^(https?):\/\/git\.sr\.ht\/(~[^\/]+\/[^\/]+\/blob\/.+\/.+)/i,
-   '$1://srht.githack.com/$2'],
-  [/^(https?):\/\/hg\.sr\.ht\/(~[^\/]+\/[^\/]+\/raw\/.+)/i,
-   '$1://srhgt.githack.com/$2']
+   '$1://gist.githack.com/$2']
 ];
 
 function mergeSlashes(url) {
@@ -192,8 +181,15 @@ function show(element) {
     hide(filesSuccess);
     hide(filesError);
     show(filesWait);
-    var body = 'files=' + encodeURIComponent(filesTextarea.value) + '&patron=' + encodeURIComponent(filesPatron.value);
-    fetch('/purge', { method: 'POST', body: body})
+    var body = JSON.stringify({
+      files: filesTextarea.value.split("\n"),
+      patron: filesPatron.value
+    });
+    fetch('/purge', {
+      method: 'POST',
+      body: body,
+      headers: {"Content-Type": "application/json"}
+    })
       .then(res => { return res.json(); })
       .then(res => {
           hide(filesWait);
