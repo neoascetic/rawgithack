@@ -71,10 +71,11 @@ local domain_to_origin = {
 
 
 local function validate_files(raw_files)
-   if not raw_files then error("wrong number of URLs") end
+   if type(raw_files) ~= 'table' then error("invalid request") end
 
    local files, invalid_files = {}, {}
-   for l in raw_files:gmatch('[^\r\n]+') do
+   for _, l in pairs(raw_files) do
+      if type(l) ~= 'string' then error("invalid request") end
       local url = l:gsub('^%s*(.*)%s*$', '%1') -- trailing whitespaces
       local domain = url:match('^https?://(%w+)cdn%.githack%.com/') or url:match('^https?://(%w+)%.githack%.com/')
       table.insert(domain_to_origin[domain] and files or invalid_files, url)
@@ -135,10 +136,11 @@ end
 
 
 local function purge_request()
-   local args, err = ngx.req.get_post_args()
-   if err == "truncated" then error("truncated request") end
+   ngx.req.read_body()
+   local args = json.decode(ngx.req.get_body_data())
+   if not args then error("invalid request") end
 
-   if (not args.patron or not patrons[args.patron:lower()] and args.patron ~= cfg.simsim)
+   if (type(args.patron) ~= 'string' or not patrons[args.patron:lower()] and args.patron ~= cfg.simsim)
      then error("you are not our patron")
    end
 

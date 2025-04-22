@@ -14,7 +14,7 @@ multiline layout << 'HTML'
 <title>${title} | raw.githack.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="${description}">
-<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/ee590f6/web/rawgithack.css?min=1">
+<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/ec5b4e9/web/rawgithack.css?min=1">
 
 <link rel="canonical" href="https://raw.githack.com/${canonical}">
 <link rel="search" type="application/opensearchdescription+xml" href="//rawcdn.githack.com/neoascetic/rawgithack/465ac52/web/opensearch.xml" title="raw.githack.com">
@@ -65,8 +65,7 @@ ${content}
 </footer>
 
 
-<script defer src="//rawcdn.githack.com/cdnjs/cdnjs/0971b44/ajax/libs/fetch/2.0.1/fetch.min.js?min=1"></script>
-<script defer src="//rawcdn.githack.com/neoascetic/rawgithack/35d3b36/web/rawgithack.js?min=1"></script>
+<script defer src="//rawcdn.githack.com/neoascetic/rawgithack/ec5b4e9/web/rawgithack.js?min=1"></script>
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9fdcadef580f4335ad3c1e18bf166d0f"}'></script>
 
 </body>
