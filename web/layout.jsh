@@ -70,4 +70,5 @@ ${content}
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "9fdcadef580f4335ad3c1e18bf166d0f"}'></script>
 
 </body>
+</html>
 HTML
