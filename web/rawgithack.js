@@ -5,6 +5,14 @@ const TEMPLATES = [
    '$1://gl.githack.com/$2/raw/$3'],
   [/^(https?):\/\/bitbucket\.org\/([^\/]+\/[^\/]+)\/(?:raw|src)\/(.+?)(?:\?.*)?$/i,
    '$1://bb.githack.com/$2/raw/$3'],
+  
+  // Gitea support
+  [/^(https?):\/\/gitea\.com\/([^\/]+\/[^\/]+)\/(?:raw|src)\/(.+?)(?:\?.*)?$/i,
+   '$1://gt.githack.com/$2/raw/$3'],
+  
+  // Codeberg support
+  [/^(https?):\/\/codeberg\.org\/([^\/]+\/[^\/]+)\/(?:raw|src)\/(.+?)(?:\?.*)?$/i,
+   '$1://cb.githack.com/$2/raw/$3'],
 
   // snippet file URL from web interface, with revision
   [/^(https?):\/\/bitbucket\.org\/snippets\/([^\/]+\/[^\/]+)\/revisions\/([^\/\#\?]+)(?:\?[^#]*)?(?:\#file-(.+?))$/i,

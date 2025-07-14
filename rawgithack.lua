@@ -66,7 +66,9 @@ local domain_to_origin = {
    ['gl'] = 'gitlab.com',
    ['bb'] = 'bitbucket.org',
    ['raw'] = 'raw.githubusercontent.com',
-   ['gist'] = 'gist.githubusercontent.com'
+   ['gist'] = 'gist.githubusercontent.com',
+   ['gt'] = 'gitea.com',
+   ['cb'] = 'codeberg.org'
 }
 
 
@@ -98,7 +100,8 @@ local function cdn_purge(files)
    local params = {
        method='POST',
        headers=headers,
-       body=json.encode({files=files})}
+       body=json.encode({files=files})
+   }
    local res = http.new():request_uri(purge_url, params)
    local res_body = json.decode(res.body)
    if type(res_body) ~= 'table' or not res_body.success then
