@@ -14,8 +14,8 @@ raw.githack.com supports the following source code hosting platforms:
 - **[GitHub Gist](https://gist.github.com)** - served via `gist.githack.com` subdomain
 - **[GitLab](https://gitlab.com)** - served via `gl.githack.com` subdomain
 - **[Bitbucket](https://bitbucket.org)** - served via `bb.githack.com` subdomain
-- **[Gitea](https://gitea.com)** - served via `gitea.githack.com` subdomain
-- **[Codeberg](https://codeberg.org)** - served via `codeberg.githack.com` subdomain
+- **[Gitea](https://gitea.com)** - served via `gt.githack.com` subdomain
+- **[Codeberg](https://codeberg.org)** - served via `cb.githack.com` subdomain
 
 Both development and production (CDN) URLs are available for each platform.
 

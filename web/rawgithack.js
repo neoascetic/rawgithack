@@ -8,11 +8,11 @@ const TEMPLATES = [
   
   // Gitea support
   [/^(https?):\/\/gitea\.com\/([^\/]+\/[^\/]+)\/(?:raw|src)\/(.+?)(?:\?.*)?$/i,
-   '$1://gitea.githack.com/$2/raw/$3'],
+   '$1://gt.githack.com/$2/raw/$3'],
   
   // Codeberg support
   [/^(https?):\/\/codeberg\.org\/([^\/]+\/[^\/]+)\/(?:raw|src)\/(.+?)(?:\?.*)?$/i,
-   '$1://codeberg.githack.com/$2/raw/$3'],
+   '$1://cb.githack.com/$2/raw/$3'],
 
   // snippet file URL from web interface, with revision
   [/^(https?):\/\/bitbucket\.org\/snippets\/([^\/]+\/[^\/]+)\/revisions\/([^\/\#\?]+)(?:\?[^#]*)?(?:\#file-(.+?))$/i,

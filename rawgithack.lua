@@ -67,8 +67,8 @@ local domain_to_origin = {
    ['bb'] = 'bitbucket.org',
    ['raw'] = 'raw.githubusercontent.com',
    ['gist'] = 'gist.githubusercontent.com',
-   ['gitea'] = 'gitea.com',
-   ['codeberg'] = 'codeberg.org'
+   ['gt'] = 'gitea.com',
+   ['cb'] = 'codeberg.org'
 }
 
 
