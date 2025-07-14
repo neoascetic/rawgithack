@@ -16,8 +16,6 @@ raw.githack.com supports the following source code hosting platforms:
 - **[Bitbucket](https://bitbucket.org)** - served via `bb.githack.com` subdomain
 - **[Gitea](https://gitea.com)** - served via `gitea.githack.com` subdomain
 - **[Codeberg](https://codeberg.org)** - served via `codeberg.githack.com` subdomain
-- **[SourceHut Git](https://git.sr.ht)** - served via `srht.githack.com` subdomain
-- **[SourceHut Mercurial](https://hg.sr.ht)** - served via `srhgt.githack.com` subdomain
 
 Both development and production (CDN) URLs are available for each platform.
 
