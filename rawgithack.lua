@@ -29,7 +29,7 @@ local function refresh_patrons(_premature, cold_cache_path)
      cfg.patreon.campaign,
      'members?fields%5Bmember%5D=email,patron_status'}, '/')
    local acc = {}
-   while next_page ~= json.null do
+   while next_page and next_page ~= json.null do
      local res, err = http.new():request_uri(next_page, {headers=headers})
      if res and res.status ~= 200 then err = res.body end
      if err then return ngx.log(ngx.WARN, "Cannot refresh patrons list: " .. err) end
@@ -40,7 +40,7 @@ local function refresh_patrons(_premature, cold_cache_path)
             acc[user['email']:lower()] = true
          end
      end
-     next_page = result['meta']['pagination']['cursors']['next']
+     next_page = (result['links'] or {})['next']
    end 
    patrons = acc
    dump_file(cold_cache_path, json.encode(acc))
