@@ -37,13 +37,3 @@ return {
    }
 }
 ```
-
-Frontend
---------
-
-Pages are built  using [jopa](https://github.com/neoascetic/jopa) static
-site generator, with the following command:
-
-```bash
-layout_file="web/layout.jsh" from="web/pages" jopa
-```
