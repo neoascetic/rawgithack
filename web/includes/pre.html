@@ -8,7 +8,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="<!--# echo var="description" default="" -->">
 <link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/ec5b4e9/web/rawgithack.css?min=1">
-<link rel="canonical" href="https://raw.githack.com/<!--# if expr="$page != index" --><!--# echo var="page" --><!--# endif -->">
+
+<!--# if expr="$page == index" -->
+<link rel="canonical" href="https://raw.githack.com/">
+<!--# elif expr="$page" -->
+<link rel="canonical" href="https://raw.githack.com/<!--# echo var="page" -->">
+<!--# endif -->
+
 <link rel="search" type="application/opensearchdescription+xml" href="//rawcdn.githack.com/neoascetic/rawgithack/465ac52/web/opensearch.xml" title="raw.githack.com">
 <link rel="icon" href="//rawcdn.githack.com/neoascetic/rawgithack/092e86b/web/sushi.svg">
 
