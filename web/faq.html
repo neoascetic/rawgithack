@@ -124,6 +124,22 @@
     </p>
   </div>
 
+  <div id="html-notice" class="question">
+    <h2><a href="#html-notice">How does raw.githack.com handle HTML files?</a></h2>
+    <p>
+      raw.githack.com serves HTML pages exactly as their authors wrote them, without any review or modification. This means anyone can host an HTML page in a public Git repository and share a raw.githack.com link to it. Malicious actors have exploited this to serve phishing pages — sites that impersonate banks, login forms, or other trusted services — through raw.githack.com, which leads to the service getting blocked by browsers, antivirus software, and corporate firewalls.
+    </p>
+    <p>
+      To prevent this, raw.githack.com adds a brief confirmation step before opening HTML pages. The notice page shows you the full address you're about to visit and asks you to confirm you want to proceed. This makes it harder to use raw.githack.com as a silent redirect to a malicious page, since the destination URL is always shown to the visitor first.
+    </p>
+    <p>
+      Once you confirm, the page opens normally, and you won't see the notice again for that specific page for the next 24 hours. Non-HTML files (scripts, stylesheets, images, etc.) are not affected.
+    </p>
+    <p>
+      If you use raw.githack.com in automated tests or scripts and the extra redirect gets in the way, you can bypass the notice by sending the cookie <code>__Http-phish=1</code> with your request. Most HTTP clients and browser automation tools (curl, Playwright, Cypress, Puppeteer, etc.) let you set cookies before making a request. Set <code>__Http-phish=1</code> on the domain you're requesting, and the confirmation step will be skipped.
+    </p>
+  </div>
+
   <div id="purge" class="question">
     <h2><a href="#purge">Can I somehow purge cached URLs?</a></h2>
     <p>

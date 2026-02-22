@@ -1,0 +1,55 @@
+<!--# set var="title" value="External Content Notice" -->
+<!--# set var="description" value="You are about to view a page hosted in a third-party Git repository." -->
+
+<!--# include file="includes/pre.html" -->
+
+<p class="hero">
+  <strong>One more step</strong>
+  <span class="desc">
+    You are about to view an HTML page from a third-party Git repository, served as-is by <strong>raw.githack.com</strong>.<br>
+    raw.githack.com does not review third-party content. If you received this link from someone you trust, go ahead.
+  </span>
+</p>
+
+<div class="phishing">
+  <label for="phish-dest">You're going to open:</label>
+  <input readonly class="url" id="phish-dest">
+  <div class="actions">
+    <form id="phish-form" method="POST" action="">
+      <input type="submit" value="Open the page">
+    </form>
+    <a href="/">Go to homepage</a>
+  </div>
+  <p class="hint">
+    Not sure about the source? Avoid entering passwords, personal details, or payment information on the page.
+  </p>
+</div>
+
+<script>
+  var url = location.hash.slice(1);
+  if (!url.match(/^https:\/\/[a-z]+\.githack\.com\//)) location.replace('/');
+  document.getElementById('phish-dest').value = url;
+  document.getElementById('phish-form').action = url;
+</script>
+
+<style>
+  .phishing { text-align: center; }
+  .phishing .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    margin-top: 1em;
+  }
+  .phishing input[type=submit] {
+    color: #900;
+    cursor: pointer;
+  }
+  .phishing .hint {
+    color: #888;
+    font-size: .85em;
+    margin-top: 1.5em;
+  }
+</style>
+
+<!--# include file="includes/post.html" -->
