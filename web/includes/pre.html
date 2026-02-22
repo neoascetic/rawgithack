@@ -9,7 +9,9 @@
 <meta name="description" content="<!--# echo var="description" default="" -->">
 <link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/ec5b4e9/web/rawgithack.css?min=1">
 
-<!--# if expr="$page == index" -->
+<!--# if expr="$page == phishing-notice" -->
+<meta name="robots" content="noindex">
+<!--# elif expr="$page == index" -->
 <link rel="canonical" href="https://raw.githack.com/">
 <!--# elif expr="$page" -->
 <link rel="canonical" href="https://raw.githack.com/<!--# echo var="page" -->">
