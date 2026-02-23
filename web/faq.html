@@ -136,7 +136,7 @@
       Once you confirm, the page opens normally, and you won't see the notice again for any page in the same repository for the next 24 hours. Non-HTML files (scripts, stylesheets, images, etc.) are not affected.
     </p>
     <p>
-      If you use raw.githack.com in automated tests or scripts and the extra redirect gets in the way, you can bypass the notice by sending the cookie <code>__Http-phish=1</code> with your request. Most HTTP clients and browser automation tools (curl, Playwright, Cypress, Puppeteer, etc.) let you set cookies before making a request. Set <code>__Http-phish=1</code> on the domain you're requesting, and the confirmation step will be skipped.
+      The notice is only shown to actual browsers — HTTP libraries and command-line tools (curl, wget, Python requests, etc.) are not affected and will receive the file directly. If you use browser automation tools that emulate a real browser (Playwright, Puppeteer, Cypress), set the cookie <code>__Http-phish=1</code> on the domain you're requesting before navigating to the page, and the confirmation step will be skipped.
     </p>
   </div>
 
