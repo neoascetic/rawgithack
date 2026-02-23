@@ -1,7 +1,8 @@
 <!--# set var="title" value="External Content Notice" -->
 <!--# set var="description" value="You are about to view a page hosted in a third-party Git repository." -->
+<!--# set var="target_url" value="https://$http_host$request_uri" -->
 
-<!--# include file="includes/pre.html" -->
+<!--# include file="pre.html" -->
 
 <p class="hero">
   <strong>One more step</strong>
@@ -13,9 +14,9 @@
 
 <div class="phishing">
   <label for="phish-dest">You're going to open:</label>
-  <input readonly class="url" id="phish-dest">
+  <input readonly class="url" id="phish-dest" value="<!--# echo var="target_url" -->">
   <div class="actions">
-    <form id="phish-form" method="POST" action="">
+    <form method="POST" action="">
       <input type="submit" value="Open the page">
     </form>
     <a href="/">Go to homepage</a>
@@ -24,13 +25,6 @@
     Not sure about the source? Avoid entering passwords, personal details, or payment information on the page.
   </p>
 </div>
-
-<script>
-  var url = location.hash.slice(1);
-  if (!url.match(/^https:\/\/[a-z]+\.githack\.com\//)) location.replace('/');
-  document.getElementById('phish-dest').value = url;
-  document.getElementById('phish-form').action = url;
-</script>
 
 <style>
   .phishing { text-align: center; }
@@ -52,4 +46,4 @@
   }
 </style>
 
-<!--# include file="includes/post.html" -->
+<!--# include file="post.html" -->
