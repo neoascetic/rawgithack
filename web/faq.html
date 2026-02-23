@@ -133,7 +133,7 @@
       To prevent this, raw.githack.com adds a brief confirmation step before opening HTML pages. The notice page shows you the full address you're about to visit and asks you to confirm you want to proceed. This makes it harder to use raw.githack.com as a silent redirect to a malicious page, since the destination URL is always shown to the visitor first.
     </p>
     <p>
-      Once you confirm, the page opens normally, and you won't see the notice again for that specific page for the next 24 hours. Non-HTML files (scripts, stylesheets, images, etc.) are not affected.
+      Once you confirm, the page opens normally, and you won't see the notice again for any page in the same repository for the next 24 hours. Non-HTML files (scripts, stylesheets, images, etc.) are not affected.
     </p>
     <p>
       If you use raw.githack.com in automated tests or scripts and the extra redirect gets in the way, you can bypass the notice by sending the cookie <code>__Http-phish=1</code> with your request. Most HTTP clients and browser automation tools (curl, Playwright, Cypress, Puppeteer, etc.) let you set cookies before making a request. Set <code>__Http-phish=1</code> on the domain you're requesting, and the confirmation step will be skipped.
