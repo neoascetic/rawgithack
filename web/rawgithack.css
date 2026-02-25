@@ -304,6 +304,26 @@ pre > code { display: block; }
   color: red;
 }
 
+/* -- Notice ----------------------------------------------------------------- */
+
+.phishing { text-align: center; }
+.phishing .actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+  margin-top: 1em;
+}
+.phishing input[type=submit] {
+  color: #900;
+  cursor: pointer;
+}
+.phishing .hint {
+  color: #888;
+  font-size: .85em;
+  margin-top: 1.5em;
+}
+
 /* -- Misc ------------------------------------------------------------------ */
 .invalid {
   background: #FFF7F7;
