@@ -1,4 +1,5 @@
 const GITHUB_API_URL = 'https://api.github.com';
+const GIST_URL_PATTERN = /^(https?):\/\/gist\.github\.com\/([^\/]+)\/([0-9a-f]+)\/?(?:\?.*)?$/i;
 
 const TEMPLATES = [
   [/^(https?):\/\/gitlab\.com\/([^\/]+.*\/[^\/]+)\/(?:raw|blob)\/(.+?)(?:\?.*)?$/i,
@@ -136,6 +137,24 @@ function show(element) {
             let ref = data && data.object && data.object.sha ? data.object.sha : matches[5];
             prodEl.value = cdnize(`${matches[1]}/${ref}/${matches[6]}`);
             setValid();
+          });
+      }
+    } else {
+      var gistMatch = url.match(GIST_URL_PATTERN);
+      if (gistMatch) {
+        var gistId = gistMatch[3];
+        fetch(`${GITHUB_API_URL}/gists/${gistId}`)
+          .then(res => { if (res.ok) return res.json(); })
+          .then(data => {
+            if (!data || !data.files) return;
+            var firstFile = Object.values(data.files)[0];
+            if (!firstFile || !firstFile.raw_url) return;
+            var converted = maybeConvertUrl(firstFile.raw_url);
+            if (converted) {
+              devEl.value = converted;
+              prodEl.value = cdnize(converted);
+              setValid();
+            }
           });
       }
     }
