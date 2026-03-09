@@ -113,7 +113,11 @@ function show(element) {
     navigator.clipboard.writeText('sha384-' + hashBase64);
   });
 
-  urlEl.addEventListener('input', formatURL, false);
+  var formatTimer;
+  urlEl.addEventListener('input', function() {
+    clearTimeout(formatTimer);
+    formatTimer = setTimeout(formatURL, 150);
+  }, false);
 
   if (/(iPhone|iPad|iPod)/i.test(navigator.userAgent)) {
     // On iOS, it's quite difficult to copy the value of readonly input elements (see https://git.io/vpI8Z).
