@@ -81,14 +81,18 @@ function show(element) {
   var prodEl = doc.getElementById('url-prod');
   var devEl  = doc.getElementById('url-dev');
 
-  new Clipboard('.url-copy-button');
+  new Clipboard('.url-action-button');
 
   var devCopyButton  = doc.getElementById('url-dev-copy');
   var prodCopyButton = doc.getElementById('url-prod-copy');
+  var sriGenButton   = doc.getElementById('url-sri-gen');
 
   if (doc.queryCommandSupported && doc.queryCommandSupported('copy')) {
     devCopyButton.style.display  = 'inline-block';
     prodCopyButton.style.display = 'inline-block';
+    if (window.crypto && window.crypto.subtle) {
+      sriGenButton.style.display = 'inline-block';
+    }
   }
 
   urlEl.addEventListener('input', formatURL, false);
@@ -120,6 +124,7 @@ function show(element) {
     prodEl.classList.remove('valid');
     devCopyButton.disabled = true;
     prodCopyButton.disabled = true;
+    sriGenButton.disabled = true;
 
     var ghUrl = maybeConvertUrl(url);
     if (ghUrl) {
@@ -167,7 +172,20 @@ function show(element) {
     devEl.classList.add('valid');
     devCopyButton.disabled = false;
     prodCopyButton.disabled = false;
+    sriGenButton.disabled = false;
   }
+
+  sriGenButton.addEventListener('click', async function(e) {
+    e.preventDefault();
+    if (!urlEl.value) return;
+
+    var response = await fetch(urlEl.value);
+    var buffer = await response.arrayBuffer();
+    var hashBuffer = await crypto.subtle.digest('SHA-384', buffer);
+    var hashArray = Array.from(new Uint8Array(hashBuffer));
+    var hashBase64 = btoa(hashArray.map(function(b) { return String.fromCharCode(b); }).join(''));
+    navigator.clipboard.writeText('sha384-' + hashBase64);
+  });
 
   prodEl.addEventListener('focus', onFocus);
   devEl.addEventListener('focus', onFocus);

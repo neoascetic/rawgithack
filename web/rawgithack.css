@@ -29,8 +29,6 @@ code {
 
 pre { overflow-x: auto; }
 
-pre > code { display: block; }
-
 .offscreen {
   left: -9999px;
   position: absolute;
@@ -156,35 +154,27 @@ pre > code { display: block; }
   display: flex;
 }
 
-.url-copy-button {
+.url-action-button {
   background: none;
   border: 1px solid transparent;
   cursor: pointer;
   display: none;
 }
 
-.url-copy-button:hover {
+.url-action-button:hover {
   background: #f5f5f5;
   border-color: #efefef;
 }
 
-.url-copy-button:active {
+.url-action-button:active {
   background: #badeff;
   border-color: #8cc3f6;
 }
 
-.url-copy-button:disabled {
+.url-action-button:disabled {
   background: none;
   border-color: transparent;
   cursor: not-allowed
-}
-
-.url-copy-button:disabled img {
-  opacity: 0.3;
-}
-
-.url-copy-button img {
-  display: block;
 }
 
 .url-helper {
@@ -206,11 +196,11 @@ pre > code { display: block; }
 
 #url-form {
   text-align: center;
+  justify-content: space-evenly;
 }
 
-#url {
+#url, #url-form .url-action-button {
   font-size: 1.3em;
-  width: 80%;
 }
 
 @media (max-width: 975px) {
