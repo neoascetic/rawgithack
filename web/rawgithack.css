@@ -142,7 +142,7 @@ pre { overflow-x: auto; }
 
 .url {
   background: #fbfbfb;
-  border: 1px solid #dfdfdf;
+  border: none;
   cursor: text;
   padding-left: 6px;
   padding-right: 6px;
@@ -152,29 +152,29 @@ pre { overflow-x: auto; }
 
 .url-container {
   display: flex;
+  border: 1px solid #dfdfdf;
 }
 
 .url-action-button {
-  background: none;
-  border: 1px solid transparent;
+  text-wrap: nowrap;
+  text-align: center;
+  border: none;
+  border-left: 1px solid #dfdfdf;
   cursor: pointer;
   display: none;
+  min-width: 7em;
 }
 
-.url-action-button:hover {
+.url-action-button:hover, .url-action-button:disabled {
   background: #f5f5f5;
-  border-color: #efefef;
-}
-
-.url-action-button:active {
-  background: #badeff;
-  border-color: #8cc3f6;
 }
 
 .url-action-button:disabled {
-  background: none;
-  border-color: transparent;
-  cursor: not-allowed
+  cursor: not-allowed;
+}
+
+.url-action-button:active:not(:disabled) {
+  background: #badeff;
 }
 
 .url-helper {

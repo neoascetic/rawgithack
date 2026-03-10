@@ -93,12 +93,16 @@ function show(element) {
     }
   }
 
-  devCopyButton.addEventListener('click', function() {
-    navigator.clipboard.writeText(devEl.value).catch(console.error);
-  });
-
-  prodCopyButton.addEventListener('click', function() {
-    navigator.clipboard.writeText(prodEl.value).catch(console.error);
+  [[devCopyButton, devEl], [prodCopyButton, prodEl]].forEach(([button, input]) => {
+    button.addEventListener('click', async function() {
+      navigator.clipboard
+        .writeText(input.value)
+        .catch(console.error)
+        .then(() => {
+          button.textContent = 'copied!';
+          setTimeout(() => button.textContent = 'copy', 1000);
+        });
+    });
   });
 
   sriGenButton.addEventListener('click', async function(e) {
@@ -110,7 +114,13 @@ function show(element) {
     var hashBuffer = await crypto.subtle.digest('SHA-384', buffer);
     var hashArray = Array.from(new Uint8Array(hashBuffer));
     var hashBase64 = btoa(hashArray.map(function(b) { return String.fromCharCode(b); }).join(''));
-    navigator.clipboard.writeText('sha384-' + hashBase64);
+    navigator.clipboard
+      .writeText('sha384-' + hashBase64)
+      .catch(console.error)
+      .then(() => {
+        sriGenButton.textContent = 'copied!';
+        setTimeout(() => sriGenButton.textContent = 'copy SRI hash', 1000);
+      });
   });
 
   var formatTimer;

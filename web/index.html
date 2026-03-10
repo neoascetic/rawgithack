@@ -13,7 +13,7 @@
     <form method="get" id="url-form" class="url-container">
       <label for="url" class="offscreen">URL:</label>
       <input id="url" class="url" type="url" name="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste GitHub, Bitbucket, GitLab, Gitea or Codeberg URL here" autofocus tabindex="1">
-      <button id="url-sri-gen" class="url-action-button" title="Copy integrity hash" disabled>&#128737;</button>
+      <button id="url-sri-gen" class="url-action-button" title="Generate and then copy SRI hash" disabled>copy SRI hash</button>
     </form>
   </div>
 
@@ -21,7 +21,7 @@
     <h2>Use this URL in <strong>production</strong></h2>
     <p class="url-container">
       <input id="url-prod" class="url" placeholder="https://rawcdn.githack.com/user/repo/tag/file" readonly tabindex="2">
-      <button id="url-prod-copy" class="url-action-button" title="Copy URL" disabled>&#128203;</button>
+      <button id="url-prod-copy" class="url-action-button" title="Copy production URL" disabled>copy</button>
     </p>
     <ul>
       <li><p>No traffic limits. Files are served via CloudFlare's CDN.
@@ -33,7 +33,7 @@
     <h2>Use this URL for <strong>development</strong></h2>
     <p class="url-container">
       <input id="url-dev" class="url" placeholder="https://raw.githack.com/user/repo/branch/file" readonly tabindex="3">
-      <button id="url-dev-copy" class="url-action-button" title="Copy URL" disabled>&#128203;</button>
+      <button id="url-dev-copy" class="url-action-button" title="Copy development URL" disabled>copy</button>
     </p>
     <ul>
       <li><p>New changes you push will be reflected within minutes.</p>
