@@ -162,7 +162,7 @@ pre { overflow-x: auto; }
   border-left: 1px solid #dfdfdf;
   cursor: pointer;
   display: none;
-  min-width: 7em;
+  min-width: 5em;
 }
 
 .url-action-button:hover, .url-action-button:disabled {
@@ -331,6 +331,7 @@ pre { overflow-x: auto; }
 
 /* -- Footer ---------------------------------------------------------------- */
 .ft {
+  text-align: left;
   border-top: 1px solid #efefef;
   color: #888;
   font-size: 0.8em;

@@ -94,7 +94,7 @@ function show(element) {
   }
 
   [[devCopyButton, devEl], [prodCopyButton, prodEl]].forEach(([button, input]) => {
-    button.addEventListener('click', async function() {
+    button.addEventListener('click', function() {
       navigator.clipboard
         .writeText(input.value)
         .catch(console.error)
@@ -105,7 +105,7 @@ function show(element) {
     });
   });
 
-  sriGenButton.addEventListener('click', async function(e) {
+  sriGenButton.addEventListener('click', function(e) {
     e.preventDefault();
     if (!urlEl.value) return;
 
@@ -119,7 +119,7 @@ function show(element) {
       .catch(console.error)
       .then(() => {
         sriGenButton.textContent = 'copied!';
-        setTimeout(() => sriGenButton.textContent = 'copy SRI hash', 1000);
+        setTimeout(() => sriGenButton.textContent = 'SRI', 1000);
       });
   });
 
