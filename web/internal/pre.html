@@ -81,6 +81,7 @@ a { color: var(--color-link); }
 .hd {
   border-bottom: 1px solid var(--color-border);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
   padding: 0 1em;
@@ -97,6 +98,7 @@ a { color: var(--color-link); }
 .hd .nav ul {
   margin: 0;
   padding: 0;
+  white-space: nowrap;
 }
 
 .hd .nav li {
@@ -131,30 +133,26 @@ a { color: var(--color-link); }
 
 @media (max-width: 767px) {
   .hd {
-    flex-direction: column;
+    justify-content: center;
+    gap: 0 1em;
   }
 
   .hd .logo svg {
-    height: 24px;
+    height: 20px;
     width: auto;
-    top: 5px;
-  }
-
-  .hd .nav,
-  .hd .title {
-    text-align: center;
+    top: 4px;
   }
 
   .hd .nav li {
-    margin-right: 0.3em;
+    margin: 0 0.2em;
   }
 
   .hd .nav a {
-    padding: 0;
+    padding: 3px 4px;
   }
 
   .hd .title {
-    font-size: 1.4em;
+    font-size: 1.2em;
   }
 }
 
