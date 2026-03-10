@@ -100,7 +100,7 @@
   <div class="url-paste">
     <form method="get" id="url-form" class="url-container">
       <label for="url" class="offscreen">URL:</label>
-      <input id="url" class="url" type="url" name="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste GitHub, Bitbucket, GitLab, Gitea or Codeberg URL here" autofocus tabindex="1">
+      <input id="url" class="url" type="url" name="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste GitHub, Bitbucket, GitLab, Gitea or Codeberg URL here" autofocus>
       <button id="url-sri-gen" class="url-action-button" title="Generate and then copy SRI hash" disabled>SRI</button>
     </form>
   </div>
@@ -108,7 +108,7 @@
   <div class="column">
     <h2>Use this URL in <strong>production</strong></h2>
     <p class="url-container">
-      <input id="url-prod" class="url" placeholder="https://rawcdn.githack.com/user/repo/tag/file" readonly tabindex="2">
+      <input id="url-prod" class="url" placeholder="https://rawcdn.githack.com/user/repo/tag/file" readonly>
       <button id="url-prod-copy" class="url-action-button" title="Copy production URL" disabled>copy</button>
     </p>
     <ul>
@@ -120,7 +120,7 @@
   <div class="column">
     <h2>Use this URL for <strong>development</strong></h2>
     <p class="url-container">
-      <input id="url-dev" class="url" placeholder="https://raw.githack.com/user/repo/branch/file" readonly tabindex="3">
+      <input id="url-dev" class="url" placeholder="https://raw.githack.com/user/repo/branch/file" readonly>
       <button id="url-dev-copy" class="url-action-button" title="Copy development URL" disabled>copy</button>
     </p>
     <ul>
