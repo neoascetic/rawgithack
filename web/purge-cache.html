@@ -9,20 +9,23 @@
   overflow: hidden;
   resize: vertical;
   min-height: 150px;
-  border-width: 1px;
-  border-color: #555;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-ui);
 }
 
 .purge input[name=patron] {
-  display: inline-block;
-  border-width: 1px;
-  border-color: #555;
   margin: 0;
+  text-align: left;
 }
 
-.purge input[type=submit] {
-  display: block;
-  margin: 0 auto;
+.purge .patron-row {
+  max-width: 30em;
+}
+
+@media (max-width: 767px) {
+  .purge .patron-row {
+    max-width: 100%;
+  }
 }
 
 .purge .report {
@@ -40,7 +43,7 @@
 }
 
 .purge .success {
-  color: green;
+  color: var(--color-success);
 }
 
 .purge .error:before {
@@ -49,7 +52,7 @@
 }
 
 .purge .error {
-  color: red;
+  color: var(--color-error);
 }
 </style>
 
@@ -64,20 +67,22 @@
 
 <form method="POST" action="/purge" class="purge" id="purge-form">
   <textarea autofocus required="true" name="files" placeholder="https://rawcdn.githack.com/user/repo/branch/file1.ext&#10;http://raw.githack.com/user/repo/branch/file2.ext&#10;..."></textarea>
-  <input type="email" required="true" name="patron" placeholder="Your Patreon email">
+  <p class="url-container patron-row">
+    <input type="email" required name="patron" class="url" placeholder="Your Patreon email">
+    <button type="submit" class="url-action-button">Purge!</button>
+  </p>
   <div class="report">
     <span class="wait">waiting</span>
     <span class="success hidden">success</span>
     <span class="error hidden">error</span>
   </div>
-  <input type="submit" value="Send purge request">
 </form>
 
 <script>
 <!--# include file="internal/common.js" -->
 
 const filesTextarea = document.querySelector('.purge textarea');
-const filesSubmit = document.querySelector('.purge input[type=submit]');
+const filesSubmit = document.querySelector('.purge button[type=submit]');
 const filesPatron = document.querySelector('.purge input[name=patron]');
 const filesWait = document.querySelector('.purge .wait');
 const filesSuccess = document.querySelector('.purge .success');

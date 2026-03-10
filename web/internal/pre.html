@@ -18,9 +18,46 @@
 <link rel="icon" href="//rawcdn.githack.com/neoascetic/rawgithack/caef975/web/internal/sushi.svg">
 
 <style>
+:root {
+  --color-bg:               #fff;
+  --color-text:             #333;
+  --color-text-muted:       #555;
+  --color-link:             #0000ff;
+  --color-border:           #efefef;
+  --color-border-ui:        #dfdfdf;
+  --color-surface:          #f8f8f8;
+  --color-active:           #badeff;
+  --color-invalid-bg:       #FFF7F7;
+  --color-valid-bg:         #F2FFEB;
+  --color-highlight-bg:     rgba(255, 255, 0, 0.10);
+  --color-highlight-border: rgba(255, 255, 0, 0.50);
+  --color-success:          #2a7a2a;
+  --color-error:            #c0392b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg:               #1e1e1e;
+    --color-text:             #ccc;
+    --color-text-muted:       #888;
+    --color-link:             #6ab0f5;
+    --color-border:           #333;
+    --color-border-ui:        #444;
+    --color-surface:          #2a2a2a;
+    --color-active:           #1a3a5c;
+    --color-invalid-bg:       #2a1515;
+    --color-valid-bg:         #152a15;
+    --color-highlight-bg:     rgba(255, 255, 0, 0.05);
+    --color-highlight-border: rgba(255, 255, 0, 0.25);
+    --color-success:          #4caf50;
+    --color-error:            #e57373;
+  }
+}
+
 html {
-  background: #fff;
-  color: #333;
+  background: var(--color-bg);
+  color: var(--color-text);
+  color-scheme: light dark;
 }
 
 html, button, input, textarea {
@@ -33,7 +70,7 @@ body {
   padding: 0;
 }
 
-a { color: #0000ff; }
+a { color: var(--color-link); }
 
 .offscreen {
   left: -9999px;
@@ -42,11 +79,11 @@ a { color: #0000ff; }
 
 /* -- Header ---------------------------------------------------------------- */
 .hd {
-  border-bottom: 1px solid #efefef;
+  border-bottom: 1px solid var(--color-border);
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 0.5em 1em;
+  align-items: baseline;
+  padding: 0 1em;
 }
 
 .hd .logo svg {
@@ -70,17 +107,17 @@ a { color: #0000ff; }
 
 .hd .nav a, .hd .nav {
   border: 0;
-  color: #555;
+  color: var(--color-text-muted);
   padding: 5px 8px;
   text-decoration: none;
 }
 
 .hd .nav a:hover {
-  background: #efefef;
+  background: var(--color-border);
 }
 
 .hd .title {
-  color: #333;
+  color: var(--color-text);
   font-size: 2em;
   line-height: 48px;
   margin: 0;
@@ -146,7 +183,7 @@ a { color: #0000ff; }
 }
 
 .url {
-  background: #fbfbfb;
+  background: var(--color-surface);
   border: none;
   padding-left: 6px;
   padding-right: 6px;
@@ -156,24 +193,50 @@ a { color: #0000ff; }
 
 /* -- Misc ------------------------------------------------------------------ */
 .invalid {
-  background: #FFF7F7;
-  border-color: #FFCCCC;
+  background: var(--color-invalid-bg);
 }
 
 .valid {
-  background: #F2FFEB;
-  border-color: #98f9a0;
+  background: var(--color-valid-bg);
 }
 
 .hidden {
   display: none;
 }
 
+/* -- URL container --------------------------------------------------------- */
+.url-container {
+  display: flex;
+  border: 1px solid var(--color-border-ui);
+}
+
+.url-action-button {
+  white-space: nowrap;
+  text-align: center;
+  border: none;
+  border-left: 1px solid var(--color-border-ui);
+  cursor: pointer;
+  display: inline-block;
+  min-width: 5em;
+}
+
+.url-action-button:hover, .url-action-button:disabled {
+  background: var(--color-border);
+}
+
+.url-action-button:disabled {
+  cursor: not-allowed;
+}
+
+.url-action-button:active:not(:disabled) {
+  background: var(--color-active);
+}
+
 /* -- Footer ---------------------------------------------------------------- */
 .ft {
   text-align: left;
-  border-top: 1px solid #efefef;
-  color: #555;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
   font-size: 0.8em;
   margin: 3em 0 0;
 }
