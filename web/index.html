@@ -15,7 +15,7 @@
   border: none;
   border-left: 1px solid #dfdfdf;
   cursor: pointer;
-  display: none;
+  display: inline-block;
   min-width: 5em;
 }
 
@@ -160,14 +160,6 @@ const prodCopyButton = document.getElementById('url-prod-copy');
 const sriGenButton   = document.getElementById('url-sri-gen');
 let rawFileUrl;
 
-if (navigator.clipboard) {
-  devCopyButton.style.display  = 'inline-block';
-  prodCopyButton.style.display = 'inline-block';
-  if (window.crypto && window.crypto.subtle) {
-    sriGenButton.style.display = 'inline-block';
-  }
-}
-
 const copyWithFeedback = (button, text, label) => {
   navigator.clipboard.writeText(text).catch(console.error).then(() => {
     button.textContent = 'copied!';
@@ -252,7 +244,11 @@ function formatURL() {
 function setValid() {
   urlEl.classList.replace('invalid', 'valid') || urlEl.classList.add('valid');
   [prodEl, devEl].forEach(el => el.classList.add('valid'));
-  [devCopyButton, prodCopyButton, sriGenButton].forEach(b => b.disabled = false);
+  if (navigator.clipboard) {
+    devCopyButton.disabled = false;
+    prodCopyButton.disabled = false;
+    if (window.crypto?.subtle) sriGenButton.disabled = false;
+  }
 }
 
 [urlEl, prodEl, devEl].forEach(el => el.addEventListener('focus', onFocus));
