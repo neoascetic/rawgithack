@@ -3,6 +3,55 @@
 
 <!--# include file="includes/pre.html" -->
 
+<style>
+.purge textarea {
+  width: 100%;
+  overflow: hidden;
+  height: 150px;
+  border-width: 1px;
+  border-color: #888;
+}
+
+.purge input[name=patron] {
+  display: inline-block;
+  border-width: 1px;
+  border-color: #888;
+  margin: 0;
+}
+
+.purge input[type=submit] {
+  display: block;
+  margin: 0 auto;
+}
+
+.purge .report {
+  text-align: left;
+}
+
+.purge .wait:before {
+  content: "👆";
+  margin-right: 5px;
+}
+
+.purge .success:before {
+  content: "👍";
+  margin-right: 5px;
+}
+
+.purge .success {
+  color: green;
+}
+
+.purge .error:before {
+  content: "👎";
+  margin-right: 5px;
+}
+
+.purge .error {
+  color: red;
+}
+</style>
+
 <p class="hero" id="purge">
   <strong>Purge cache</strong>
   <span class="desc">

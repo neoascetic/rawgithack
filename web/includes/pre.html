@@ -7,7 +7,202 @@
 <title><!--# echo var="title" --> | raw.githack.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="<!--# echo var="description" default="" -->">
-<link rel="stylesheet" href="//rawcdn.githack.com/neoascetic/rawgithack/e231e99/web/rawgithack.css">
+<style>
+html {
+  background: #fff;
+  color: #333;
+}
+
+html, button, input, select, textarea {
+  font: 16px/1.5 'Trebuchet MS', sans-serif;
+  text-align: justify;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+}
+
+a { color: #0000ff; }
+
+code, pre {
+  color: #444;
+  font-family: 'Courier New', 'Courier', monospace;
+}
+
+code {
+  background: #f8f8f8;
+  border: 1px solid #f0f0f0;
+  border-radius: 2px;
+  padding: 0 4px 1px;
+}
+
+pre { overflow-x: auto; }
+
+.offscreen {
+  left: -9999px;
+  position: absolute;
+}
+
+/* -- Header ---------------------------------------------------------------- */
+.hd {
+  background: #fff;
+  border-bottom: 1px solid #efefef;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5em 1em;
+}
+
+.hd .logo svg {
+  margin: 0 0.2em 0 0.4em;
+  width: 56px;
+  height: auto;
+  position: relative;
+  top: 15px;
+}
+
+.hd .nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+.hd .nav li {
+  display: inline-block;
+  line-height: 48px;
+  margin: 0 0.6em;
+}
+
+.hd .nav a, .hd .nav {
+  border: 0;
+  color: #555;
+  padding: 5px 8px;
+  text-decoration: none;
+  background: transparent;
+}
+
+.hd .nav a:hover {
+  background: #efefef;
+}
+
+.hd .title {
+  color: #333;
+  font-size: 2em;
+  line-height: 48px;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.hd .title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .hd {
+    flex-direction: column;
+  }
+
+  .hd .logo svg {
+    height: 24px;
+    width: auto;
+    top: 5px;
+  }
+
+  .hd .nav,
+  .hd .title {
+    text-align: center;
+  }
+
+  .hd .nav li {
+    margin-right: 0.3em;
+  }
+
+  .hd .nav a {
+    padding: 0;
+  }
+
+  .hd .title {
+    font-size: 1.4em;
+  }
+}
+
+/* -- Content --------------------------------------------------------------- */
+.bd,
+.ft {
+  padding: 0 30px;
+}
+
+.bd {
+  margin: 0 auto;
+  max-width: 1140px;
+  hyphens: auto;
+}
+
+.hero {
+  font-size: 3em;
+  line-height: 1.5;
+  padding: 0 3em;
+  text-align: center;
+}
+
+.hero .desc {
+  font-size: 1rem;
+  display: block;
+}
+
+.url {
+  background: #fbfbfb;
+  border: none;
+  cursor: text;
+  padding-left: 6px;
+  padding-right: 6px;
+  text-align: center;
+  width: 100%;
+}
+
+/* -- Misc ------------------------------------------------------------------ */
+.invalid {
+  background: #FFF7F7;
+  border-color: #FFCCCC;
+}
+
+.valid {
+  background: #F2FFEB;
+  border-color: #98f9a0;
+}
+
+.hidden {
+  display: none;
+}
+
+/* -- Footer ---------------------------------------------------------------- */
+.ft {
+  text-align: left;
+  border-top: 1px solid #efefef;
+  color: #888;
+  font-size: 0.8em;
+  margin: 3em 0 0;
+}
+
+.ft a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+@media (max-width: 975px) {
+  .bd,
+  .ft {
+    padding: 0 1em;
+  }
+
+  .hero { font-size: 1.6em; }
+}
+
+@media (max-width: 767px) {
+  .hero { font-size: 1.4em; padding: 0; }
+}
+</style>
 
 <!--# if expr="$page == index" -->
 <link rel="canonical" href="https://raw.githack.com/">
