@@ -7,6 +7,16 @@
 <title><!--# echo var="title" --> | raw.githack.com</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="<!--# echo var="description" default="" -->">
+
+<!--# if expr="$page = index" -->
+<link rel="canonical" href="https://raw.githack.com/">
+<!--# elif expr="$page" -->
+<link rel="canonical" href="https://raw.githack.com/<!--# echo var="page" -->">
+<!--# endif -->
+
+<link rel="search" type="application/opensearchdescription+xml" href="//rawcdn.githack.com/neoascetic/rawgithack/caef975/web/internal/opensearch.xml" title="raw.githack.com">
+<link rel="icon" href="//rawcdn.githack.com/neoascetic/rawgithack/caef975/web/internal/sushi.svg">
+
 <style>
 html {
   background: #fff;
@@ -186,15 +196,6 @@ a { color: #0000ff; }
   .hero { font-size: 1.4em; padding: 0; }
 }
 </style>
-
-<!--# if expr="$page == index" -->
-<link rel="canonical" href="https://raw.githack.com/">
-<!--# elif expr="$page" -->
-<link rel="canonical" href="https://raw.githack.com/<!--# echo var="page" -->">
-<!--# endif -->
-
-<link rel="search" type="application/opensearchdescription+xml" href="//rawcdn.githack.com/neoascetic/rawgithack/465ac52/web/opensearch.xml" title="raw.githack.com">
-<link rel="icon" href="//rawcdn.githack.com/neoascetic/rawgithack/092e86b/web/sushi.svg">
 
 </head>
 
