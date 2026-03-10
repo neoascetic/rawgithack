@@ -44,9 +44,10 @@ pre { overflow-x: auto; }
   padding: 0.5em 1em;
 }
 
-.hd .logo {
+.hd .logo svg {
   margin: 0 0.2em 0 0.4em;
   width: 56px;
+  height: auto;
   position: relative;
   top: 15px;
 }
@@ -92,7 +93,7 @@ pre { overflow-x: auto; }
     flex-direction: column;
   }
 
-  .hd .logo {
+  .hd .logo svg {
     height: 24px;
     width: auto;
     top: 5px;
