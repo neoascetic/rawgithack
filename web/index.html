@@ -158,6 +158,7 @@ const devEl  = document.getElementById('url-dev');
 const devCopyButton  = document.getElementById('url-dev-copy');
 const prodCopyButton = document.getElementById('url-prod-copy');
 const sriGenButton   = document.getElementById('url-sri-gen');
+let rawFileUrl;
 
 if (navigator.clipboard) {
   devCopyButton.style.display  = 'inline-block';
@@ -180,9 +181,9 @@ const copyWithFeedback = (button, text, label) => {
 
 sriGenButton.addEventListener('click', async (e) => {
   e.preventDefault();
-  if (!urlEl.value) return;
+  if (!rawFileUrl) return;
 
-  const response = await fetch(urlEl.value);
+  const response = await fetch(rawFileUrl);
   const buffer = await response.arrayBuffer();
   const hashBuffer = await crypto.subtle.digest('SHA-384', buffer);
   const hashBase64 = btoa(String.fromCharCode(...new Uint8Array(hashBuffer)));
@@ -204,13 +205,15 @@ function formatURL() {
   urlEl.classList.toggle('invalid', url.length);
   [devEl, prodEl].forEach(el => { el.value = ''; el.classList.remove('valid'); });
   [devCopyButton, prodCopyButton, sriGenButton].forEach(b => b.disabled = true);
+  rawFileUrl = null;
 
-  const ghUrl = maybeConvertUrl(url);
+  const [ghUrl, rawUrl] = convertUrl(url) ?? [];
   if (ghUrl) {
     const matches = ghUrl.match(/^(\w+:\/\/(raw).githack.com\/([^\/]+)\/([^\/]+))\/([^\/]+)\/(.*)/i);
     if (!matches) {
       devEl.value = ghUrl;
       prodEl.value = cdnize(ghUrl);
+      rawFileUrl = rawUrl;
       setValid();
     } else if (matches[2] === 'raw') {
       devEl.value = ghUrl;
@@ -220,6 +223,7 @@ function formatURL() {
         .then(data => {
           let ref = data && data.object && data.object.sha ? data.object.sha : matches[5];
           prodEl.value = cdnize(`${matches[1]}/${ref}/${matches[6]}`);
+          rawFileUrl = `https://raw.githubusercontent.com/${matches[3]}/${matches[4]}/${ref}/${matches[6]}`;
           setValid();
         });
     }
@@ -233,10 +237,11 @@ function formatURL() {
           if (!data || !data.files) return;
           const firstFile = Object.values(data.files)[0];
           if (!firstFile || !firstFile.raw_url) return;
-          const converted = maybeConvertUrl(firstFile.raw_url);
+          const [converted, raw] = convertUrl(firstFile.raw_url) ?? [];
           if (converted) {
             devEl.value = converted;
             prodEl.value = cdnize(converted);
+            rawFileUrl = raw;
             setValid();
           }
         });

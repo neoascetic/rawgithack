@@ -87,7 +87,7 @@ filesTextarea.addEventListener('input', () => {
   const result = [];
   for (const url of filesTextarea.value.split('\n')) {
     const trimmed = decodeURIComponent(url.trim());
-    const converted = maybeConvertUrl(trimmed);
+    const [converted] = convertUrl(trimmed) ?? [];
     result.push(converted ? cdnize(converted) : trimmed);
   }
   filesTextarea.value = result.join('\n');
