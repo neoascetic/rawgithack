@@ -13,12 +13,18 @@
   gap: 1em;
   margin-top: 1em;
 }
-.phishing input[type=submit] {
-  color: #900;
-  cursor: pointer;
+.phishing .url-action-button {
+  background: var(--color-error);
+  color: #fff;
+  border: none;
+}
+
+.phishing .url-action-button:hover {
+  background: var(--color-error);
+  opacity: 0.85;
 }
 .phishing .hint {
-  color: #555;
+  color: var(--color-text-muted);
   font-size: .85em;
   margin-top: 1.5em;
 }
@@ -37,7 +43,7 @@
   <input readonly class="url" id="phish-dest" value="<!--# echo var="target_url" -->">
   <div class="actions">
     <form method="POST" action="">
-      <input type="submit" value="Open the page">
+      <button type="submit" class="url-action-button">Open the page</button>
     </form>
     <a href="/">Go to homepage</a>
   </div>
