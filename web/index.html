@@ -134,4 +134,126 @@
 </div>
 
 
+<script>
+<!--# include file="includes/common.js" -->
+
+const GITHUB_API_URL = 'https://api.github.com';
+const GIST_URL_PATTERN = /^(https?):\/\/gist\.github\.com\/([^\/]+)\/([0-9a-f]+)\/?(?:\?.*)?$/i;
+
+const mergeSlashes = (url) => {
+  try {
+    url = new URL(url);
+  } catch (e) {
+    return url;
+  }
+  url.pathname = url.pathname.replace(/\/\/+/ig, '/');
+  return url.toString();
+};
+
+const onFocus = (e) => {
+  setTimeout(() => e.target.select(), 1);
+};
+
+const urlEl  = document.getElementById('url');
+const prodEl = document.getElementById('url-prod');
+const devEl  = document.getElementById('url-dev');
+
+const devCopyButton  = document.getElementById('url-dev-copy');
+const prodCopyButton = document.getElementById('url-prod-copy');
+const sriGenButton   = document.getElementById('url-sri-gen');
+
+if (navigator.clipboard) {
+  devCopyButton.style.display  = 'inline-block';
+  prodCopyButton.style.display = 'inline-block';
+  if (window.crypto && window.crypto.subtle) {
+    sriGenButton.style.display = 'inline-block';
+  }
+}
+
+const copyWithFeedback = (button, text, label) => {
+  navigator.clipboard.writeText(text).catch(console.error).then(() => {
+    button.textContent = 'copied!';
+    setTimeout(() => button.textContent = label, 1000);
+  });
+};
+
+[[devCopyButton, devEl, 'copy'], [prodCopyButton, prodEl, 'copy']].forEach(([button, input, label]) => {
+  button.addEventListener('click', () => copyWithFeedback(button, input.value, label));
+});
+
+sriGenButton.addEventListener('click', async (e) => {
+  e.preventDefault();
+  if (!urlEl.value) return;
+
+  const response = await fetch(urlEl.value);
+  const buffer = await response.arrayBuffer();
+  const hashBuffer = await crypto.subtle.digest('SHA-384', buffer);
+  const hashBase64 = btoa(String.fromCharCode(...new Uint8Array(hashBuffer)));
+  copyWithFeedback(sriGenButton, 'sha384-' + hashBase64, 'SRI');
+});
+
+let formatTimer;
+urlEl.addEventListener('input', () => {
+  clearTimeout(formatTimer);
+  formatTimer = setTimeout(formatURL, 150);
+}, false);
+
+formatURL();
+
+function formatURL() {
+  const url = urlEl.value = mergeSlashes(decodeURIComponent(urlEl.value.trim()));
+
+  urlEl.classList.remove('valid');
+  urlEl.classList.toggle('invalid', url.length);
+  [devEl, prodEl].forEach(el => { el.value = ''; el.classList.remove('valid'); });
+  [devCopyButton, prodCopyButton, sriGenButton].forEach(b => b.disabled = true);
+
+  const ghUrl = maybeConvertUrl(url);
+  if (ghUrl) {
+    const matches = ghUrl.match(/^(\w+:\/\/(raw).githack.com\/([^\/]+)\/([^\/]+))\/([^\/]+)\/(.*)/i);
+    if (!matches) {
+      devEl.value = ghUrl;
+      prodEl.value = cdnize(ghUrl);
+      setValid();
+    } else if (matches[2] === 'raw') {
+      devEl.value = ghUrl;
+      let apiUrl = `${GITHUB_API_URL}/repos/${matches[3]}/${matches[4]}/git/refs/heads/${matches[5]}`;
+      fetch(apiUrl)
+        .then(res => { if (res.ok) return res.json(); })
+        .then(data => {
+          let ref = data && data.object && data.object.sha ? data.object.sha : matches[5];
+          prodEl.value = cdnize(`${matches[1]}/${ref}/${matches[6]}`);
+          setValid();
+        });
+    }
+  } else {
+    const gistMatch = url.match(GIST_URL_PATTERN);
+    if (gistMatch) {
+      const gistId = gistMatch[3];
+      fetch(`${GITHUB_API_URL}/gists/${gistId}`)
+        .then(res => { if (res.ok) return res.json(); })
+        .then(data => {
+          if (!data || !data.files) return;
+          const firstFile = Object.values(data.files)[0];
+          if (!firstFile || !firstFile.raw_url) return;
+          const converted = maybeConvertUrl(firstFile.raw_url);
+          if (converted) {
+            devEl.value = converted;
+            prodEl.value = cdnize(converted);
+            setValid();
+          }
+        });
+    }
+  }
+}
+
+function setValid() {
+  urlEl.classList.replace('invalid', 'valid') || urlEl.classList.add('valid');
+  [prodEl, devEl].forEach(el => el.classList.add('valid'));
+  [devCopyButton, prodCopyButton, sriGenButton].forEach(b => b.disabled = false);
+}
+
+[urlEl, prodEl, devEl].forEach(el => el.addEventListener('focus', onFocus));
+</script>
+
 <!--# include file="includes/post.html" -->
