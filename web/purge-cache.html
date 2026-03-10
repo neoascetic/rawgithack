@@ -1,7 +1,7 @@
 <!--# set var="title" value="Purge cache" -->
 <!--# set var="description" value="The page where you can purge cached URLs if you messed up" -->
 
-<!--# include file="includes/pre.html" -->
+<!--# include file="internal/pre.html" -->
 
 <style>
 .purge textarea {
@@ -73,7 +73,7 @@
 </form>
 
 <script>
-<!--# include file="includes/common.js" -->
+<!--# include file="internal/common.js" -->
 
 const filesTextarea = document.querySelector('.purge textarea');
 const filesSubmit = document.querySelector('.purge input[type=submit]');
@@ -132,4 +132,4 @@ document.getElementById('purge-form').onsubmit = () => {
 
 </script>
 
-<!--# include file="includes/post.html" -->
+<!--# include file="internal/post.html" -->

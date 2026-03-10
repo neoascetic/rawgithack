@@ -1,7 +1,7 @@
 <!--# set var="title" value="CDN for your source code" -->
 <!--# set var="description" value="raw.githack.com - ${title}" -->
 
-<!--# include file="includes/pre.html" -->
+<!--# include file="internal/pre.html" -->
 
 <style>
 .url-container {
@@ -132,7 +132,7 @@
 
 
 <script>
-<!--# include file="includes/common.js" -->
+<!--# include file="internal/common.js" -->
 
 const GITHUB_API_URL = 'https://api.github.com';
 const GIST_URL_PATTERN = /^(https?):\/\/gist\.github\.com\/([^\/]+)\/([0-9a-f]+)\/?(?:\?.*)?$/i;
@@ -254,4 +254,4 @@ function setValid() {
 [urlEl, prodEl, devEl].forEach(el => el.addEventListener('focus', onFocus));
 </script>
 
-<!--# include file="includes/post.html" -->
+<!--# include file="internal/post.html" -->
