@@ -78,6 +78,22 @@ pre { overflow-x: auto; }
     </p>
   </div>
 
+  <div id="html-notice" class="question">
+    <h2><a href="#html-notice">How does raw.githack.com handle HTML files?</a></h2>
+    <p>
+      raw.githack.com serves HTML pages exactly as their authors wrote them, without any review or modification. This means anyone can host an HTML page in a public Git repository and share a raw.githack.com link to it. Malicious actors have exploited this to serve phishing pages — sites that impersonate banks, login forms, or other trusted services — through raw.githack.com, which leads to the service getting blocked by browsers, antivirus software, and corporate firewalls.
+    </p>
+    <p>
+      To prevent this, raw.githack.com adds a brief confirmation step before opening HTML pages. The notice page shows you the full address you're about to visit and asks you to confirm you want to proceed. This makes it harder to use raw.githack.com as a silent redirect to a malicious page, since the destination URL is always shown to the visitor first.
+    </p>
+    <p>
+      Once you confirm, the page opens normally, and you won't see the notice again for any page in the same repository for the next 24 hours. Non-HTML files (scripts, stylesheets, images, etc.) are not affected.
+    </p>
+    <p>
+      The notice is only shown to actual browsers — HTTP libraries and command-line tools (curl, wget, Python requests, etc.) are not affected and will receive the file directly. If you use browser automation tools that emulate a real browser (Playwright, Puppeteer, Cypress), set the cookie <code>__Http-phish=1</code> on the domain you're requesting before navigating to the page, and the confirmation step will be skipped.
+    </p>
+  </div>
+
   <div id="what-is-supported" class="question">
     <h2><a href="#what-is-supported">What source code services are supported?</a></h2>
     <p>
@@ -152,22 +168,6 @@ pre { overflow-x: auto; }
     <h2><a href="#feedback">I have feedback or want to report a bug! Who can I contact?</a></h2>
     <p>
       To report a critical issue like raw.githack.com being broken, used to spread spam/copyright-protected content/etc or to share general feedback, <a href="mailto:admin@githack.com">send me a letter</a>. I try to respond quickly when I'm awake and near a computer, but sometimes I do have to sleep. To report a non-critical bug, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue</a>.
-    </p>
-  </div>
-
-  <div id="html-notice" class="question">
-    <h2><a href="#html-notice">How does raw.githack.com handle HTML files?</a></h2>
-    <p>
-      raw.githack.com serves HTML pages exactly as their authors wrote them, without any review or modification. This means anyone can host an HTML page in a public Git repository and share a raw.githack.com link to it. Malicious actors have exploited this to serve phishing pages — sites that impersonate banks, login forms, or other trusted services — through raw.githack.com, which leads to the service getting blocked by browsers, antivirus software, and corporate firewalls.
-    </p>
-    <p>
-      To prevent this, raw.githack.com adds a brief confirmation step before opening HTML pages. The notice page shows you the full address you're about to visit and asks you to confirm you want to proceed. This makes it harder to use raw.githack.com as a silent redirect to a malicious page, since the destination URL is always shown to the visitor first.
-    </p>
-    <p>
-      Once you confirm, the page opens normally, and you won't see the notice again for any page in the same repository for the next 24 hours. Non-HTML files (scripts, stylesheets, images, etc.) are not affected.
-    </p>
-    <p>
-      The notice is only shown to actual browsers — HTTP libraries and command-line tools (curl, wget, Python requests, etc.) are not affected and will receive the file directly. If you use browser automation tools that emulate a real browser (Playwright, Puppeteer, Cypress), set the cookie <code>__Http-phish=1</code> on the domain you're requesting before navigating to the page, and the confirmation step will be skipped.
     </p>
   </div>
 
