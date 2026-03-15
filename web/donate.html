@@ -1,64 +1,77 @@
-<!--# set var="title" value="Donate" -->
+<!--# set var="title" value="Buy me a coffee" -->
 <!--# set var="description" value="Support raw.githack.com — a free CDN for source code files" -->
 
 <!--# include file="internal/pre.html" -->
 
 <style>
-.donate-list {
+.donate-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
   list-style: none;
   padding: 0;
-  margin: 2.5em 0;
+  margin: 2em 0;
 }
 
-.donate-list li {
-  display: grid;
-  grid-template-columns: 14em 1fr;
-  gap: 0.5em 2em;
-  padding: 1.1em 0;
-  border-top: 1px solid var(--color-border);
-  align-items: baseline;
+.donate-grid a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  padding: 1.4em 1.6em;
+  background: var(--color-bg);
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  box-sizing: border-box;
 }
 
-.donate-list li:last-child {
-  border-bottom: 1px solid var(--color-border);
+.donate-grid a:hover {
+  background: var(--color-surface);
 }
 
-.donate-list .label { font-weight: bold; }
+.donate-grid .icon { font-size: 1.8em; }
+.donate-grid strong { display: block; }
+.donate-grid p { margin: 0; color: var(--color-text-muted); }
 
-.donate-list p {
-  margin: 0;
-  color: var(--color-text-muted);
-}
-
-@media (max-width: 767px) {
-  .donate-list li {
-    grid-template-columns: 1fr;
-    gap: 0.3em;
-  }
-}
+@media (max-width: 900px) { .donate-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .donate-grid { grid-template-columns: 1fr; } }
 </style>
 
 <p class="hero">
-  Buy me a coffee ☕
-  <span class="desc">raw.githack.com has been running since 2013. If it saves you time, here are a few ways to say thanks.</span>
+  <strong>Buy me a coffee ☕</strong>
+  <span class="desc">Running since 2013. If it saves you time, here are a few ways to say thanks.</span>
 </p>
 
-<ul class="donate-list">
+<ul class="donate-grid">
   <li>
-    <div class="label">☕ <a href="https://ko-fi.com/neoascetic">Buy me a coffee on Ko-fi</a></div>
-    <p>One-time, any amount. Fast and simple.</p>
+    <a href="https://ko-fi.com/neoascetic">
+      <span class="icon">☕</span>
+      <strong>Ko-fi</strong>
+      <p>One-time or monthly tip, any amount. Fast and simple — no account needed.</p>
+    </a>
   </li>
   <li>
-    <div class="label">💸 <a href="https://paypal.me/pavelpuchkin">Donate via PayPal</a></div>
-    <p>One-time, any amount.</p>
+    <a href="https://paypal.me/pavelpuchkin">
+      <span class="icon">💸</span>
+      <strong>PayPal</strong>
+      <p>One-time donation, any amount.</p>
+    </a>
   </li>
   <li>
-    <div class="label">🎖️ <a href="https://www.patreon.com/rawgithackcom">Become a patron</a></div>
-    <p>Monthly support via Patreon. Patrons get unlimited <a href="/purge-cache">cache invalidation</a>.</p>
+    <a href="https://www.patreon.com/rawgithackcom">
+      <span class="icon">🎖️</span>
+      <strong>Patreon</strong>
+      <p>Monthly support. Patrons get unlimited <b>cache invalidation</b>.</p>
+    </a>
   </li>
   <li>
-    <div class="label">🤝 <a href="https://hetzner.cloud/?ref=BrRJMValwaz8">Hetzner Cloud</a></div>
-    <p>Referral link — if you're considering them anyway, this generates a small commission. One of the largest European data center operators.</p>
+    <a href="https://hetzner.cloud/?ref=BrRJMValwaz8">
+      <span class="icon">🤝</span>
+      <strong>Hetzner Cloud</strong>
+      <p>Referral link — if you're considering them anyway, this generates a small commission.</p>
+    </a>
   </li>
 </ul>
 
