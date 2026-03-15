@@ -4,7 +4,7 @@
 <!--# include file="internal/pre.html" -->
 
 <style>
-.bd { text-align: justify; hyphens: auto; }
+.bd p, .bd li { text-align: justify; hyphens: auto; }
 
 code, pre {
   color: var(--color-text-muted);
@@ -123,7 +123,7 @@ pre { overflow-x: auto; }
       When you make a request to a development URL, the server loads the requested file from the corresponding service, serves it to your browser with the correct <code>Content-Type</code> header, and caches it for a short time. If you push new changes to your repo, you can reload and see them within a few minutes, which makes development URLs useful for low-traffic testing or sharing demos during development.
     </p>
     <p>
-      Requests to CDN are routed through <a href="http://cloudflare.com/">CloudFlare</a>'s content delivery network, and are cached <strong>for an year</strong> the first time they're loaded. This results in the best performance and reduces load on raw.githack.com and on underlying service, but it means that reloading won't fetch new changes.
+      Requests to CDN are routed through <a href="http://cloudflare.com/">CloudFlare</a>'s content delivery network, and are cached <strong>for a year</strong> the first time they're loaded. This results in the best performance and reduces load on raw.githack.com and the underlying service, but it means that reloading won't fetch new changes.
     </p>
     <p>
       During development, when traffic is low and freshness is more important than performance, use development URLs. For anything you share with the public or push to production, use CDN URLs.
@@ -133,10 +133,10 @@ pre { overflow-x: auto; }
   <div id="development-in-production" class="question">
     <h2><a href="#development-in-production">Can I use a development URL on a production website?</a></h2>
     <p>
-      Better no. Please use CDN URLs for anything that might result in heavy traffic. Only use development URLs for low-traffic testing and sharing temporary examples or demos during development. 
+      Please don't. Use CDN URLs for anything that might result in heavy traffic. Development URLs are for low-traffic testing and sharing temporary examples or demos during development.
     </p>
     <p>
-      If you don't and the service gets a lots of requests from the same domain, all further requests will be temporary redirected to corresponding CDN URLs, meaning some clients won't see changes you push to your repo on the next request.
+      If you do, and the service gets a lot of requests from the same domain, all further requests will be temporarily redirected to the corresponding CDN URLs — meaning clients won't see changes you push to your repo on the next request.
     </p>
   </div>
 
@@ -159,7 +159,7 @@ pre { overflow-x: auto; }
       Probably not.
     </p>
     <p>
-      raw.githack.com is a free service and cannot provide any uptime or support guarantees, even for CDN URLs. While I do my best to keep things running, things sometimes go wrong. Sometimes there are network or provider issues outside my control, sometimes abusive traffic temporarily affects response times, and sometimes I break things (although I try really hard not to).
+      raw.githack.com is a free service and cannot provide any uptime or support guarantees, even for CDN URLs. While I do my best to keep things running, sometimes there are network or provider issues outside my control, sometimes abusive traffic temporarily affects response times, and sometimes I break things (although I try really hard not to).
     </p>
     <p>
       You can take a look at the <a href="https://status.githack.com/?r=neoascetic/raw.githack.com-monitor">uptime stats</a> to decide if this service is stable enough for you. On the other hand, the service has been working since 2013, for more than a decade, without major outages. Doesn't this mean something?
@@ -167,16 +167,16 @@ pre { overflow-x: auto; }
   </div>
 
   <div id="feedback" class="question">
-    <h2><a href="#feedback">I have feedback or want to report a bug! Who can I contact?</a></h2>
+    <h2><a href="#feedback">How can I contact you?</a></h2>
     <p>
-      To report a critical issue like raw.githack.com being broken, used to spread spam/copyright-protected content/etc or to share general feedback, <a href="mailto:admin@githack.com">send me a letter</a>. I try to respond quickly when I'm awake and near a computer, but sometimes I do have to sleep. To report a non-critical bug, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue</a>.
+      For critical issues — service outages, abuse, spam, or general feedback — <a href="mailto:admin@githack.com">send me an email</a>. For non-critical bugs, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue on GitHub</a>.
     </p>
   </div>
 
   <div id="purge" class="question">
     <h2><a href="#purge">Can I somehow purge cached URLs?</a></h2>
     <p>
-      If you messed up and want your cache to be purged, you can do this <a href="/purge-cache">using special form</a>.
+      Yes — use the <a href="/purge-cache">cache purge form</a>. Available to Patreon sponsors.
     </p>
   </div>
 
