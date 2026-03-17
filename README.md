@@ -1,14 +1,14 @@
-raw.githack.com
-===============
+rawgit.hack
+============
 
-This         is          the         source          code         behind
-[raw.githack.com](https://raw.githack.com)  - CDN  for your  source code
-that serves files with proper `Content-Type` headers.
+This is the source  code behind [rawgit.hack](https://raw.githack.com) -
+CDN for  your source code  that serves files with  proper `Content-Type`
+headers.
 
 Supported Platforms
 -------------------
 
-raw.githack.com supports the following source code hosting platforms:
+rawgit.hack supports the following source code hosting platforms:
 
 - **[GitHub](https://github.com)** - served via `raw.githack.com` subdomain
 - **[GitHub Gist](https://gist.github.com)** - served via `gist.githack.com` subdomain

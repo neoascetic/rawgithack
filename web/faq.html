@@ -1,5 +1,5 @@
 <!--# set var="title" value="FAQ" -->
-<!--# set var="description" value="Frequently Asked Questions about raw.githack.com service" -->
+<!--# set var="description" value="Frequently Asked Questions about rawgit.hack service" -->
 
 <!--# include file="internal/pre.html" -->
 
@@ -73,7 +73,7 @@ pre { overflow-x: auto; }
       They do this because serving raw files from a git repo is relatively inefficient, so they want to discourage people from using their repos for static file hosting.
     </p>
     <p>
-      raw.githack.com acts as a caching proxy, forwarding requests to the corresponding service, caching the responses either for a short time (in the case of development URLs) or permanently (in the case of CDN URLs), and relaying them to your browser with the correct <code>Content-Type</code> headers.
+      rawgit.hack acts as a caching proxy, forwarding requests to the corresponding service, caching the responses either for a short time (in the case of development URLs) or permanently (in the case of CDN URLs), and relaying them to your browser with the correct <code>Content-Type</code> headers.
     </p>
     <p>
       The caching layer ensures that minimal load is placed on each service, and you get quick and easy static file hosting right from a repo. Everyone's happy!
@@ -81,12 +81,12 @@ pre { overflow-x: auto; }
   </div>
 
   <div id="html-notice" class="question">
-    <h2><a href="#html-notice">How does raw.githack.com handle HTML files?</a></h2>
+    <h2><a href="#html-notice">How does rawgit.hack handle HTML files?</a></h2>
     <p>
-      raw.githack.com serves HTML pages exactly as their authors wrote them, without any review or modification. This means anyone can host an HTML page in a public Git repository and share a raw.githack.com link to it. Malicious actors have exploited this to serve phishing pages — sites that impersonate banks, login forms, or other trusted services — through raw.githack.com, which leads to the service getting blocked by browsers, antivirus software, and corporate firewalls.
+      rawgit.hack serves HTML pages exactly as their authors wrote them, without any review or modification. This means anyone can host an HTML page in a public Git repository and share a rawgit.hack link to it. Malicious actors have exploited this to serve phishing pages — sites that impersonate banks, login forms, or other trusted services — through rawgit.hack, which leads to the service getting blocked by browsers, antivirus software, and corporate firewalls.
     </p>
     <p>
-      To prevent this, raw.githack.com adds a brief confirmation step before opening HTML pages. The notice page shows you the full address you're about to visit and asks you to confirm you want to proceed. This makes it harder to use raw.githack.com as a silent redirect to a malicious page, since the destination URL is always shown to the visitor first.
+      To prevent this, rawgit.hack adds a brief confirmation step before opening HTML pages. The notice page shows you the full address you're about to visit and asks you to confirm you want to proceed. This makes it harder to use rawgit.hack as a silent redirect to a malicious page, since the destination URL is always shown to the visitor first.
     </p>
     <p>
       Once you confirm, the page opens normally, and you won't see the notice again for any page in the same repository for the next 24 hours. Non-HTML files (scripts, stylesheets, images, etc.) are not affected.
@@ -111,9 +111,9 @@ pre { overflow-x: auto; }
   </div>
 
   <div id="associated-with-hosting-service" class="question">
-    <h2><a href="#associated-with-hosting-service">Is raw.githack.com associated with any of the supported hosting services?</a></h2>
+    <h2><a href="#associated-with-hosting-service">Is rawgit.hack associated with any of the supported hosting services?</a></h2>
     <p>
-      No, raw.githack.com is not associated with them in any way. Please don't contact their support asking for help with raw.githack.com. They'll give you a weird look and back away slowly.
+      No, rawgit.hack is not associated with them in any way. Please don't contact their support asking for help with rawgit.hack. They'll give you a weird look and back away slowly.
     </p>
   </div>
 
@@ -123,7 +123,7 @@ pre { overflow-x: auto; }
       When you make a request to a development URL, the server loads the requested file from the corresponding service, serves it to your browser with the correct <code>Content-Type</code> header, and caches it for a short time. If you push new changes to your repo, you can reload and see them within a few minutes, which makes development URLs useful for low-traffic testing or sharing demos during development.
     </p>
     <p>
-      Requests to CDN are routed through <a href="http://cloudflare.com/">CloudFlare</a>'s content delivery network, and are cached <strong>for a year</strong> the first time they're loaded. This results in the best performance and reduces load on raw.githack.com and the underlying service, but it means that reloading won't fetch new changes.
+      Requests to CDN are routed through <a href="http://cloudflare.com/">CloudFlare</a>'s content delivery network, and are cached <strong>for a year</strong> the first time they're loaded. This results in the best performance and reduces load on rawgit.hack and the underlying service, but it means that reloading won't fetch new changes.
     </p>
     <p>
       During development, when traffic is low and freshness is more important than performance, use development URLs. For anything you share with the public or push to production, use CDN URLs.
@@ -154,12 +154,12 @@ pre { overflow-x: auto; }
   </div>
 
   <div id="no-uptime-guarantee" class="question">
-    <h2><a href="#no-uptime-guarantee">I need guaranteed 100% uptime. Should I use raw.githack.com?</a></h2>
+    <h2><a href="#no-uptime-guarantee">I need guaranteed 100% uptime. Should I use rawgit.hack?</a></h2>
     <p>
       Probably not.
     </p>
     <p>
-      raw.githack.com is a free service and cannot provide any uptime or support guarantees, even for CDN URLs. While I do my best to keep things running, sometimes there are network or provider issues outside my control, sometimes abusive traffic temporarily affects response times, and sometimes I break things (although I try really hard not to).
+      rawgit.hack is a free service and cannot provide any uptime or support guarantees, even for CDN URLs. While I do my best to keep things running, sometimes there are network or provider issues outside my control, sometimes abusive traffic temporarily affects response times, and sometimes I break things (although I try really hard not to).
     </p>
     <p>
       You can take a look at the <a href="https://status.githack.com/?r=neoascetic/raw.githack.com-monitor">uptime stats</a> to decide if this service is stable enough for you. On the other hand, the service has been working since 2013, for more than a decade, without major outages. Doesn't this mean something?
