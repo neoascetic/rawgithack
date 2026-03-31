@@ -112,32 +112,6 @@ local function cdn_purge(files)
 end
 
 
-local function url_to_cache_key(url)
-   for domain, origin in pairs(domain_to_origin) do
-      local pattern = '^https?://' .. domain .. '%w*%.githack%.com'
-      local cache_key, n = url:gsub(pattern, origin, 1)
-      if n == 1 then return cache_key end
-   end
-end
-
-
-local function local_purge(files)
-   local dir = '/var/cache/nginx/rawgithack'
-   local keys = {}
-   for _, f in pairs(files) do
-      keys[#keys+1] = ngx.md5(url_to_cache_key(ngx.unescape_uri(f)))
-   end
-   for _, key in pairs(keys) do
-      -- TODO support arbitrary logic of cache path
-      local path = table.concat({dir, key:sub(-1), key:sub(-3, -2), key}, '/')
-      local _, err = os.remove(path)
-      if err then
-         ngx.log(ngx.WARN, "unable to remove cache file " .. path .. ", err:" .. err)
-      end
-   end
-end
-
-
 local function purge_request()
    ngx.req.read_body()
    local args = json.decode(ngx.req.get_body_data())
@@ -149,7 +123,6 @@ local function purge_request()
 
    local files = validate_files(args.files)
    ngx.log(ngx.WARN, "got a request to purge #" .. #files .. " files")
-   local_purge(files)
    if not cdn_purge(files) then error("CDN response error") end
    ngx.say(json.encode({success = true, response = 'cache was successfully invalidated!'}))
 end
