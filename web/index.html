@@ -151,7 +151,7 @@ pre { overflow-x: auto; }
     <form method="get" id="url-form" class="url-container">
       <label for="url" class="offscreen">URL:</label>
       <input id="url" class="url" type="url" name="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste GitHub, Bitbucket, GitLab, Gitea or Codeberg URL here" autofocus>
-      <button id="url-sri-gen" class="url-action-button" title="Generate and then copy SRI hash" disabled>SRI</button>
+      <button id="url-sri-gen" class="url-action-button" title="Generate and copy SRI hash" disabled>hash</button>
     </form>
   </div>
 
@@ -376,7 +376,7 @@ sriGenButton.addEventListener('click', async (e) => {
   const buffer = await response.arrayBuffer();
   const hashBuffer = await crypto.subtle.digest('SHA-384', buffer);
   const hashBase64 = btoa(String.fromCharCode(...new Uint8Array(hashBuffer)));
-  copyWithFeedback(sriGenButton, 'sha384-' + hashBase64, 'SRI');
+  copyWithFeedback(sriGenButton, 'sha384-' + hashBase64, 'hash');
 });
 
 let formatTimer;
