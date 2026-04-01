@@ -13,19 +13,10 @@
   border: 1px solid var(--color-border-ui);
 }
 
-.purge input[name=patron] {
-  margin: 0;
-  text-align: left;
-}
-
-.purge .patron-row {
-  max-width: 30em;
-}
-
-@media (max-width: 767px) {
-  .purge .patron-row {
-    max-width: 100%;
-  }
+.purge button[type=submit] {
+  margin-top: 0.5em;
+  border: 1px solid var(--color-border-ui);
+  padding: 0.4em 1.5em;
 }
 
 .purge .report {
@@ -59,16 +50,13 @@
 <p class="hero" id="purge">
   <strong>Purge cache</strong>
   <span class="desc">
-    Paste URLs below to purge cached files. Available to my <a href="https://www.patreon.com/rawgithackcom">Patreon</a> sponsors only. Up to 30 URLs per request.
+    Paste URLs below to purge cached files. Up to 30 URLs per request.
   </span>
 </p>
 
 <form method="POST" action="/purge" class="purge" id="purge-form">
   <textarea autofocus required="true" name="files" placeholder="https://rawcdn.githack.com/user/repo/branch/file1.ext&#10;http://raw.githack.com/user/repo/branch/file2.ext&#10;..."></textarea>
-  <p class="url-container patron-row">
-    <input type="email" required name="patron" class="url" placeholder="Your Patreon email">
-    <button type="submit" class="url-action-button">Purge!</button>
-  </p>
+  <button type="submit" class="url-action-button">Purge!</button>
   <div class="report">
     <span class="wait">waiting</span>
     <span class="success hidden">success</span>
@@ -81,7 +69,6 @@
 
 const filesTextarea = document.querySelector('.purge textarea');
 const filesSubmit = document.querySelector('.purge button[type=submit]');
-const filesPatron = document.querySelector('.purge input[name=patron]');
 const filesWait = document.querySelector('.purge .wait');
 const filesSuccess = document.querySelector('.purge .success');
 const filesError = document.querySelector('.purge .error');
@@ -102,13 +89,11 @@ filesTextarea.addEventListener('input', () => {
 document.getElementById('purge-form').onsubmit = () => {
   filesTextarea.disabled = true;
   filesSubmit.disabled = true;
-  filesPatron.disabled = true;
   filesSuccess.classList.add('hidden');
   filesError.classList.add('hidden');
   filesWait.classList.remove('hidden');
   const body = JSON.stringify({
-    files: filesTextarea.value.split("\n"),
-    patron: filesPatron.value
+    files: filesTextarea.value.split("\n")
   });
   fetch('/purge', {
     method: 'POST',
@@ -128,7 +113,6 @@ document.getElementById('purge-form').onsubmit = () => {
     .finally(() => {
       filesWait.classList.add('hidden');
       filesSubmit.disabled = false;
-      filesPatron.disabled = false;
       filesTextarea.disabled = false;
     });
   return false;
