@@ -17,7 +17,7 @@
 }
 
 .url-helper h2 { text-align: center; }
-.url-paste { flex: 2 100%; }
+.url-paste { flex: 0 0 100%; }
 #url-form { justify-content: space-evenly; }
 
 #url, #url-form .url-action-button {
@@ -73,7 +73,6 @@ pre { overflow-x: auto; }
   cursor: pointer;
   text-decoration: underline;
   font: inherit;
-  font-size: inherit;
 }
 
 #url-prod-purge:disabled {
@@ -341,10 +340,10 @@ const sriGenButton    = document.getElementById('url-sri-gen');
 let rawFileUrl;
 
 const copyWithFeedback = (button, text, label) => {
-  navigator.clipboard.writeText(text).catch(console.error).then(() => {
+  navigator.clipboard.writeText(text).then(() => {
     button.textContent = 'copied!';
     setTimeout(() => button.textContent = label, 1000);
-  });
+  }).catch(console.error);
 };
 
 [[devCopyButton, devEl, 'copy'], [prodCopyButton, prodEl, 'copy']].forEach(([button, input, label]) => {
@@ -386,9 +385,9 @@ urlEl.addEventListener('input', () => {
   formatTimer = setTimeout(formatURL, 150);
 }, false);
 
-formatURL();
-
 const decdn = url => url.replace(/^(\w+:\/\/\w+)cdn(\.githack\.com\/)/, '$1$2');
+
+formatURL();
 
 function formatURL() {
   const url = urlEl.value = mergeSlashes(decodeURIComponent(urlEl.value.trim()));
