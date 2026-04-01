@@ -24,7 +24,6 @@ Example config.lua
 
 ```lua
 return {
-   simsim = "SECRET",
    cf = {
       zone = "ZONE_ID",
       username = "USERNAME",
