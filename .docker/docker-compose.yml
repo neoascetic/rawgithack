@@ -8,7 +8,6 @@ services:
     network_mode: host
     volumes:
       - cache:/var/cache/nginx/rawgithack:rw
-      - patrons_cache:/var/cache/nginx/rawgithack_patrons:rw
       - ..:/etc/nginx/rawgithack
     logging:
       options:
@@ -17,4 +16,3 @@ services:
 
 volumes:
   cache:
-  patrons_cache:
