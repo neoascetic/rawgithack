@@ -5,7 +5,7 @@ local cfg = require("config")
 
 local function error(desc)
    ngx.status = ngx.HTTP_BAD_REQUEST
-   ngx.say(json.encode({success = false, response = desc}))
+   ngx.say(desc)
    ngx.exit(ngx.status)
 end
 
@@ -18,24 +18,6 @@ local domain_to_origin = {
    ['gt'] = 'gitea.com',
    ['cb'] = 'codeberg.org'
 }
-
-
-local function validate_files(raw_files)
-   if type(raw_files) ~= 'table' then error("invalid request") end
-
-   local files, invalid_files = {}, {}
-   for _, l in pairs(raw_files) do
-      if type(l) ~= 'string' then error("invalid request") end
-      local url = l:gsub('^%s*(.*)%s*$', '%1') -- trailing whitespaces
-      local domain = url:match('^https?://(%w+)cdn%.githack%.com/') or url:match('^https?://(%w+)%.githack%.com/')
-      table.insert(domain_to_origin[domain] and files or invalid_files, url)
-   end
-
-   if #invalid_files > 0 then error("invalid URLs: " .. table.concat(invalid_files, ', ')) end
-   if #files < 1 or #files > 30 then error("wrong number of URLs") end
-
-   return files
-end
 
 
 local function cdn_purge(files)
@@ -61,14 +43,14 @@ end
 
 
 local function purge_request()
-   ngx.req.read_body()
-   local args = json.decode(ngx.req.get_body_data())
-   if not args then error("invalid request") end
-
-   local files = validate_files(args.files)
-   ngx.log(ngx.WARN, "got a request to purge #" .. #files .. " files")
-   if not cdn_purge(files) then error("CDN response error") end
-   ngx.say(json.encode({success = true, response = 'cache was successfully invalidated!'}))
+   local url = ngx.var.arg_url
+   if type(url) ~= 'string' or url == '' then error("missing url parameter") end
+   url = ngx.unescape_uri(url)
+   local domain = url:match('^https?://(%w+)cdn%.githack%.com/') or url:match('^https?://(%w+)%.githack%.com/')
+   if not domain or not domain_to_origin[domain] then error("invalid URL") end
+   ngx.log(ngx.WARN, "got a request to purge: " .. url)
+   if not cdn_purge({url}) then error("CDN response error") end
+   ngx.exit(ngx.HTTP_OK)
 end
 
 

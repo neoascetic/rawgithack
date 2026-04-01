@@ -326,13 +326,8 @@ prodPurgeButton.addEventListener('click', async (e) => {
   prodPurgeButton.disabled = true;
   prodPurgeStatus.className = 'waiting';
   try {
-    const res = await fetch('/purge', {
-      method: 'POST',
-      body: JSON.stringify({ files: [url] }),
-      headers: { 'Content-Type': 'application/json' }
-    });
-    const data = await res.json();
-    prodPurgeStatus.className = data.success ? 'success' : 'error';
+    const res = await fetch('/purge?' + new URLSearchParams({ url }), { method: 'DELETE' });
+    prodPurgeStatus.className = res.ok ? 'success' : 'error';
   } catch {
     prodPurgeStatus.className = 'error';
   }
