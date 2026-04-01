@@ -65,6 +65,32 @@ code {
 pre { overflow-x: auto; }
 
 /* FAQ */
+#url-prod-purge {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--color-link);
+  cursor: pointer;
+  text-decoration: underline;
+  font: inherit;
+  font-size: inherit;
+}
+
+#url-prod-purge:disabled {
+  cursor: default;
+  opacity: 0.4;
+  text-decoration: none;
+  color: inherit;
+}
+
+#url-prod-purge-status {
+  margin-left: 0.3em;
+  font-style: normal;
+}
+
+#url-prod-purge-status.waiting::before { content: "…"; color: var(--color-text-muted); }
+#url-prod-purge-status.success::before { content: "✓"; color: var(--color-success); }
+#url-prod-purge-status.error::before   { content: "✗"; color: var(--color-error); }
 .faq {
   max-width: 800px;
   margin: 0 auto;
@@ -137,7 +163,9 @@ pre { overflow-x: auto; }
       <button id="url-prod-copy" class="url-action-button" title="Copy production URL" disabled>copy</button>
     </p>
     <ul>
-      <li><p>Use a specific tag or commit hash in the URL (not a branch). Files are cached permanently based on the URL. Query string is ignored.</p></li>
+      <li><p>Use a specific tag or commit hash in the URL (not a branch)</p></li>
+      <li><p>Files are cached permanently based on the URL, query string is ignored</p></li>
+      <li><p>To force-invalidate, <button id="url-prod-purge" disabled>purge cache</button><span id="url-prod-purge-status"></span></p></li>
     </ul>
   </div>
 
@@ -148,7 +176,7 @@ pre { overflow-x: auto; }
       <button id="url-dev-copy" class="url-action-button" title="Copy development URL" disabled>copy</button>
     </p>
     <ul>
-      <li><p>New changes you push will be reflected within minutes.</p></li>
+      <li><p>New changes you push will be reflected within minutes</p></li>
     </ul>
   </div>
 </div>
@@ -221,7 +249,7 @@ pre { overflow-x: auto; }
         <strong>CDN URLs</strong> are routed through <a href="http://cloudflare.com/">CloudFlare</a> and cached for a year, giving the best performance and reducing load on rawgit.hack. The downside is that the file won't update on reload.
       </p>
       <p>
-        To serve a new version, use a tag or commit ref in the URL instead of a branch name — e.g. <code>/user/repo/TAG/file</code> instead of <code>/user/repo/BRANCH/file</code>. If you need to invalidate a URL immediately, use the <a href="/purge-cache">cache purge form</a>.
+        To serve a new version, use a tag or commit ref in the URL instead of a branch name — e.g. <code>/user/repo/TAG/file</code> instead of <code>/user/repo/BRANCH/file</code>. If you need to invalidate a URL immediately, use the purge cache button above.
       </p>
     </div>
   </details>
@@ -273,9 +301,11 @@ const urlEl  = document.getElementById('url');
 const prodEl = document.getElementById('url-prod');
 const devEl  = document.getElementById('url-dev');
 
-const devCopyButton  = document.getElementById('url-dev-copy');
-const prodCopyButton = document.getElementById('url-prod-copy');
-const sriGenButton   = document.getElementById('url-sri-gen');
+const devCopyButton   = document.getElementById('url-dev-copy');
+const prodCopyButton  = document.getElementById('url-prod-copy');
+const prodPurgeButton = document.getElementById('url-prod-purge');
+const prodPurgeStatus = document.getElementById('url-prod-purge-status');
+const sriGenButton    = document.getElementById('url-sri-gen');
 let rawFileUrl;
 
 const copyWithFeedback = (button, text, label) => {
@@ -287,6 +317,29 @@ const copyWithFeedback = (button, text, label) => {
 
 [[devCopyButton, devEl, 'copy'], [prodCopyButton, prodEl, 'copy']].forEach(([button, input, label]) => {
   button.addEventListener('click', () => copyWithFeedback(button, input.value, label));
+});
+
+prodPurgeButton.addEventListener('click', async (e) => {
+  e.preventDefault();
+  const url = prodEl.value;
+  if (!url) return;
+  prodPurgeButton.disabled = true;
+  prodPurgeStatus.className = 'waiting';
+  try {
+    const res = await fetch('/purge', {
+      method: 'POST',
+      body: JSON.stringify({ files: [url] }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    const data = await res.json();
+    prodPurgeStatus.className = data.success ? 'success' : 'error';
+  } catch {
+    prodPurgeStatus.className = 'error';
+  }
+  setTimeout(() => {
+    prodPurgeStatus.className = '';
+    prodPurgeButton.disabled = false;
+  }, 2000);
 });
 
 sriGenButton.addEventListener('click', async (e) => {
@@ -308,14 +361,23 @@ urlEl.addEventListener('input', () => {
 
 formatURL();
 
+const decdn = url => url.replace(/^(\w+:\/\/\w+)cdn(\.githack\.com\/)/, '$1$2');
+
 function formatURL() {
   const url = urlEl.value = mergeSlashes(decodeURIComponent(urlEl.value.trim()));
 
   urlEl.classList.remove('valid');
   urlEl.classList.toggle('invalid', url.length);
   [devEl, prodEl].forEach(el => { el.value = ''; el.classList.remove('valid'); });
-  [devCopyButton, prodCopyButton, sriGenButton].forEach(b => b.disabled = true);
+  [devCopyButton, prodCopyButton, prodPurgeButton, sriGenButton].forEach(b => b.disabled = true);
   rawFileUrl = null;
+
+  if (/^https?:\/\/\w+\.githack\.com\//i.test(url)) {
+    devEl.value = decdn(url);
+    prodEl.value = cdnize(decdn(url));
+    setValid();
+    return;
+  }
 
   const [ghUrl, rawUrl] = convertUrl(url) ?? [];
   if (ghUrl) {
@@ -362,6 +424,7 @@ function formatURL() {
 function setValid() {
   urlEl.classList.replace('invalid', 'valid') || urlEl.classList.add('valid');
   [prodEl, devEl].forEach(el => el.classList.add('valid'));
+  prodPurgeButton.disabled = false;
   if (navigator.clipboard) {
     devCopyButton.disabled = false;
     prodCopyButton.disabled = false;
