@@ -4,7 +4,7 @@
 <!--# include file="internal/pre.html" -->
 
 <style>
-.question p, .question li { text-align: justify; hyphens: auto; }
+details p, details li { text-align: justify; hyphens: auto; }
 
 code, pre {
   color: var(--color-text-muted);
@@ -20,36 +20,46 @@ code {
 
 pre { overflow-x: auto; }
 
-.question {
+details {
   border: 1px solid transparent;
-  margin: 1em -1em;
-  padding: 0.5em 1em;
+  border-bottom: 1px solid var(--color-border);
+  margin: 0;
+  padding: 0;
   hyphens: auto;
 }
 
-.question h2 {
+details > summary {
+  list-style: none;
   font-size: 1.3em;
   line-height: 1.3;
-  margin: 0 0 0.7em;
+  padding: 0.4em 2em 0.4em 0.5em;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
 }
 
-.question h2 a {
-  color: inherit;
-  text-decoration: none;
+details > summary::-webkit-details-marker { display: none; }
+
+details > summary::after {
+  content: "+";
+  position: absolute;  top: 0.4em;  right: 0.5em;
+  color: var(--color-text-muted);
 }
 
-.question h2 a:hover {
-  text-decoration: underline;
+details[open] > summary::after {
+  content: "\2212";
 }
 
-.question > p:last-child {
-  margin-bottom: 0;
+details > summary:hover {
+  background: var(--color-surface);
 }
 
-.question:target {
-  background: var(--color-highlight-bg);
-  border-color: var(--color-highlight-border);
+details .body {
+  padding: 0.5em 0.8em;
 }
+
+details .body > p:first-child { margin-top: 0; }
+details .body > p:last-child  { margin-bottom: 0; }
 </style>
 
 <p class="hero">
@@ -57,132 +67,97 @@ pre { overflow-x: auto; }
 </p>
 
 <div>
-  <div id="who" class="question">
-    <h2><a href="#who">Who runs this thing?</a></h2>
-    <p>
-      Hi, I'm <a href="https://github.com/neoascetic">Pavel Puchkin</a>.
-    </p>
-  </div>
+  <details>
+    <summary>Who runs this? How can I get in touch or support the project?</summary>
+    <div class="body">
+      <p>
+        Hi, I'm <a href="https://github.com/neoascetic">Pavel Puchkin</a>.
+      </p>
+      <p>
+        For outages, abuse, or general feedback — <a href="mailto:admin@githack.com">send me an email</a>. For bugs, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue on GitHub</a>.
+      </p>
+      <p>
+        If you'd like to support the service, visit my <a href="https://ko-fi.com/neoascetic">Ko-fi page</a>.
+      </p>
+    </div>
+  </details>
 
-  <div id="why" class="question">
-    <h2><a href="#why">Why is this necessary? Can't I just load files from my favorite service directly?</a></h2>
-    <p>
-      When you request a file from source control hosting services, they are usually served (in the case of JavaScript, HTML, CSS, and some other file types) with a <code>Content-Type</code> of <code>text/plain</code>. As a result, most modern browsers won't actually interpret it as JavaScript, HTML, or CSS.
-    </p>
-    <p>
-      They do this because serving raw files from a git repo is relatively inefficient, so they want to discourage people from using their repos for static file hosting.
-    </p>
-    <p>
-      rawgit.hack acts as a caching proxy, forwarding requests to the corresponding service, caching the responses either for a short time (in the case of development URLs) or permanently (in the case of CDN URLs), and relaying them to your browser with the correct <code>Content-Type</code> headers.
-    </p>
-    <p>
-      The caching layer ensures that minimal load is placed on each service, and you get quick and easy static file hosting right from a repo. Everyone's happy!
-    </p>
-  </div>
+  <details>
+    <summary>Why is this necessary? Can't I just load files from my favorite service directly?</summary>
+    <div class="body">
+      <p>
+        When you request a file from source control hosting services, they are usually served (in the case of JavaScript, HTML, CSS, and some other file types) with a <code>Content-Type</code> of <code>text/plain</code>. As a result, most modern browsers won't actually interpret it as JavaScript, HTML, or CSS. Hosts do this to discourage using repos for static file hosting, since serving raw files is relatively inefficient.
+      </p>
+      <p>
+        rawgit.hack acts as a caching proxy: it forwards requests to the corresponding service, relays responses to your browser with the correct <code>Content-Type</code> headers, and caches them — briefly for development URLs, permanently for CDN URLs. The result is quick and easy static file hosting right from a repo.
+      </p>
+    </div>
+  </details>
 
-  <div id="html-notice" class="question">
-    <h2><a href="#html-notice">How does rawgit.hack handle HTML files?</a></h2>
-    <p>
-      rawgit.hack serves HTML pages exactly as their authors wrote them, without any review or modification. This means anyone can host an HTML page in a public Git repository and share a rawgit.hack link to it. Malicious actors have exploited this to serve phishing pages — sites that impersonate banks, login forms, or other trusted services — through rawgit.hack, which leads to the service getting blocked by browsers, antivirus software, and corporate firewalls.
-    </p>
-    <p>
-      To prevent this, rawgit.hack adds a brief confirmation step before opening HTML pages. The notice page shows you the full address you're about to visit and asks you to confirm you want to proceed. This makes it harder to use rawgit.hack as a silent redirect to a malicious page, since the destination URL is always shown to the visitor first.
-    </p>
-    <p>
-      Once you confirm, the page opens normally, and you won't see the notice again for any page in the same repository for the next 24 hours. Non-HTML files (scripts, stylesheets, images, etc.) are not affected.
-    </p>
-    <p>
-      The notice is only shown to actual browsers — HTTP libraries and command-line tools (curl, wget, Python requests, etc.) are not affected and will receive the file directly. If you use browser automation tools that emulate a real browser (Playwright, Puppeteer, Cypress), set the cookie <code>__Http-phish=1</code> on the domain you're requesting before navigating to the page, and the confirmation step will be skipped.
-    </p>
-  </div>
+  <details>
+    <summary>How does rawgit.hack handle HTML files?</summary>
+    <div class="body">
+      <p>
+        rawgit.hack serves HTML as-is, without any filtering. This has been abused to host phishing pages, which causes the service to get flagged by browsers and antivirus software.
+      </p>
+      <p>
+        To mitigate this, rawgit.hack shows a brief confirmation page before opening any HTML file — it displays the destination URL and asks you to confirm. After confirming, the notice won't appear again for any page in the same repository for 24 hours.
+      </p>
+      <p>
+        Non-HTML files are not affected. Neither are non-browser clients (curl, wget, etc.). For browser automation tools, set the cookie <code>__Http-phish=1</code> on the target domain to skip the confirmation.
+      </p>
+    </div>
+  </details>
 
-  <div id="what-is-supported" class="question">
-    <h2><a href="#what-is-supported">What source code services are supported?</a></h2>
-    <p>
-      Currently, the following services are supported:
-    </p>
-    <ul>
-      <li><a href="https://github.com/">GitHub</a> (with <a href="https://gist.github.com/">Gist</a>)</li>
-      <li><a href="https://bitbucket.org/">Bitbucket</a></li>
-      <li><a href="https://gitlab.com/">GitLab</a></li>
-      <li><a href="https://gitea.com/">Gitea</a></li>
-      <li><a href="https://codeberg.org/">Codeberg</a></li>
-    </ul>
-  </div>
+  <details>
+    <summary>What source code services are supported?</summary>
+    <div class="body">
+      <ul>
+        <li><a href="https://github.com/">GitHub</a> (with <a href="https://gist.github.com/">Gist</a>)</li>
+        <li><a href="https://bitbucket.org/">Bitbucket</a></li>
+        <li><a href="https://gitlab.com/">GitLab</a></li>
+        <li><a href="https://gitea.com/">Gitea</a></li>
+        <li><a href="https://codeberg.org/">Codeberg</a></li>
+      </ul>
+      <p>rawgit.hack is not affiliated with any of them — please don't contact their support for rawgit.hack issues.</p>
+    </div>
+  </details>
 
-  <div id="associated-with-hosting-service" class="question">
-    <h2><a href="#associated-with-hosting-service">Is rawgit.hack associated with any of the supported hosting services?</a></h2>
-    <p>
-      No, rawgit.hack is not associated with them in any way. Please don't contact their support asking for help with rawgit.hack. They'll give you a weird look and back away slowly.
-    </p>
-  </div>
+  <details>
+    <summary>What's the difference between development and CDN URLs?</summary>
+    <div class="body">
+      <p>
+        <strong>Development URLs</strong> are proxied on every request and cached for a short time — changes in your repo show up within minutes. Use them for low-traffic testing and demos only; don't use them in production.
+      </p>
+      <p>
+        <strong>CDN URLs</strong> are routed through <a href="http://cloudflare.com/">CloudFlare</a> and cached for a year, giving the best performance and reducing load on rawgit.hack. The downside is that the file won't update on reload.
+      </p>
+      <p>
+        To serve a new version, use a tag or commit ref in the URL instead of a branch name — e.g. <code>/user/repo/TAG/file</code> instead of <code>/user/repo/BRANCH/file</code>. If you need to invalidate a URL immediately, use the <a href="/purge-cache">cache purge form</a>.
+      </p>
+    </div>
+  </details>
 
-  <div id="diff-between-rawgithack-and-cdn" class="question">
-    <h2><a href="#diff-between-rawgithack-and-cdn">What's the difference between development and CDN URLs?</a></h2>
-    <p>
-      When you make a request to a development URL, the server loads the requested file from the corresponding service, serves it to your browser with the correct <code>Content-Type</code> header, and caches it for a short time. If you push new changes to your repo, you can reload and see them within a few minutes, which makes development URLs useful for low-traffic testing or sharing demos during development.
-    </p>
-    <p>
-      Requests to CDN are routed through <a href="http://cloudflare.com/">CloudFlare</a>'s content delivery network, and are cached <strong>for a year</strong> the first time they're loaded. This results in the best performance and reduces load on rawgit.hack and the underlying service, but it means that reloading won't fetch new changes.
-    </p>
-    <p>
-      During development, when traffic is low and freshness is more important than performance, use development URLs. For anything you share with the public or push to production, use CDN URLs.
-    </p>
-  </div>
+  <details>
+    <summary>Is rawgit.hack related to RawGit?</summary>
+    <div class="body">
+      <p>
+        RawGit was a similar, now defunct service that inspired rawgit.hack. The main difference is in implementation: instead of a Node.js application, rawgit.hack is built entirely on nginx — which makes it simpler, faster, and easier to maintain.
+      </p>
+    </div>
+  </details>
 
-  <div id="development-in-production" class="question">
-    <h2><a href="#development-in-production">Can I use a development URL on a production website?</a></h2>
-    <p>
-      Please don't. Use CDN URLs for anything that might result in heavy traffic. Development URLs are for low-traffic testing and sharing temporary examples or demos during development.
-    </p>
-  </div>
-
-  <div id="cdn-ttl" class="question">
-    <h2><a href="#cdn-ttl">How long does the CDN cache files? How can I make it refresh my file?</a></h2>
-    <p>
-      The CDN caches files for one year based on their path. It ignores query strings. This is done both to improve performance and to make it possible for the CDN to handle massive amounts of traffic without causing excessive load on the underlying services.
-    </p>
-    <p>
-      To ensure that the CDN always serves the version of the file you want, use a git tag or commit ref in the file's path instead of a branch name, and update the URL if you push a new version of the file.
-    </p>
-    <p>
-      So, instead of a URL like <code>/user/repo/BRANCH/file</code>, use a URL like <code>/user/repo/TAG/file</code> or <code>/user/repo/COMMIT/file</code>.
-    </p>
-  </div>
-
-  <div id="no-uptime-guarantee" class="question">
-    <h2><a href="#no-uptime-guarantee">I need guaranteed 100% uptime. Should I use rawgit.hack?</a></h2>
-    <p>
-      Probably not.
-    </p>
-    <p>
-      rawgit.hack is a free service and cannot provide any uptime or support guarantees, even for CDN URLs. While I do my best to keep things running, sometimes there are network or provider issues outside my control, sometimes abusive traffic temporarily affects response times, and sometimes I break things (although I try really hard not to).
-    </p>
-    <p>
-      You can take a look at the <a href="https://status.githack.com/?r=neoascetic/raw.githack.com-monitor">uptime stats</a> to decide if this service is stable enough for you. On the other hand, the service has been working since 2013, for more than a decade, without major outages. Doesn't this mean something?
-    </p>
-  </div>
-
-  <div id="sponsorship" class="question">
-    <h2><a href="#sponsorship">I would like to support this service, how can I do this?</a></h2>
-    <p>
-      First of all, thank you! You can support me by visiting my <a href="https://ko-fi.com/neoascetic">Ko-fi page</a>, where you’ll find donation options.
-    </p>
-  </div>
-
-  <div id="feedback" class="question">
-    <h2><a href="#feedback">How can I contact you?</a></h2>
-    <p>
-      For critical issues — service outages, abuse, spam, or general feedback — <a href="mailto:admin@githack.com">send me an email</a>. For non-critical bugs, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue on GitHub</a>.
-    </p>
-  </div>
-
-  <div id="purge" class="question">
-    <h2><a href="#purge">Can I somehow purge cached URLs?</a></h2>
-    <p>
-      Yes — use the <a href="/purge-cache">cache purge form</a>.
-    </p>
-  </div>
+  <details>
+    <summary>I need guaranteed 100% uptime. Should I use rawgit.hack?</summary>
+    <div class="body">
+      <p>
+        Probably not. rawgit.hack is a free service and cannot provide any uptime or support guarantees, even for CDN URLs. Network issues, abusive traffic, and the occasional self-inflicted outage are all real possibilities.
+      </p>
+      <p>
+        That said, the service has been running since 2013 — over a decade — without major outages. You can check the <a href="https://status.githack.com/?r=neoascetic/raw.githack.com-monitor">uptime stats</a> and decide for yourself.
+      </p>
+    </div>
+  </details>
 
 </div>
 
