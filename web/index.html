@@ -249,8 +249,9 @@ pre { overflow-x: auto; }
         <strong>CDN URLs</strong> are routed through <a href="http://cloudflare.com/">CloudFlare</a> and cached for a year, giving the best performance and reducing load on rawgit.hack. The downside is that the file won't update on reload.
       </p>
       <p>
-        To serve a new version, use a tag or commit ref in the URL instead of a branch name — e.g. <code>/user/repo/TAG/file</code> instead of <code>/user/repo/BRANCH/file</code>. If you need to invalidate a URL immediately, use the purge cache button above.
+        To serve a new version, use a tag or commit ref in the URL instead of a branch name — e.g. <code>/user/repo/TAG/file</code> instead of <code>/user/repo/BRANCH/file</code>. If you need to invalidate a URL immediately, use the purge cache button above, or send a <code>DELETE</code> request from the command line:
       </p>
+      <pre><code>curl -X DELETE 'https://raw.githack.com/purge?url=https://...'</code></pre>
     </div>
   </details>
 
