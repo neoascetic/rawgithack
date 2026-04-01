@@ -29,10 +29,6 @@ return {
       zone = "ZONE_ID",
       username = "USERNAME",
       api_key = "API_KEY"
-   },
-   patreon = {
-      campaign = "CAMPAIGN_ID",
-      token = "ACCESS_TOKEN"
    }
 }
 ```
