@@ -53,16 +53,9 @@
 }
 
 /* Code */
-code, pre {
+code {
   color: var(--color-text-muted);
   font-family: 'Courier New', 'Courier', monospace;
-}
-
-code {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 2px;
-  padding: 0 4px 1px;
 }
 
 pre { overflow-x: auto; }
@@ -261,7 +254,9 @@ pre { overflow-x: auto; }
       <p>
         To serve a new version, use a tag or commit ref in the URL instead of a branch name — e.g. <code>/user/repo/TAG/file</code> instead of <code>/user/repo/BRANCH/file</code>. If you need to invalidate a URL immediately, use the purge cache button above, or send a <code>DELETE</code> request from the command line:
       </p>
-      <pre><code>curl -X DELETE 'https://raw.githack.com/purge?url=https://...'</code></pre>
+      <p>
+        <code>curl -X DELETE 'https://raw.githack.com/purge?url=https://...'</code>
+      </p>
     </div>
   </details>
 
