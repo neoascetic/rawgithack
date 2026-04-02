@@ -1,3 +1,4 @@
 blacklist
 config.lua
 web/internal/meta.html
+web/internal/stats.html

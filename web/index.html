@@ -142,11 +142,15 @@ pre { overflow-x: auto; }
 .faq details .body { padding: 0.5em 0.8em; }
 .faq details .body > p:first-child { margin-top: 0; }
 .faq details .body > p:last-child  { margin-bottom: 0; }
+
 </style>
 
 <p class="hero">
   <strong title="Content Delivery Network">CDN</strong> for your source code
-  <span class="desc">A decade proven way to serve files from source code hostings with proper <strong>Content-Type</strong> headers</span>
+  <span class="desc">
+    A decade proven way to serve files from source code hostings with proper <strong>Content-Type</strong> headers
+    <!--# block name="stats" --><!--# endblock --><!--# include file="internal/stats.html" stub="stats" -->
+  </span>
 </p>
 
 <div class="url-helper">
