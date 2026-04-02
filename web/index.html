@@ -183,6 +183,7 @@ pre { overflow-x: auto; }
     </p>
     <ul>
       <li><p>New changes you push will be reflected within minutes</p></li>
+      <li><p>Under high traffic, cache time is automatically extended to keep responses fast</p></li>
     </ul>
   </div>
 </div>
@@ -249,10 +250,13 @@ pre { overflow-x: auto; }
     <summary>What's the difference between development and CDN URLs?</summary>
     <div class="body">
       <p>
-        <strong>Development URLs</strong> are proxied on every request and cached for a short time — changes in your repo show up within minutes. Use them for low-traffic testing and demos only; don't use them in production.
+        Both URL types are served through Cloudflare's global network, but they differ in how long they're cached.
       </p>
       <p>
-        <strong>CDN URLs</strong> are routed through <a href="http://cloudflare.com/">CloudFlare</a> and cached for a year, giving the best performance and reducing load on rawgit.hack. The downside is that the file won't update on reload.
+        <strong>Development URLs</strong> are cached for a short time, so changes in your repo show up within minutes. They're designed for local testing and demos where you need fresh content. If a development URL starts receiving high traffic, its cache time is automatically extended up to an hour to keep it fast and reliable — though this is a strong hint to switch to a CDN URL.
+      </p>
+      <p>
+        <strong>CDN URLs</strong> are cached permanently based on the exact URL, which makes them fast and reliable for production use. Since the URL includes a specific tag or commit hash, the content never changes — no stale cache surprises. Use these whenever you're embedding files in a real project.
       </p>
       <p>
         To serve a new version, use a tag or commit ref in the URL instead of a branch name — e.g. <code>/user/repo/TAG/file</code> instead of <code>/user/repo/BRANCH/file</code>. If you need to invalidate a URL immediately, use the purge cache button above, or send a <code>DELETE</code> request from the command line:
