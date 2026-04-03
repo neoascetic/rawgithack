@@ -100,13 +100,13 @@ pre { overflow-x: auto; }
 }
 
 .faq details {
-  border: 1px solid transparent;
   border-bottom: 1px solid var(--color-border);
   margin: 0;
   padding: 0;
   hyphens: auto;
 }
 
+.faq details:hover { background: var(--color-surface); }
 .faq details p, .faq details li { text-align: justify; }
 
 .faq details > summary {
@@ -130,7 +130,6 @@ pre { overflow-x: auto; }
 }
 
 .faq details[open] > summary::after { content: "\2212"; }
-.faq details > summary:hover { background: var(--color-surface); }
 
 .faq details .body { padding: 0.5em 0.8em; }
 .faq details .body > p:first-child { margin-top: 0; }
