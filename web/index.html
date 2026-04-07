@@ -183,21 +183,6 @@ pre { overflow-x: auto; }
 <div class="faq">
   <h2>FAQ</h2>
   <details>
-    <summary>Who runs this and how can I get in touch?</summary>
-    <div class="body">
-      <p>
-        Hi, I'm <a href="https://github.com/neoascetic">Pavel Puchkin</a>.
-      </p>
-      <p>
-        For outages, abuse, or general feedback — <a href="mailto:admin@githack.com">send me an email</a>. For bugs, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue on GitHub</a>.
-      </p>
-      <p>
-        If you'd like to support the service, visit my <a href="https://ko-fi.com/neoascetic">Ko-fi page</a>.
-      </p>
-    </div>
-  </details>
-
-  <details>
     <summary>Why is this necessary?</summary>
     <div class="body">
       <p>
@@ -210,7 +195,7 @@ pre { overflow-x: auto; }
   </details>
 
   <details>
-    <summary>How does rawgit.hack handle HTML files?</summary>
+    <summary>How HTML files are handled?</summary>
     <div class="body">
       <p>
         rawgit.hack serves HTML as-is, without any filtering. This has been abused to host phishing pages, which causes the service to get flagged by browsers and antivirus software.
@@ -243,7 +228,7 @@ pre { overflow-x: auto; }
   </details>
 
   <details>
-    <summary>What's the difference between development and CDN URLs?</summary>
+    <summary>What's the difference between dev and prod URLs?</summary>
     <div class="body">
       <p>
         Both URL types are served through <a href="https://cloudflare.com">Cloudflare's</a> global network, but they differ in how long they're cached.
@@ -264,7 +249,7 @@ pre { overflow-x: auto; }
   </details>
 
   <details>
-    <summary>If I need guaranteed 100% uptime, should I use rawgit.hack?</summary>
+    <summary>If I need guaranteed 100% uptime, should I use this service?</summary>
     <div class="body">
       <p>
         rawgit.hack is a free service with no formal uptime or support guarantees — network issues and the occasional outage are real possibilities. That said, URLs are backed by Cloudflare's global cache, so even if the origin goes down, your files keep being served.
@@ -276,7 +261,7 @@ pre { overflow-x: auto; }
   </details>
 
   <details>
-    <summary>Is rawgit.hack related to RawGit?</summary>
+    <summary>What is relation to RawGit?</summary>
     <div class="body">
       <p>
         RawGit was a similar, now defunct service that inspired rawgit.hack. The main difference is in implementation: instead of a Node.js application, rawgit.hack is built entirely on nginx — which makes it simpler, faster, and easier to maintain.
@@ -284,6 +269,20 @@ pre { overflow-x: auto; }
     </div>
   </details>
 
+  <details>
+    <summary>Who runs this and how can I get in touch?</summary>
+    <div class="body">
+      <p>
+        Hi, I'm <a href="https://github.com/neoascetic">Pavel Puchkin</a>.
+      </p>
+      <p>
+        For outages, abuse, or general feedback — <a href="mailto:admin@githack.com">send me an email</a>. For bugs, please <a href="https://github.com/neoascetic/rawgithack/issues">file an issue on GitHub</a>.
+      </p>
+      <p>
+        If you'd like to support the service, visit my <a href="https://ko-fi.com/neoascetic">Ko-fi page</a>.
+      </p>
+    </div>
+  </details>
 </div>
 
 <script>
