@@ -219,8 +219,12 @@ pre { overflow-x: auto; }
         To mitigate this, rawgit.hack shows a brief confirmation page before opening any HTML file — it displays the destination URL and asks you to confirm. After confirming, the notice won't appear again for any page in the same repository for 24 hours.
       </p>
       <p>
-        Non-HTML files are not affected. Neither are non-browser clients (curl, wget, etc.). For browser automation tools, set the cookie <code>__Http-phish=1</code> on the target domain to skip the confirmation.
+        Non-HTML files are not affected. Neither are non-browser clients (curl, wget, etc.). For browser automation tools and any other cases there are multiple ways to bypass the confirmation:
       </p>
+      <ul>
+        <li>Set <code>__Http-phish=1</code> cookie for the target domain</li>
+        <li>Do not send Sec-Fetch-Dest header, or set it to a value other than <code>document</code></li>
+      </ul>
     </div>
   </details>
 
