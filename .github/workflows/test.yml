@@ -17,4 +17,4 @@ jobs:
         run: docker build -f Containerfile --target test -t rawgithack:test .
 
       - name: Run Test::Nginx suite
-        run: docker run --rm -v .:/etc/nginx/rawgithack -ti rawgithack:test
+        run: docker run --rm -v .:/etc/nginx/rawgithack rawgithack:test
