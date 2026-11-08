@@ -7,7 +7,7 @@ WORKDIR /etc/nginx/rawgithack
 # test image
 FROM base AS test
 RUN apk add --no-cache perl-dev perl-utils perl-app-cpanminus && cpanm --notest Test::Nginx
-ENV TEST_NGINX_SERVER_PORT=80 TEST_NGINX_NO_CLEAN=true
+ENV TEST_NGINX_CLIENT_PORT=80 TEST_NGINX_NO_CLEAN=true
 CMD ["prove", "-r", "t"]
 
 

@@ -1,12 +1,21 @@
 use Test::Nginx::Socket 'no_plan';
 
 use_hup();
-no_root_location();
+
+my $port = $Test::Nginx::Util::ServerPort;
+
+my $conf = do {
+  local (@ARGV, $/) = ('rawgithack.conf');
+  <>;
+};
+$conf =~ s{proxy_pass https://\$origin;}{proxy_pass http://127.0.0.1:$port;}
+  or die "proxy_pass not found in config";
 
 add_block_preprocessor(sub {
   my $block = shift;
-  $block->set_value("http_config", "include /etc/nginx/rawgithack/rawgithack.conf;");
-  $block->set_value("config", "");
+  $block->set_value("server_name", "127.0.0.1");
+  $block->set_value("http_config", $conf);
+  $block->set_value("config", $block->config // '');
   my $more = $block->more_headers // '';
   $block->set_value(
     "more_headers",
@@ -50,15 +59,15 @@ Not sure about the source?
 --- request
 GET /index.html
 --- error_code: 301
---- response_headers_like
-Location: ^http://raw\.githack\.com/$
+--- response_headers
+Location: http://raw.githack.com/
 
 === duplicate slashes are merged with a redirect
 --- request
 GET /user//repo///branch/file.js
---- error_code: 307
---- response_headers_like
-Location: ^/user/repo/branch/file\.js$
+--- error_code: 301
+--- response_headers
+Location: http://raw.githack.com/user//repo//branch/file.js
 
 === index page on a non-main host redirects to raw.githack.com
 --- more_headers
@@ -75,8 +84,8 @@ Host: example.com
 --- request
 GET /foo?x=1
 --- error_code: 301
---- response_headers_like
-Location: ^http://raw\.githack\.com/foo\?x=1$
+--- response_headers
+Location: http://raw.githack.com/foo?x=1
 
 === index page rejects non-GET methods
 --- request
@@ -99,10 +108,10 @@ Referer: http://raw.githack.com/user/repo/branch/index.html
 --- request
 POST /user/repo/branch/index.html
 --- error_code: 303
---- response_headers_like
-Location: ^https://raw\.githack\.com/user/repo/branch/index\.html$
-Cache-Control: ^no-store$
-Set-Cookie: ^__Http-phish=1; Path=/user/repo/; Max-Age=86400; SameSite=Lax; HttpOnly; Secure$
+--- response_headers
+Location: https://raw.githack.com/user/repo/branch/index.html
+Cache-Control: no-store
+Set-Cookie: __Http-phish=1; Path=/user/repo/; Max-Age=86400; SameSite=Lax; HttpOnly; Secure
 
 === POST with foreign referer does not set phishing cookie
 --- more_headers
@@ -111,7 +120,7 @@ Referer: http://evil.example.com/user/repo/branch/index.html
 POST /user/repo/branch/index.html
 --- error_code: 403
 --- response_headers
-Set-Cookie:
+!Set-Cookie
 
 === unknown extension redirects to origin
 --- request
@@ -127,3 +136,77 @@ Cache-Control: max-age=86400, public
 --- request
 GET /internal/error.html
 --- error_code: 404
+
+=== proxied dev file gets proper Content-Type and short cache
+--- config
+location = /user/repo/branch/dev.js { return 200 "mock"; }
+--- request
+GET /user/repo/branch/dev.js
+--- response_headers
+Content-Type: application/javascript; charset=utf-8
+Cache-Control: max-age=60, public, stale-while-revalidate=60, stale-if-error=604800
+X-Robots-Tag: none
+Access-Control-Allow-Origin: *
+--- response_body chomp
+mock
+
+=== proxied CDN file is cached permanently
+--- config
+location = /user/repo/branch/cdn.js { return 200 "mock"; }
+--- more_headers
+Host: rawcdn.githack.com
+--- request
+GET /user/repo/branch/cdn.js
+--- response_headers
+Content-Type: application/javascript; charset=utf-8
+Cache-Control: max-age=31536000, public, immutable
+
+=== binary types have no charset
+--- config
+location = /user/repo/branch/font.woff2 { return 200 "mock"; }
+--- request
+GET /user/repo/branch/font.woff2
+--- response_headers
+Content-Type: application/font-woff2
+
+=== upstream headers are replaced
+--- config
+location = /user/repo/branch/hidden.js {
+    add_header Set-Cookie "a=b";
+    add_header Content-Security-Policy "default-src 'none'";
+    add_header Cache-Control "no-cache";
+    return 200 "mock";
+}
+--- request
+GET /user/repo/branch/hidden.js
+--- response_headers
+!Set-Cookie
+!Content-Security-Policy
+Cache-Control: max-age=60, public, stale-while-revalidate=60, stale-if-error=604800
+
+=== second request is served from cache
+--- config
+location ~* ^/user/repo/branch/cached-.*.js$ { return 200 "mock"; }
+--- request eval
+my $fn = rand(9999999);
+["GET /user/repo/branch/cached-$fn.js", "GET /user/repo/branch/cached-$fn.js"]
+--- response_headers eval
+["X-Githack-Cache-Status: MISS", "X-Githack-Cache-Status: HIT"]
+
+=== upstream 404 is replaced with error page
+--- config
+location = /user/repo/branch/missing.js { return 404 "nope"; }
+--- request
+GET /user/repo/branch/missing.js
+--- error_code: 404
+--- response_body_like chomp
+Something is wrong. That's all we know.
+
+=== upstream 500 is replaced with error page
+--- config
+location = /user/repo/branch/broken.js { return 500 "boom"; }
+--- request
+GET /user/repo/branch/broken.js
+--- error_code: 500
+--- response_body_like chomp
+Something is wrong. That's all we know.
