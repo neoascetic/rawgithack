@@ -49,10 +49,10 @@ Location: https://raw.githack.com/?url=abc
 --- more_headers
 Host: example.com
 --- request
-GET /foo?x=1
+GET /user/repo/branch/file.js
 --- error_code: 301
 --- response_headers
-Location: http://raw.githack.com/foo?x=1
+Location: http://raw.githack.com/user/repo/branch/file.js
 
 === index page rejects non-GET methods
 --- request
