@@ -13,8 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v7
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Build test stage
-        run: docker build -f Containerfile --target test -t rawgithack:test .
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Containerfile
+          target: test
+          tags: rawgithack:test
+          load: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Run Test::Nginx suite
         run: docker run --rm -v .:/etc/nginx/rawgithack rawgithack:test
