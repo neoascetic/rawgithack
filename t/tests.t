@@ -1,26 +1,9 @@
 use Test::Nginx::Socket 'no_plan';
 
-use_hup();
+use lib 't/lib';
+use RawGitHack;
 
-my $port = $Test::Nginx::Util::ServerPort;
-
-my $conf = do {
-  local (@ARGV, $/) = ('rawgithack.conf');
-  <>;
-};
-$conf =~ s{proxy_pass https://\$origin;}{proxy_pass http://127.0.0.1:$port;}
-  or die "proxy_pass not found in config";
-
-add_block_preprocessor(sub {
-  my $block = shift;
-  $block->set_value("server_name", "127.0.0.1");
-  $block->set_value("http_config", $conf);
-  $block->set_value("config", $block->config // '');
-  my $more = $block->more_headers // '';
-  $block->set_value(
-    "more_headers",
-    ($more =~ /^Host:/mi ? '' : "Host: raw.githack.com\n") . $more);
-});
+RawGitHack::setup();
 
 run_tests();
 
@@ -38,22 +21,6 @@ GET /not-found
 --- error_code: 404
 --- response_body_like chomp
 Something is wrong. That's all we know.
-
-=== HTML file returns phishing warning if requested from browser
---- more_headers
-Sec-Fetch-Dest: document
---- request
-GET /user/repo/branch/index.html
---- response_body_like chomp
-Not sure about the source?
-
-=== directory URL is rewritten to index.html and shows phishing warning
---- more_headers
-Sec-Fetch-Dest: document
---- request
-GET /user/repo/branch/
---- response_body_like chomp
-Not sure about the source?
 
 === /index.html redirects to /
 --- request
@@ -101,26 +68,6 @@ DELETE /user/repo/branch/file.js
 --- request
 POST /user/repo/branch/file.js
 --- error_code: 403
-
-=== POST from the phishing notice sets cookie and redirects back
---- more_headers
-Referer: http://raw.githack.com/user/repo/branch/index.html
---- request
-POST /user/repo/branch/index.html
---- error_code: 303
---- response_headers
-Location: https://raw.githack.com/user/repo/branch/index.html
-Cache-Control: no-store
-Set-Cookie: __Http-phish=1; Path=/user/repo/; Max-Age=86400; SameSite=Lax; HttpOnly; Secure
-
-=== POST with foreign referer does not set phishing cookie
---- more_headers
-Referer: http://evil.example.com/user/repo/branch/index.html
---- request
-POST /user/repo/branch/index.html
---- error_code: 403
---- response_headers
-!Set-Cookie
 
 === unknown extension redirects to origin
 --- request
