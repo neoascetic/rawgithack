@@ -25,7 +25,7 @@ jobs:
           tags: rawgithack:test
           load: true
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-to: ${{ github.ref == 'refs/heads/master' && 'type=gha,mode=min' || '' }}
 
       - name: Run Test::Nginx suite
         run: docker run --rm -v .:/etc/nginx/rawgithack rawgithack:test
