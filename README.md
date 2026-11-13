@@ -18,16 +18,3 @@ rawgit.hack supports the following source code hosting platforms:
 - **[Codeberg](https://codeberg.org)** - served via `cb.githack.com` subdomain
 
 Both development and production (CDN) URLs are available for each platform.
-
-Example config.lua
-------------------
-
-```lua
-return {
-   cf = {
-      zone = "ZONE_ID",
-      username = "USERNAME",
-      api_key = "API_KEY"
-   }
-}
-```
