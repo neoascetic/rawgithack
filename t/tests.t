@@ -30,6 +30,8 @@ GET /index.html
 Location: http://raw.githack.com/
 
 === duplicate slashes are merged with a redirect
+--- http_config
+merge_slashes off;
 --- request
 GET /user//repo///branch/file.js
 --- error_code: 301

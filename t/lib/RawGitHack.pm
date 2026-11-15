@@ -28,7 +28,7 @@ sub load_conf {
     local (@ARGV, $/) = ($CONF_PATH);
     <>;
   };
-  $conf =~ s{proxy_pass https://\$origin;}{proxy_pass http://127.0.0.1:$port;}
+  $conf =~ s{proxy_pass https://\$rg_origin;}{proxy_pass http://127.0.0.1:$port;}
     or die "proxy_pass not found in $CONF_PATH";
   return $conf;
 }
@@ -40,7 +40,7 @@ sub setup {
 
   Test::Nginx::Util::add_block_preprocessor(sub {
     my $block = shift;
-    $block->set_value("http_config", $conf);
+    $block->set_value("http_config", $conf . ($block->http_config // ''));
     $block->set_value("server_name", "127.0.0.1");
     $block->set_value("config", $block->config // '');
     my $more = $block->more_headers // '';
