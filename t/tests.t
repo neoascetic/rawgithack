@@ -159,3 +159,12 @@ GET /user/repo/branch/broken.js
 --- error_code: 500
 --- response_body_like chomp
 Something is wrong. That's all we know.
+
+=== upstream receives origin Host (needed for SSL certificate selection)
+--- config
+location ~ ^/user/repo/branch/host-.*\.js$ { return 200 $http_host; }
+--- more_headers
+Host: gl.githack.com
+--- request eval
+"GET /user/repo/branch/host-" . rand(9999999) . ".js"
+--- response_body: gitlab.com

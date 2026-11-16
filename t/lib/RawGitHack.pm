@@ -28,9 +28,14 @@ sub load_conf {
     local (@ARGV, $/) = ($CONF_PATH);
     <>;
   };
-  $conf =~ s{proxy_pass https://\$rg_origin;}{proxy_pass http://127.0.0.1:$port;}
+
+ my ($map) = $conf =~ /map \$host \$rg_origin \{(.*?)\}/s
+    or die "rg_origin map not found in $CONF_PATH";
+  my $upstreams = join '', map { "upstream $_ { server 127.0.0.1:$port; }\n" } $map =~ /\s(\S+);/g;
+
+  $conf =~ s{proxy_pass https://\$rg_origin;}{proxy_pass http://\$rg_origin;}
     or die "proxy_pass not found in $CONF_PATH";
-  return $conf;
+  return $upstreams . $conf;
 }
 
 sub setup {
