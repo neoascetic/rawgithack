@@ -15,7 +15,7 @@ Sec-Fetch-Dest: document
 --- request
 GET /user/repo/branch/index.html
 --- response_body_like chomp
-Not sure about the source?
+This HTML page is hosted on <a href="https://raw.githubusercontent.com/user/repo/branch/index.html"[^>]*>raw.githubusercontent.com</a>
 
 === directory URL is rewritten to index.html and shows phishing warning
 --- more_headers
@@ -23,7 +23,7 @@ Sec-Fetch-Dest: document
 --- request
 GET /user/repo/branch/
 --- response_body_like chomp
-Not sure about the source?
+This HTML page is hosted on <a href="https://raw.githubusercontent.com/user/repo/branch/index.html"[^>]*>raw.githubusercontent.com</a>
 
 === phishing warning is not cacheable
 --- more_headers

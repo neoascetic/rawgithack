@@ -33,7 +33,7 @@
 <p class="hero">
   <strong>One more step</strong>
   <span class="desc">
-    This HTML page is hosted on <a href="https://<!--# echo var="origin" --><!--# echo var="request_uri" -->" target="_blank" rel="noopener"><!--# echo var="origin" --></a> and proxied as-is.<br>
+    This HTML page is hosted on <a href="https://<!--# echo var="rg_origin" --><!--# echo var="request_uri" --><!--# if expr="$request_uri = /\/\$/" -->index.html<!--# endif -->" target="_blank" rel="noopener"><!--# echo var="rg_origin" --></a> and proxied as-is.<br>
     rawgit.hack does not review third-party content.
   </span>
 </p>
