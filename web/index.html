@@ -148,7 +148,7 @@ pre { overflow-x: auto; }
   <div class="url-paste">
     <form method="get" id="url-form" class="url-container">
       <label for="url" class="offscreen">URL:</label>
-      <input id="url" class="url" type="url" name="url" value="<!--# echo var="arg_url" encoding="none" default="" -->" placeholder="Paste GitHub, Bitbucket, GitLab, Gitea or Codeberg URL here" autofocus>
+      <input id="url" class="url" type="url" name="url" placeholder="Paste GitHub, Bitbucket, GitLab, Gitea or Codeberg URL here" autofocus>
       <button id="url-sri-gen" class="url-action-button" title="Generate and copy SRI hash" disabled>hash</button>
     </form>
   </div>
@@ -394,6 +394,7 @@ urlEl.addEventListener('input', () => {
 
 const decdn = url => url.replace(/^(\w+:\/\/\w+)cdn(\.githack\.com\/)/, '$1$2');
 
+urlEl.value = new URLSearchParams(location.search).get('url') ?? '';
 formatURL();
 
 function formatURL() {
