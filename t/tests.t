@@ -168,3 +168,16 @@ Host: gl.githack.com
 --- request eval
 "GET /user/repo/branch/host-" . rand(9999999) . ".js"
 --- response_body: gitlab.com
+
+=== hot file gets progressively longer Cache-Control
+--- config
+location ~* ^/user/repo/branch/hot-.*\.js$ { return 200 "mock"; }
+--- request eval
+my $fn = int(rand(9999999));
+[("GET /user/repo/branch/hot-$fn.js") x 12]
+--- response_headers eval
+[
+  "Cache-Control: max-age=60, public, stale-while-revalidate=60, stale-if-error=604800",
+  ("Cache-Control: max-age=300, public, stale-while-revalidate=60, stale-if-error=604800") x 10,
+  "Cache-Control: max-age=3600, public, stale-while-revalidate=60, stale-if-error=604800",
+]
